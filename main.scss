@@ -1,0 +1,248 @@
+/*variables*/
+$color1: black;
+$color2: black;
+$color3: grey;
+$color4: white;
+$min-width: 200px;
+$max-width: 1000px;
+$main-width: 65%;
+$inner-width: 90%;
+/*mixins*/
+// @mixin border($color) {
+//
+// }
+/*add flexbox mixin!!!*/
+
+/*AWD - dodać media queries?*/
+/*jednostki: czy powinno być ujednolicone - wszystko w rem itp?*/
+/*zrobić grid??*/
+
+/*reset css*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style-type: none;
+}
+/*fonts*/
+
+/*general*/
+html {
+  font-size: 10px;
+}
+#app {
+  background-color: grey;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-width: $min-width;
+  min-height: 100vh;
+  // background-image: ;
+}
+/*styles*/
+.container {
+    // border: 1px solid brown;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: $main-width;
+    min-width: $min-width;
+    max-width: $max-width;
+    min-height: 100vh;
+    // background-image: ;
+  header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    position: fixed;
+    top: 0;
+    width: $main-width;
+    min-width: $min-width;
+    max-width: $max-width;
+    font-size: 1.6rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: $color3;
+    padding: 0.5em 1em 0.5em 1em;
+    background-color: $color4;
+    // border: 1px solid pink;
+    border: 2px solid $color1;
+  }
+  main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: space-around;
+    margin-top: 10vh;
+    width: 100%;
+    min-width: $min-width;
+    min-height: 60vh;
+    background-color: $color4;
+    border: 2px solid $color1;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    #search {
+      // border: 1px solid blue;
+      width: $inner-width;
+      min-width: $min-width;
+      // padding: 3%;
+      h1 {
+        font-size: 4rem;
+        margin-bottom: 2rem;
+      }
+      h2 {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+      }
+      form#search-form {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 100%;
+        min-width: $min-width;
+        font-size: 1.5rem;
+        // padding: 2%;
+        border: 1px solid red;
+        // to poniżej się powtarza: zrobić coś z tym (mixin/wspólne klasy)
+        .form-left {
+          display: flex;
+          flex-wrap: wrap;
+          // align-items: center;
+          // justify-content: space-between;
+          // border: 1px solid yellow;
+          width: 30%;
+          min-width: $min-width;
+          // padding: 2% 0;
+          .form-item {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            // align-items: center;
+            // justify-content: flex-end;
+            // text-align: right;
+            width: 100%;
+            // border: 1px solid orange;
+            padding: 2px 0;
+            label {
+              margin-left: 5%;
+            }
+            .temp-input {
+              width: 50px;
+              // margin-right: 5px;
+            }
+          }
+        }
+        .form-right {
+          display: flex;
+          flex-wrap: wrap;
+          // align-items: center;
+          justify-content: flex-end;
+          // align-content: space-around;
+          border: 1px solid yellow;
+          width: 65%;
+          min-width: $min-width;
+          // padding: 2%;
+          .date-container{
+            display: flex;
+            flex-wrap: wrap;
+            border: 1px solid black;
+            justify-content: flex-end;
+            width: 100%;
+            .form-item {
+              display: flex;
+              flex-wrap: wrap;
+              justify-content: space-between;
+              // justify-content: flex-end;
+              text-align: left;
+              width: 50%;
+              // min-width: $min-width;
+              // border: 1px solid orange;
+              padding: 2px 0;
+              min-width: 135px;
+              label {
+                padding-right: 5px;
+                margin-left: 5%;
+              }
+              .date-input {
+                min-width: 135px;
+              }
+            }
+          }
+          p {
+            font-size: 1.3rem;
+            // border: 1px solid purple;
+            padding: 2% 0;
+            width: 100%;
+            text-align: right;
+          }
+        }
+      }
+      .search-bar {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        width: 100%;
+        #search-button {
+          font-size: 1.5rem;
+          font-weight: bold;
+          padding: 0.5em 1em 0.5em 1em;
+          // margin: 2%;
+        }
+      }
+    }
+    #results {
+      width: $inner-width;;
+      min-width: $min-width;
+      padding: 2%;
+      margin-top: 3vh;
+      // border: 1px solid green;
+      p {
+        font-size: 1.8rem;
+        line-height: 3rem;
+        color: $color2;
+        font-weight: bold;
+        margin-bottom: 1em;
+      }
+      ul#destinations-list{
+        li.country-li{
+          font-size: 1.6rem;
+          line-height: 2.5rem;
+          color: $color2;
+          font-weight: bold;
+          ul.country-ul{
+            li.city-li{
+              text-indent: 20px;
+              a.google-flights-link{
+                text-decoration: none;
+                color: $color3;
+                font-weight: normal;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: space-between;
+    align-self: flex-end;
+    // position: fixed;
+    // bottom: 0;
+    width: 100%;
+    min-width: $min-width;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 0.5em 1em 0.5em 1em;
+    margin-top: 5vh;
+    background-color: $color4;
+    // border: 1px solid pink;
+    border: 2px solid $color1;
+  }
+}
