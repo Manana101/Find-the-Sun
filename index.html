@@ -6,12 +6,14 @@
 </head>
 <body>
   <div id="app">
+    <header>
+      <nav>
+        There is going to be nav here later..
+        There is going to be nav here later..
+      </nav>
+    </header>
+    <!-- <div class='background'> -->
     <div class='container'>
-      <header>
-        <nav>
-          There is going to be nav here later..
-        </nav>
-      </header>
       <main>
         <div id='search'>
           <h1>Hello, Warsovian!</h1>
@@ -40,15 +42,15 @@
               <div class='form-item'>
                 <label for="to-date-input">To*:</label><input type='date' id='to-date-input' class='date-input'/>
               </div>
+              <p>*We can check the weather for max. 10 days from now</p>
             </div>
-            <p>*We can check the weather for max. 10 days from now</p>
           </div>
           <div class='search-bar'>
             <button id='search-button'>Search</button>
           </div>
           </form>
         </div>
-        <!-- <div id='results'>
+        <div id='results'>
           <p>Click on the country name, to see cities matching your search.<br/>
           Click on the city name to find flights.</p>
           <ul id='destinations-list'>
@@ -105,13 +107,14 @@
             </li>
 
           </ul>
-        </div> -->
+        </div> <!-- end of results -->
       </main> <!--end of main-->
-      <footer id='footer'>
-        <p id='disclaimer'> Disclaimer: Results are based on a weather forecast. Weather forecasts do not always come true. Please don't blame us for ruining your holiday :)</p>
-        <p id='powered'> Powered by <a href='https://darksky.net/poweredby/' target='blank'>Dark Sky</a></p>
-      </footer>
     </div> <!--end of container-->
+  <!-- </div> --> <!--end of background-->
+    <footer id='footer'>
+      <p id='disclaimer'> Disclaimer: Results are based on a weather forecast. Weather forecasts do not always come true. Please don't blame us for ruining your holiday :)</p>
+      <p id='powered'> Powered by <a href='https://darksky.net/poweredby/' target='blank'>Dark Sky</a></p>
+    </footer>
   </div> <!--end of app-->
   <script src="js/out.js"></script>
 </body>
