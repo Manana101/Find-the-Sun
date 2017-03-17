@@ -1,22 +1,68 @@
 {
   "destinations": [
     {
-      "name": "Paris",
-      "nameToShow": "Paris",
-      "FlightSearchKey": "CDG,ORY,BVA,XHP,XPG",
-      "country": "France",
       "url": "http://api.apixu.com/v1/forecast.json?key=0ffd45ac047f4cda8ae85915171303&q=Paris&days=10",
-      "temp_day0": 11.3,
-      "temp_day1": 8.7,
-      "temp_day2": 9.7,
-      "temp_day3": 11,
-      "temp_day4": 10.1,
-      "temp_day5": 8.7,
-      "temp_day6": 7.3,
-      "temp_day7": 8.4,
-      "temp_day8": 6.5,
-      "temp_day9": 4.9,
-      "checkedAt": "2017-03-16",
+      "location": {
+        "name": "Paris",
+        "nameToShow": "Paris",
+        "FlightSearchKey": "CDG,ORY,BVA,XHP,XPG",
+        "country": "France"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 8.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 7.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 5.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 5.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 6.1
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-17",
       "id": 1
     }
   ]

@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import '../main.scss';
-// import cacheProxy from './cacheProxy';
 // import destinations from '../db/cities';
 
 class Search extends React.Component{
@@ -9,13 +8,11 @@ class Search extends React.Component{
   constructor(props){
     super(props);
     this.state={
-      dataReady: '',
+      dataReady: 'beforeSearch',
       minTemp: '',
       maxTemp: '',
       fromDate: '',
-      toDate: '',
-      countries: [],
-      France: []
+      toDate: ''
     }
   }
   // handleAreaChange = (event) => {
@@ -45,20 +42,36 @@ class Search extends React.Component{
   }
   handleSearchClick = (event) => {
     event.preventDefault();
+    //wyświetl 'loading'...
     this.setState({
       dataReady: 'pending'
     })
-    //zapytanie o Paris
-    let currentDate = new Date().toISOString().substring(0, 10); //zapisuję dzisiejszą datę do zmiennej
-    fetch("http://localhost:3000/destinations/1")
+    //zapytanie o pojedyncze miasto - tu przykładowo Paris - wywołuję funkcję
+    this.search1CityFunction(1); //jako parametr podaję id z mojej bazy
+  } //koniec handleSearchClick
+
+  //search1CityFunction -> funkcja, która sprawdza pogodę dla pojedynczego miasta - jeśli miasto spełnia kryteria podane przez użytkownika, jest dodawane do odpowiednich zmiennych w state //przenieść ją później do osobnego pliku
+  search1CityFunction = (id) => {
+    //zapisuję dzisiejszą datę do zmiennej. Żeby porównać ją z datami pobranymi z inputów, skracam ją do samej daty. //TODO: może być problem z ISO string podobno w różnych przeglądarkach. Spróbować zmienić to na format UTC.
+    let currentDate = new Date().toISOString().substring(0, 10);
+    //zapytanie do mojej bazy o rekord o konkretnym id
+    fetch("http://localhost:3000/destinations/"+id)
     .then(data => data.json())
     .then(city=> {
+      //sprawdzam, czy prognoza pogody dla tego miasta była sprawdzona dzisiaj
+      //TODO: tak naprawdę wystarczy sprawdzić to dla pierwszego miasta, bo wszystkie pobieram jednocześnie. Czyli tylko dla miasta o id=1. Reszta miast powinna lecieć wtedy automatycznie ifem albo elsem. Ale jeśli kiedyś będę chciała dodać zawężenie obszaru wyszukiwania, lub wyszukiwanie dla innej lokalizacji niż Warszawa, może to się przydać (nie wszystkie miasta będę za każdym razem pobierać z API)
       let checkedAt = city.checkedAt;
+
       if (checkedAt !== currentDate){
-        let url = 'http://api.apixu.com/v1/forecast.json?key=0ffd45ac047f4cda8ae85915171303&q='+city.name+'&days=10';
-        fetch(url)
+        //co robi if: jeśli prognoza pogody NIE BYŁA SPRAWDZONA DZISIAJ, wyślij zapytanie dla tego miasta do API i dodaj dane o temperaturach na najbliższe 10 dni do mojej bazy. Zaktualizuj też pole checkedAt. Potem wywołaj funkcję, która sprawdza, czy miasto spełnia kryteria użytkownika i dodaje (lub nie) miasto do odpowiednich zmiennych w state.
+        console.log('prognoza dziś jeszcze nie była sprawdzona, jestem w if');
+        console.log('city.url', city.url);
+        //zapytanie o to miasto do API - prognoza na najbliższe 10 dni
+        fetch(city.url)
         .then(data => data.json())
         .then(data=>{
+          console.log('jestem w fetchu do API');
+          //zapisuję średnie temperatury dla najbliższych 10 dni do zmiennych
           //zrobić tu pętlę:
           let temp_day0 = data.forecast.forecastday[0].day.avgtemp_c;
           let temp_day1 = data.forecast.forecastday[1].day.avgtemp_c;
@@ -70,194 +83,175 @@ class Search extends React.Component{
           let temp_day7 = data.forecast.forecastday[7].day.avgtemp_c;
           let temp_day8 = data.forecast.forecastday[8].day.avgtemp_c;
           let temp_day9 = data.forecast.forecastday[9].day.avgtemp_c;
+          //tworzę nowy obiekt dla miasta, w którym podmieniam temperatury oraz checkedAt.
+          //TODO: muszę jeszcze rozkminić czy temperatury mają być zapisane w słowniku, czy w tablicy
           let cityUpdated =     {
-                "name": "Paris",
-                "nameToShow": "Paris",
-                "FlightSearchKey": "CDG,ORY,BVA,XHP,XPG",
-                "country": "France",
                 "url": "http://api.apixu.com/v1/forecast.json?key=0ffd45ac047f4cda8ae85915171303&q=Paris&days=10",
-                "temp_day0": temp_day0,
-                "temp_day1": temp_day1,
-                "temp_day2": temp_day2,
-                "temp_day3": temp_day3,
-                "temp_day4": temp_day4,
-                "temp_day5": temp_day5,
-                "temp_day6": temp_day6,
-                "temp_day7": temp_day7,
-                "temp_day8": temp_day8,
-                "temp_day9": temp_day9,
+                "location": {
+                  "name": "Paris",
+                  "nameToShow": "Paris",
+                  "FlightSearchKey": "CDG,ORY,BVA,XHP,XPG",
+                  "country": "France"
+                },
+                "forecast": {
+                  "forecastday": [
+                    {
+                        "day": {
+                          "avgtemp_c" : temp_day0
+                        }
+                    },
+                    {
+                        "day": {
+                          "avgtemp_c" : temp_day1
+                        }
+                    },
+                    {
+                        "day": {
+                          "avgtemp_c" : temp_day2
+                        }
+                    },
+                    {
+                        "day": {
+                          "avgtemp_c" : temp_day3
+                        }
+                    },
+                    {
+                        "day": {
+                          "avgtemp_c" : temp_day4
+                        }
+                    },
+                    {
+                        "day": {
+                          "avgtemp_c" : temp_day5
+                        }
+                    },
+                    {
+                        "day": {
+                          "avgtemp_c" : temp_day6
+                        }
+                    },
+                    {
+                        "day": {
+                          "avgtemp_c" : temp_day7
+                        }
+                    },
+                    {
+                        "day": {
+                          "avgtemp_c" : temp_day8
+                        }
+                    },
+                    {
+                        "day": {
+                          "avgtemp_c" : temp_day9
+                        }
+                    }
+                  ]
+                },
                 "checkedAt": currentDate,
                 "id": 1
               }
-        fetch("http://localhost:3000/destinations/1", {
-                method: 'put',
-                body: JSON.stringify(cityUpdated),
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                }
-            }).catch(error=>console.log('error w ifie', error))
-        // //tu dalej manipuluję na cityUpdated
-        // //FILTROWANIE
-        // //ponieważ to będzie to samo co niżej, zapisać to potem w funkcji i tu tylko wywołać z parametrem
-        // // let temp_array = [temp_day0, temp_day1, temp_day2, temp_day3, temp_day04, temp_day5, temp_day6, temp_day7, temp_day8, temp_day9];
-        // //state - dane od użytkownika:
-        // // minTemp: '',
-        // // maxTemp: '',
-        // // fromDate: '',
-        // // toDate: ''
-        //
-        // //obliczanie różnicy pomiędzy dzisiaj a dniem wylotu w dniach -> wynik oznacza, od którego dnia zacząć sprawdzać temperaturę (dzień 0 = dzisiaj);
-        // let currentDateString = new Date().toISOString().substring(0, 10);
-        // let currentDateMs = new Date(currentDateString).getTime()
-        // let fromDateMs = new Date(this.state.fromDate).getTime();
-        // let diffMs = fromDateMs - currentDateMs
-        // let oneDayInMs = 1000*60*60*24;
-        // let startDay = Math.round(diffMs/oneDayInMs);
-        // console.log(startDay);
-        //
-        // //obliczanie różnicy pomiędzy dzisiaj a dniem powrotu w dniach -> wynik oznacza, do którego dnia sprawdzać temperaturę (dzień 0 = dzisiaj);
-        // let toDateMs = new Date(this.state.toDate).getTime();
-        // let diffMs = toDateMs - currentDateMs
-        // let stopDay = Math.round(diffMs/oneDayInMs);
-        // console.log(stopDay);
+              //dodaję zaktualizone miasto do mojej bazy na odpowiednie miejsce (po id)
+              fetch("http://localhost:3000/destinations/"+id, {
+                      method: 'put',
+                      body: JSON.stringify(cityUpdated),
+                      headers: {
+                          'Accept': 'application/json',
+                          'Content-Type': 'application/json'
+                      }
+                  }).catch(error=>console.log('error w ifie, podczas updejtowania miasta w bazie', error))
+              //wywołuję funkcję, która sprawdzi, czy miasto spełnia kryteria użytkownika, a jeśli tak, doda go do odpowiednich zmiennych w state
+              this.filterCity(cityUpdated);
 
-        return cityUpdated;
-        })
+              // //zwracam zupdejtowany obiekt, żeby mógł go przechwycić kolejny fetch, który wrzuci go do mojej bazy - już niepotrzebne
+              //
+              // return cityUpdated;
+            }).catch(error=>console.log('error w ifie, podczas fetcha do weather api', error)); //koniec fetcha do weather API
+
       } //koniec ifa
-      else { //czyli jeśli prognoza była sprawdzona dziś
-      //tu dalej manipuluję na city pobranym z mojej bazy - parametr city
-      //FILTROWANIE
-      //ponieważ to będzie to samo co niżej, zapisać to potem w funkcji i tu tylko wywołać z parametrem
-      // let temp_array = [temp_day0, temp_day1, temp_day2, temp_day3, temp_day04, temp_day5, temp_day6, temp_day7, temp_day8, temp_day9];
-      //state - dane od użytkownika:
-      // minTemp: '',
-      // maxTemp: '',
-      // fromDate: '',
-      // toDate: ''
+      else { //czyli co ma zrobić, jeśli prognoza dla tego miasta była sprawdzona dziś
+        console.log('prognoza już dziś była sprawdzona, jestem w else');
+        //tu dalej manipuluję na city pobranym z mojej bazy - parametr city
 
-      //obliczanie różnicy pomiędzy dzisiaj a dniem wylotu w dniach -> wynik oznacza, od którego dnia zacząć sprawdzać temperaturę (dzień 0 = dzisiaj);
-      let currentDateString = new Date().toISOString().substring(0, 10);
-      let currentDateMs = new Date(currentDateString).getTime()
-      let fromDateMs = new Date(this.state.fromDate).getTime();
-      let diffToStartMs = fromDateMs - currentDateMs;
-      let oneDayInMs = 1000*60*60*24;
-      let startDay = Math.round(diffToStartMs/oneDayInMs);
-      console.log(startDay);
+        //wywołuję funkcję, która sprawdzi, czy miasto spełnia kryteria użytkownika, a jeśli tak, doda go do odpowiednich zmiennych w state
+        //console.log(city);
+        this.filterCity(city);
 
-      //obliczanie różnicy pomiędzy dzisiaj a dniem powrotu w dniach -> wynik oznacza, do którego dnia sprawdzać temperaturę (dzień 0 = dzisiaj);
-      let toDateMs = new Date(this.state.toDate).getTime();
-      let diffToEndMs = toDateMs - currentDateMs;
-      let endDay = Math.round(diffToEndMs/oneDayInMs);
-      console.log(endDay);
-      let daysToCheck = [];
-      //sprawdzam temperaturę tylko dla wybranych dni
-      let tempsArray = [city.temp_day0, city.temp_day1, city.temp_day2, city.temp_day3, city.temp_day4, city.temp_day5, city.temp_day6, city.temp_day7, city.temp_day8, city.temp_day9];
-      let tempsToCheck = [];
-      // let tempsArray = [];
-      for (var i = startDay; i <= endDay; i++) {
-        daysToCheck.push(i);
-        tempsToCheck.push(tempsArray[i]);
-        // tempsArray.push(city.temp_day{i})
-      }
-      console.log(tempsArray);
-      console.log(daysToCheck);
-      console.log(tempsToCheck);
-      let countriesToGo = [];
-      let citiesToGoFrance = []; //czy da się nadawać nazwy zmiennych automatycznie poprzez city.country? czy muszę zrobić z tego obiekt zawierający poszczególne tablice?
-      let tempsOk = [];
-      let cityOk = false;
-      for (var i = 0; i < tempsToCheck.length; i++) {
-        if (tempsToCheck[i] < this.state.minTemp || tempsToCheck[i] > this.state.maxTemp) {
-          tempsOk.push(false);
-          break;
-        } else {
-          tempsOk.push(true);
-        }
-      }
-      if (tempsOk.indexOf(false)===-1){
-        countriesToGo.push(city.country);
-        citiesToGoFrance.push(city.name);
-      }
-      console.log(countriesToGo);
-      console.log(citiesToGoFrance);
-      this.setState({
-        countries: countriesToGo,
-        France: citiesToGoFrance,
-        dataReady: 'ready'
-      });
-      console.log(this.state);
-      //chciałabym to zrobić jakoś sprytniej, ale na razie nie wychodzi - poprawić później - początek poniżej:
-      // let tempsArray = daysToCheck.map(day=>{
-      //   return city.temp_day{day};
-      // })
-    } //koniec else
+      } //koniec else
     }) //koniec then z ifem i elsem w środku
-    .catch(error=>console.log('error poza ifem', error))
+    .catch(error=>console.log('error poza ifem i elsem', error));
       ///////koniec zapytania o Paris
+  } ///koniec funkcji search1CityFunction
 
+  ///filterCity - funkcja, która sprawdza, czy dane miasto spełnia podane przez użytkownika kryteria, a jeśli tak, dodaje je do odpowiednich zmiennych w state
+  //TODO: przenieść to do osobnego pliku i tylko importować?
+  filterCity = (cityToFilter) => {
+    //console.log(cityToFilter);
+    //jako parametr trzeba podać zaciągnięte dane dla pojedynczego miasta (wszystko jedno, czy z mojej bazy, czy z API)
 
-    // let currentDate = new Date().toISOString().substring(0, 10);
-    // let city2 = {
-    //       "name": "Paris",
-    //       "nameToShow": "Paris",
-    //       "FlightSearchKey": "CDG,ORY,BVA,XHP,XPG",
-    //       "country": "France",
-    //       "url": "http://api.apixu.com/v1/forecast.json?key=0ffd45ac047f4cda8ae85915171303&q=Warsaw&days=10",
-    //       "temp": "20",
-    //       "checkedAt": "2017-03-16",
-    //       "id": 1
-    //     };
-    // console.log(currentDate);
-    // console.log('Szukamy miejsca o temperaturze pomiędzy', this.state.minTemp, 'a', this.state.maxTemp, 'stopni Celsjusza, w dniach od', this.state.fromDate, 'do', this.state.toDate);
-    // let city = destinations.cities[1].name;
-    // let country = destinations.cities[1].country;
-    // let url = 'http://api.apixu.com/v1/forecast.json?key=0ffd45ac047f4cda8ae85915171303&q='+city+'&days=10';
-    // console.log(url);
-    // cacheProxy.get(url).then(data=>{
-    //   console.log(data);
-    //   console.log(data.forecast.forecastday[0].date);
-    //   console.log(data.forecast.forecastday[0].day.avgtemp_c);
-    //   console.log(data.forecast.forecastday[2].date);
-    //   console.log(data.forecast.forecastday[2].day.avgtemp_c);
-    //   console.log(data.forecast.forecastday[9].date);
-    //   console.log(data.forecast.forecastday[9].day.avgtemp_c);
-    // });
-    //wrzucam coś do mojej lokalnej bazy danych:
-    // fetch("http://localhost:3000/destinations", {
-    // method: 'post',
-    // body: JSON.stringify(city1),
-    // headers: {
-    //     'Accept': 'application/json',
-    //     'Content-Type': 'application/json'
-    // }
-    //modyfikcja pól:
-    //     let city = {
-    //           "name": "Paris",
-    //           "nameToShow": "Paris",
-    //           "FlightSearchKey": "CDG,ORY,BVA,XHP,XPG",
-    //           "country": "France",
-    //           "url": "http://api.apixu.com/v1/forecast.json?key=0ffd45ac047f4cda8ae85915171303&q=Paris&days=10",
-    //           "temp": "10",
-    //           "checkedAt": currentDate,
-    //           "id": 1
-    //         }
-    //     fetch("http://localhost:3000/destinations/1", {
-    //     method: 'put',
-    //     body: JSON.stringify(city),
-    //     headers: {
-    //         'Accept': 'application/json',
-    //         'Content-Type': 'application/json'
-    //     }
-    // }).then(resp => resp.json()) //odpowiedzią jest id
-    //     .then(data => console.log(data));
-    //pobranie czegoś: //wyszukiwanie po atrybucie
-    // fetch("http://localhost:3000/destinations/1").then(data => data.json()).then(cities=> {
-    //   console.log(cities);
-    //   let checkedAt = cities.checkedAt;
-    //   console.log(checkedAt);
-    //   })
-  } /////////////////koniec handleSearchClick
+    ////////to co mam w state - dane od użytkownika:
+    // minTemp: '',
+    // maxTemp: '',
+    // fromDate: '',
+    // toDate: ''
+
+    //obliczenie startDay i endDay - które dni brać pod uwagę przy filtrowaniu
+    //TODO: to powinno być w osobnej funkcji, zrobione tylko raz - otrzymany wynik będzie dotyczył wyszukiwania wszystkich miast
+    //TODO: to co wcześniej - być może trzeba zamienić ISOString na UTC
+
+    //obliczanie różnicy pomiędzy dzisiaj a dniem wylotu w dniach -> wynik oznacza, od którego dnia zacząć sprawdzać temperaturę (dzień 0 = dzisiaj);
+    let currentDateString = new Date().toISOString().substring(0, 10);
+    let currentDateMs = new Date(currentDateString).getTime()
+    let fromDateMs = new Date(this.state.fromDate).getTime();
+    let diffToStartMs = fromDateMs - currentDateMs;
+    let oneDayInMs = 1000*60*60*24;
+    let startDay = Math.round(diffToStartMs/oneDayInMs);
+    console.log(startDay);
+
+    //obliczanie różnicy pomiędzy dzisiaj a dniem powrotu w dniach -> wynik oznacza, do którego dnia sprawdzać temperaturę (dzień 0 = dzisiaj);
+    let toDateMs = new Date(this.state.toDate).getTime();
+    let diffToEndMs = toDateMs - currentDateMs;
+    let endDay = Math.round(diffToEndMs/oneDayInMs);
+    console.log(endDay);
+
+    //sprawdzam temperaturę w danym mieście tylko dla wybranych dni
+    //przykładowa nazwa zmiennej - powinno działać zarówno dla mojej bazy, jak i dla API cityToFilter.forecast.forecastday[0].day.avgtemp_c
+
+    let tempsToCheck = [];
+    for (var i = startDay; i <= endDay; i++) {
+      tempsToCheck.push(cityToFilter.forecast.forecastday[i].day.avgtemp_c);
+    }
+    console.log(tempsToCheck);
+
+    //zmienne, które podstawię potem do state:
+    //TODO: zautomatyzować to, żebym nie musiała ręcznie tworzyć pustej tablicy dla każdego państwa. czy da się nadawać nazwy zmiennych automatycznie poprzez city.country? czy jednak żeby to działało, muszę zrobić z tego obiekt zawierający poszczególne tablice (w state)?
+    //cityToFilter.location.country
+
+    let countriesToGo = [];
+    let citiesToGoFrance = [];
+    let tempsOk = [];
+    let cityOk = false;
+    //pętla, która sprawdza, czy dla każdego dnia, w zakresie dat podanym przez użytkownika, temperatura mieści się w zakresie temperatur podanym przez użytkownika. Dla każdego dnia, do talbicy tempsOk wrzuca true lub false (jeśli napotka pierwsze false, przerywa pętlę). Potem sprawdzam, czy tablica dla tego miasta zawiera false - jeśli nie ma ani jednego false, dorzucam państwo do countriesToGo oraz miasto do tablicy tego państwa.
+    for (var i = 0; i < tempsToCheck.length; i++) {
+      if (tempsToCheck[i] < this.state.minTemp || tempsToCheck[i] > this.state.maxTemp) {
+        tempsOk.push(false);
+        break;
+      } else {
+        tempsOk.push(true);
+      }
+    }
+    if (tempsOk.indexOf(false)===-1){
+      countriesToGo.push(cityToFilter.location.country);
+      citiesToGoFrance.push(cityToFilter.location.name);
+    }
+    console.log(countriesToGo);
+    console.log(citiesToGoFrance);
+    this.setState({
+      countries: countriesToGo,
+      France: citiesToGoFrance,
+      dataReady: 'ready'
+    });
+    console.log(this.state);
+  } //koniec funkcji filterCity
   render(){
     //TODO ograniczyć wybór dat do today-today+9/10
     //https://tiffanybbrown.com/2013/10/24/date-input-in-html5-restricting-dates-and-thought-for-working-around-limitations/
@@ -276,17 +270,20 @@ class Search extends React.Component{
     //   <option value='Andorra'>Andorra</option>
     //   <option value='Armenia'>Armenia</option>
     // </select><br/><br/>
+
     let results = '';
     if (this.state.dataReady==='ready'&&this.state.countries.length>0&&this.state.countries.indexOf("France")!==-1) {
-      results = <ul>{this.state.countries[0]} {this.state.France.map(city=>{
-        return <li>{city}</li>
+      results = <ul>{this.state.countries[0]} {this.state.France.map(el=>{
+        return <li>{el}</li>
       })} </ul>
   } else if (this.state.dataReady==='pending'){
       results = 'Loading...';
     } else if (this.state.dataReady==='ready'&&this.state.countries.length === 0){
-      results = "Sorry, we didn't find any destinations matching your criteria."
+      results = "Sorry, we didn't find any destinations matching your criteria.";
+    } else if (this.state.dataReady==='beforeSearch'){
+      results='';
     }
-    console.log('Results=', results);
+    console.log('render, Results=', results);
     return <div>
       <p>Find out where you can go to enjoy your dream weather!</p>
       <form>
@@ -314,10 +311,7 @@ class Search extends React.Component{
 //     return <div>{}</div>
 //   }
 // }
-
-//TODO będzie trzeba stworzyć jakiś grid i to wszystko opakować w grid (RWD)
-//TODO CSSy tzn Sass - zainstalować odpowiednie paczki. Jak to się podłącza? napisać sass.
-
+//
 // class App extends React.Component{
 //   render(){
 //     return <div className='container'>
@@ -329,54 +323,6 @@ class Search extends React.Component{
 // }
 
 class App extends React.Component {
-  // constructor(props){
-  //   super(props);
-  //   this.state = {
-  //     minTemp: '',
-  //     maxTemp: '',
-  //     fromDate: '',
-  //     toDate: ''
-  //   }
-  // }
-//   componentDidMount(){
-//   console.log('componentDidMount');
-//   // cacheProxy.get('http://api.football-data.org/v1/competitions').then(data=>{
-//   //   // console.log(data);
-//   //   // console.log(id);
-//   //   this.setState({
-//   //     content: data[0].id
-//   //   });
-//   //   console.log(this.state.content);
-//   // });
-// }
-  // handleButtonClick = (event) => {
-  //   event.preventDefault();
-    // console.log('button click');
-    // console.log(destinations.cities[0].name);
-    // console.log(destinations.cities[0].country);
-    // let city = destinations.cities[1].name;
-    // let country = destinations.cities[1].country;
-    // let url = 'http://api.apixu.com/v1/forecast.json?key=0ffd45ac047f4cda8ae85915171303&q='+city+'&days=10';
-    // console.log(url);
-    // cacheProxy.get(url).then(data=>{
-    //   // console.log(data);
-    //   // console.log(id);
-    //   // this.setState({
-    //   //   content: data[0].id
-    //   // });
-    //   // console.log(this.state.content);
-    //   console.log(data);
-    //   console.log(data.forecast.forecastday[0].date);
-    //   console.log(data.forecast.forecastday[0].day.avgtemp_c);
-    //   console.log(data.forecast.forecastday[2].date);
-    //   console.log(data.forecast.forecastday[2].day.avgtemp_c);
-    //   console.log(data.forecast.forecastday[9].date);
-    //   console.log(data.forecast.forecastday[9].day.avgtemp_c);
-    // });
-    // this.setState({
-    //   fetch: 'we changed the state, so fetch should start now'
-    // })
-  // }
   render(){
     return <div>
       <Search/>
