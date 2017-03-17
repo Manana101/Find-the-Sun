@@ -9488,8 +9488,33 @@ var Search = function (_React$Component) {
       });
     };
 
+    _this.checkFormOk = function () {
+      console.log('formOk wywołana');
+      var toDate = new Date(_this.state.toDate);
+      var fromDate = new Date(_this.state.fromDate);
+      var maxTemp = parseInt(_this.state.maxTemp);
+      var minTemp = parseInt(_this.state.minTemp);
+      if (toDate >= fromDate && maxTemp >= minTemp && _this.state.toDate != '' && _this.state.fromDate != '' && _this.state.minTemp != '' && _this.state.maxTemp != '') {
+        console.log('formOK');
+        _this.setState({
+          formOk: true
+        });
+      } else {
+        console.log('formNotOK');
+        _this.setState({
+          formOk: false
+        });
+      }
+    };
+
     _this.handleSearchClick = function (event) {
       event.preventDefault();
+      //walidacja formularza
+      _this.checkFormOk();
+      //jeśli formularz nie jest poprawnie wypełniony, przerwij wykonywanie funkcji
+      if (_this.state.formOk === false) {
+        return;
+      }
       //wyświetl 'loading'...
       _this.setState({
         dataReady: 'pending'
@@ -9512,7 +9537,8 @@ var Search = function (_React$Component) {
         if (checkedAt !== currentDate) {
           //co robi if: jeśli prognoza pogody NIE BYŁA SPRAWDZONA DZISIAJ, wyślij zapytanie dla tego miasta do API i dodaj dane o temperaturach na najbliższe 10 dni do mojej bazy. Zaktualizuj też pole checkedAt. Potem wywołaj funkcję, która sprawdza, czy miasto spełnia kryteria użytkownika i dodaje (lub nie) miasto do odpowiednich zmiennych w state.
           console.log('prognoza dziś jeszcze nie była sprawdzona, jestem w if');
-          console.log('city.url', city.url);
+          //TODO: url tworzyć jednak dynamicznie na podstawie name, nie wrzucać URL-i do bazy. Lepiej mieć key w jednym miejscu tutaj niż 80 razy w bazie.
+          // console.log('city.url', city.url);
           //zapytanie o to miasto do API - prognoza na najbliższe 10 dni
           fetch(city.url).then(function (data) {
             return data.json();
@@ -9644,13 +9670,13 @@ var Search = function (_React$Component) {
       var diffToStartMs = fromDateMs - currentDateMs;
       var oneDayInMs = 1000 * 60 * 60 * 24;
       var startDay = Math.round(diffToStartMs / oneDayInMs);
-      console.log(startDay);
+      // console.log(startDay);
 
       //obliczanie różnicy pomiędzy dzisiaj a dniem powrotu w dniach -> wynik oznacza, do którego dnia sprawdzać temperaturę (dzień 0 = dzisiaj);
       var toDateMs = new Date(_this.state.toDate).getTime();
       var diffToEndMs = toDateMs - currentDateMs;
       var endDay = Math.round(diffToEndMs / oneDayInMs);
-      console.log(endDay);
+      // console.log(endDay);
 
       //sprawdzam temperaturę w danym mieście tylko dla wybranych dni
       //przykładowa nazwa zmiennej - powinno działać zarówno dla mojej bazy, jak i dla API cityToFilter.forecast.forecastday[0].day.avgtemp_c
@@ -9670,6 +9696,7 @@ var Search = function (_React$Component) {
       var tempsOk = [];
       var cityOk = false;
       //pętla, która sprawdza, czy dla każdego dnia, w zakresie dat podanym przez użytkownika, temperatura mieści się w zakresie temperatur podanym przez użytkownika. Dla każdego dnia, do talbicy tempsOk wrzuca true lub false (jeśli napotka pierwsze false, przerywa pętlę). Potem sprawdzam, czy tablica dla tego miasta zawiera false - jeśli nie ma ani jednego false, dorzucam państwo do countriesToGo oraz miasto do tablicy tego państwa.
+      // console.log(this.state);
       for (var i = 0; i < tempsToCheck.length; i++) {
         if (tempsToCheck[i] < _this.state.minTemp || tempsToCheck[i] > _this.state.maxTemp) {
           tempsOk.push(false);
@@ -9682,14 +9709,14 @@ var Search = function (_React$Component) {
         countriesToGo.push(cityToFilter.location.country);
         citiesToGoFrance.push(cityToFilter.location.name);
       }
-      console.log(countriesToGo);
-      console.log(citiesToGoFrance);
+      // console.log(countriesToGo);
+      // console.log(citiesToGoFrance);
       _this.setState({
         countries: countriesToGo,
         France: citiesToGoFrance,
         dataReady: 'ready'
       });
-      console.log(_this.state);
+      // console.log(this.state);
     };
 
     _this.state = {
@@ -9697,15 +9724,13 @@ var Search = function (_React$Component) {
       minTemp: '',
       maxTemp: '',
       fromDate: '',
-      toDate: ''
+      toDate: '',
+      formOk: ''
     };
     return _this;
   }
-  // handleAreaChange = (event) => {
-  //   this.setState({
-  //     area: event.target.value
-  //   })
-  // }
+  //funkcje obsługujące formularz:
+
   //koniec handleSearchClick
 
   //search1CityFunction -> funkcja, która sprawdza pogodę dla pojedynczego miasta - jeśli miasto spełnia kryteria podane przez użytkownika, jest dodawane do odpowiednich zmiennych w state //przenieść ją później do osobnego pliku
@@ -9737,8 +9762,20 @@ var Search = function (_React$Component) {
       //   <option value='Armenia'>Armenia</option>
       // </select><br/><br/>
 
+      //obliczam zakres dni, który ma być możliwy do wybrania w input type='date'
+      //TODO: wrzucić to gdzieś indziej...
+      var today = new Date().toISOString().substring(0, 10);
+      var todayMs = new Date(today).getTime();
+      var oneDayInMs = 1000 * 60 * 60 * 24;
+      var todayPlus9Ms = todayMs + 9 * oneDayInMs;
+      var todayPlus9Date = new Date(todayPlus9Ms);
+      var todayPlus9 = todayPlus9Date.toISOString().substring(0, 10);
+
+      //zmienna results i warunek - co ma się wyświetlać w zależności od etapu załadowania danych i od tego czy znaleziono przynajmniej 1 miasto do wyświetlenia
       var results = '';
-      if (this.state.dataReady === 'ready' && this.state.countries.length > 0 && this.state.countries.indexOf("France") !== -1) {
+      if (this.state.formOk === false) {
+        results = 'Formularz wypełniony niepoprawnie';
+      } else if (this.state.dataReady === 'ready' && this.state.countries.length > 0 && this.state.countries.indexOf("France") !== -1) {
         results = _react2.default.createElement(
           'ul',
           null,
@@ -9755,12 +9792,12 @@ var Search = function (_React$Component) {
         );
       } else if (this.state.dataReady === 'pending') {
         results = 'Loading...';
-      } else if (this.state.dataReady === 'ready' && this.state.countries.length === 0) {
+      } else if (this.state.dataReady === 'ready' && this.state.countries.length === 0 && this.state.formOk === true) {
         results = "Sorry, we didn't find any destinations matching your criteria.";
       } else if (this.state.dataReady === 'beforeSearch') {
         results = '';
       }
-      console.log('render, Results=', results);
+      //console.log('render, Results=', results, this.state);
       return _react2.default.createElement(
         'div',
         null,
@@ -9781,14 +9818,14 @@ var Search = function (_React$Component) {
           _react2.default.createElement('br', null),
           _react2.default.createElement('br', null),
           'From: ',
-          _react2.default.createElement('input', { type: 'date', min: '', max: '', value: this.state.fromDate, onChange: this.handleFromDateChange }),
+          _react2.default.createElement('input', { type: 'date', min: today, max: todayPlus9, value: this.state.fromDate, onChange: this.handleFromDateChange }),
           _react2.default.createElement('br', null),
           _react2.default.createElement('br', null),
           'To*: ',
-          _react2.default.createElement('input', { type: 'date', min: '', max: '', value: this.state.toDate, onChange: this.handleToDateChange }),
+          _react2.default.createElement('input', { type: 'date', min: today, max: todayPlus9, value: this.state.toDate, onChange: this.handleToDateChange }),
           _react2.default.createElement('br', null),
           _react2.default.createElement('br', null),
-          '*Sorry, we can check the weather max. 10 days from now',
+          '*We can check the weather max. 10 days from now',
           _react2.default.createElement('br', null),
           _react2.default.createElement('br', null),
           _react2.default.createElement(

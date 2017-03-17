@@ -12,14 +12,12 @@ class Search extends React.Component{
       minTemp: '',
       maxTemp: '',
       fromDate: '',
-      toDate: ''
+      toDate: '',
+      formOk: ''
     }
   }
-  // handleAreaChange = (event) => {
-  //   this.setState({
-  //     area: event.target.value
-  //   })
-  // }
+  //funkcje obsługujące formularz:
+
   handleMinTempChange = (event) => {
     this.setState({
       minTemp: event.target.value
@@ -40,8 +38,32 @@ class Search extends React.Component{
       toDate: event.target.value
     })
   }
+  checkFormOk = () => {
+    console.log('formOk wywołana')
+    let toDate = new Date(this.state.toDate);
+    let fromDate = new Date(this.state.fromDate);
+    let maxTemp = parseInt(this.state.maxTemp);
+    let minTemp = parseInt(this.state.minTemp);
+    if (toDate>=fromDate&&maxTemp>=minTemp&&this.state.toDate!=''&&this.state.fromDate!=''&&this.state.minTemp!=''&&this.state.maxTemp!='') {
+      console.log('formOK');
+      this.setState({
+        formOk: true
+      })
+    } else {
+      console.log('formNotOK');
+      this.setState({
+        formOk: false
+      })
+    }
+  }
   handleSearchClick = (event) => {
     event.preventDefault();
+    //walidacja formularza
+    this.checkFormOk();
+    //jeśli formularz nie jest poprawnie wypełniony, przerwij wykonywanie funkcji
+    if (this.state.formOk === false) {
+      return;
+    }
     //wyświetl 'loading'...
     this.setState({
       dataReady: 'pending'
@@ -65,7 +87,8 @@ class Search extends React.Component{
       if (checkedAt !== currentDate){
         //co robi if: jeśli prognoza pogody NIE BYŁA SPRAWDZONA DZISIAJ, wyślij zapytanie dla tego miasta do API i dodaj dane o temperaturach na najbliższe 10 dni do mojej bazy. Zaktualizuj też pole checkedAt. Potem wywołaj funkcję, która sprawdza, czy miasto spełnia kryteria użytkownika i dodaje (lub nie) miasto do odpowiednich zmiennych w state.
         console.log('prognoza dziś jeszcze nie była sprawdzona, jestem w if');
-        console.log('city.url', city.url);
+        //TODO: url tworzyć jednak dynamicznie na podstawie name, nie wrzucać URL-i do bazy. Lepiej mieć key w jednym miejscu tutaj niż 80 razy w bazie.
+        // console.log('city.url', city.url);
         //zapytanie o to miasto do API - prognoza na najbliższe 10 dni
         fetch(city.url)
         .then(data => data.json())
@@ -205,13 +228,13 @@ class Search extends React.Component{
     let diffToStartMs = fromDateMs - currentDateMs;
     let oneDayInMs = 1000*60*60*24;
     let startDay = Math.round(diffToStartMs/oneDayInMs);
-    console.log(startDay);
+    // console.log(startDay);
 
     //obliczanie różnicy pomiędzy dzisiaj a dniem powrotu w dniach -> wynik oznacza, do którego dnia sprawdzać temperaturę (dzień 0 = dzisiaj);
     let toDateMs = new Date(this.state.toDate).getTime();
     let diffToEndMs = toDateMs - currentDateMs;
     let endDay = Math.round(diffToEndMs/oneDayInMs);
-    console.log(endDay);
+    // console.log(endDay);
 
     //sprawdzam temperaturę w danym mieście tylko dla wybranych dni
     //przykładowa nazwa zmiennej - powinno działać zarówno dla mojej bazy, jak i dla API cityToFilter.forecast.forecastday[0].day.avgtemp_c
@@ -231,6 +254,7 @@ class Search extends React.Component{
     let tempsOk = [];
     let cityOk = false;
     //pętla, która sprawdza, czy dla każdego dnia, w zakresie dat podanym przez użytkownika, temperatura mieści się w zakresie temperatur podanym przez użytkownika. Dla każdego dnia, do talbicy tempsOk wrzuca true lub false (jeśli napotka pierwsze false, przerywa pętlę). Potem sprawdzam, czy tablica dla tego miasta zawiera false - jeśli nie ma ani jednego false, dorzucam państwo do countriesToGo oraz miasto do tablicy tego państwa.
+    // console.log(this.state);
     for (var i = 0; i < tempsToCheck.length; i++) {
       if (tempsToCheck[i] < this.state.minTemp || tempsToCheck[i] > this.state.maxTemp) {
         tempsOk.push(false);
@@ -243,14 +267,14 @@ class Search extends React.Component{
       countriesToGo.push(cityToFilter.location.country);
       citiesToGoFrance.push(cityToFilter.location.name);
     }
-    console.log(countriesToGo);
-    console.log(citiesToGoFrance);
+    // console.log(countriesToGo);
+    // console.log(citiesToGoFrance);
     this.setState({
       countries: countriesToGo,
       France: citiesToGoFrance,
       dataReady: 'ready'
     });
-    console.log(this.state);
+    // console.log(this.state);
   } //koniec funkcji filterCity
   render(){
     //TODO ograniczyć wybór dat do today-today+9/10
@@ -271,27 +295,39 @@ class Search extends React.Component{
     //   <option value='Armenia'>Armenia</option>
     // </select><br/><br/>
 
+    //obliczam zakres dni, który ma być możliwy do wybrania w input type='date'
+    //TODO: wrzucić to gdzieś indziej...
+    let today = new Date().toISOString().substring(0, 10);
+    let todayMs = new Date(today).getTime();
+    let oneDayInMs = 1000*60*60*24;
+    let todayPlus9Ms = todayMs + 9*oneDayInMs;
+    let todayPlus9Date = new Date(todayPlus9Ms);
+    let todayPlus9 = todayPlus9Date.toISOString().substring(0, 10);
+
+    //zmienna results i warunek - co ma się wyświetlać w zależności od etapu załadowania danych i od tego czy znaleziono przynajmniej 1 miasto do wyświetlenia
     let results = '';
-    if (this.state.dataReady==='ready'&&this.state.countries.length>0&&this.state.countries.indexOf("France")!==-1) {
+    if (this.state.formOk === false){
+      results = 'Formularz wypełniony niepoprawnie';
+    } else if (this.state.dataReady==='ready'&&this.state.countries.length>0&&this.state.countries.indexOf("France")!==-1) {
       results = <ul>{this.state.countries[0]} {this.state.France.map(el=>{
         return <li>{el}</li>
       })} </ul>
   } else if (this.state.dataReady==='pending'){
       results = 'Loading...';
-    } else if (this.state.dataReady==='ready'&&this.state.countries.length === 0){
+    } else if (this.state.dataReady==='ready'&&this.state.countries.length === 0&&this.state.formOk === true){
       results = "Sorry, we didn't find any destinations matching your criteria.";
     } else if (this.state.dataReady==='beforeSearch'){
       results='';
     }
-    console.log('render, Results=', results);
+    //console.log('render, Results=', results, this.state);
     return <div>
       <p>Find out where you can go to enjoy your dream weather!</p>
       <form>
       Min. temp. (Celsius): <input type='number' value={this.state.minTemp} onChange={this.handleMinTempChange}/><br/><br/>
       Max. temp. (Celsius): <input type='number' value={this.state.maxTemp} onChange={this.handleMaxTempChange}/><br/><br/>
-      From: <input type='date' min='' max='' value={this.state.fromDate} onChange={this.handleFromDateChange}/><br/><br/>
-    To*: <input type='date' min='' max='' value={this.state.toDate} onChange={this.handleToDateChange}/><br/><br/>
-    *Sorry, we can check the weather max. 10 days from now<br/><br/>
+    From: <input type='date' min={today} max={todayPlus9} value={this.state.fromDate} onChange={this.handleFromDateChange}/><br/><br/>
+    To*: <input type='date' min={today} max={todayPlus9} value={this.state.toDate} onChange={this.handleToDateChange}/><br/><br/>
+    *We can check the weather max. 10 days from now<br/><br/>
       <button onClick={this.handleSearchClick}>Search</button>
       </form>
       <div>{results}</div>
