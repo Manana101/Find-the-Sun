@@ -9517,10 +9517,19 @@ var Search = function (_React$Component) {
       }
       //wyświetl 'loading'...
       _this.setState({
-        dataReady: 'pending'
+        dataReady: 'pending',
+        destinations: {},
+        countries: []
       });
       //zapytanie o pojedyncze miasto - tu przykładowo Paris - wywołuję funkcję
-      _this.search1CityFunction(1); //jako parametr podaję id z mojej bazy
+      //let id = 1;
+      //this.search1CityFunction(id); //jako parametr podaję id z mojej bazy
+
+      //zapętlam zapytania
+      var ids = [1, 2, 3];
+      ids.forEach(function (el) {
+        return _this.search1CityFunction(el);
+      });
     };
 
     _this.search1CityFunction = function (id) {
@@ -9537,10 +9546,10 @@ var Search = function (_React$Component) {
         if (checkedAt !== currentDate) {
           //co robi if: jeśli prognoza pogody NIE BYŁA SPRAWDZONA DZISIAJ, wyślij zapytanie dla tego miasta do API i dodaj dane o temperaturach na najbliższe 10 dni do mojej bazy. Zaktualizuj też pole checkedAt. Potem wywołaj funkcję, która sprawdza, czy miasto spełnia kryteria użytkownika i dodaje (lub nie) miasto do odpowiednich zmiennych w state.
           console.log('prognoza dziś jeszcze nie była sprawdzona, jestem w if');
-          //TODO: url tworzyć jednak dynamicznie na podstawie name, nie wrzucać URL-i do bazy. Lepiej mieć key w jednym miejscu tutaj niż 80 razy w bazie.
-          // console.log('city.url', city.url);
           //zapytanie o to miasto do API - prognoza na najbliższe 10 dni
-          fetch(city.url).then(function (data) {
+          //TODO: wyszukuje mi nie do końca dobrą miejscowość, o tych samych współrzędnych geograficznych (Np. Barceloneta zamiast Barcelona). Muszę mieć więc w bazie dodatkową zmienną 'nameToShow', żeby wyświetlać dobrą nazwę miasta! Po name wyszukać się nie da, bo Palma de Mallorca znajduje mi w Meksyku (znajdzie po samym Palma, ale ja chcę, żeby się wyświetlało Palma de Mallorca.. -> czyli zmienna nameToShow tak czy siak potrzebna). Zapisać po prostu gdzieś w kodzie, jaka zmienna name odpowiada jakiej nameToShow? (taki słownik) Jeśli to jest ok rozwiązanie, to gdzie ten słownik powinnam zdefiniować? (zresztą potrzebne mi też kody lotnisk do wyszukiwania połączeń, czyli muszę mieć te dodatkowe info albo w mojej bazie, albo gdzieś w kodzie stworzone)
+          var url = "http://api.apixu.com/v1/forecast.json?key=0ffd45ac047f4cda8ae85915171303&q=" + city.location.lat + "," + city.location.lon + "&days=10";
+          fetch(url).then(function (data) {
             return data.json();
           }).then(function (data) {
             console.log('jestem w fetchu do API');
@@ -9558,13 +9567,14 @@ var Search = function (_React$Component) {
             var temp_day9 = data.forecast.forecastday[9].day.avgtemp_c;
             //tworzę nowy obiekt dla miasta, w którym podmieniam temperatury oraz checkedAt.
             //TODO: muszę jeszcze rozkminić czy temperatury mają być zapisane w słowniku, czy w tablicy
+            //TODO: problem z FlightSearchKey, który chciałabym mieć w bazie. Nie mam jak go podmienić, bo nie ma takiej zmiennej w oryginalnym API. Stworzyć tu tablicę, która będzie zawierała wszystkie FlightSearchKey, i z niej korzystać? Najlepiej byłoby użyć metody PATCH, ale ona z jakiegoś powodu nie działa. Przykładowo dla Paryża w obiekcie location chciałabym mieć:
+            //"FlightSearchKey": "CDG,ORY,BVA,XHP,XPG"
             var cityUpdated = {
-              "url": "http://api.apixu.com/v1/forecast.json?key=0ffd45ac047f4cda8ae85915171303&q=Paris&days=10",
               "location": {
-                "name": "Paris",
-                "nameToShow": "Paris",
-                "FlightSearchKey": "CDG,ORY,BVA,XHP,XPG",
-                "country": "France"
+                "name": data.location.name,
+                "lat": data.location.lat,
+                "lon": data.location.lon,
+                "country": data.location.country
               },
               "forecast": {
                 "forecastday": [{
@@ -9610,7 +9620,7 @@ var Search = function (_React$Component) {
                 }]
               },
               "checkedAt": currentDate,
-              "id": 1
+              "id": id
             };
             //dodaję zaktualizone miasto do mojej bazy na odpowiednie miejsce (po id)
             fetch("http://localhost:3000/destinations/" + id, {
@@ -9690,11 +9700,14 @@ var Search = function (_React$Component) {
       //zmienne, które podstawię potem do state:
       //TODO: zautomatyzować to, żebym nie musiała ręcznie tworzyć pustej tablicy dla każdego państwa. czy da się nadawać nazwy zmiennych automatycznie poprzez city.country? czy jednak żeby to działało, muszę zrobić z tego obiekt zawierający poszczególne tablice (w state)?
       //cityToFilter.location.country
-
-      var countriesToGo = [];
-      var citiesToGoFrance = [];
+      var destinations = _this.state.destinations;
+      //TODO: na razie robię sobie osobną tablicę krajów, bo nie umiem iterować po obiekcie. Ale docelowo lepiej byłoby nie tworzyć dodatkowej zmiennej, tylko iterować po obiekcie destinations przy renderowaniu
+      var countries = _this.state.countries;
+      //let howManyFound = 0;
+      //let countriesToGo = [];
+      //let citiesToGoFrance = [];
       var tempsOk = [];
-      var cityOk = false;
+      //let cityOk = false;
       //pętla, która sprawdza, czy dla każdego dnia, w zakresie dat podanym przez użytkownika, temperatura mieści się w zakresie temperatur podanym przez użytkownika. Dla każdego dnia, do talbicy tempsOk wrzuca true lub false (jeśli napotka pierwsze false, przerywa pętlę). Potem sprawdzam, czy tablica dla tego miasta zawiera false - jeśli nie ma ani jednego false, dorzucam państwo do countriesToGo oraz miasto do tablicy tego państwa.
       // console.log(this.state);
       for (var i = 0; i < tempsToCheck.length; i++) {
@@ -9705,27 +9718,51 @@ var Search = function (_React$Component) {
           tempsOk.push(true);
         }
       }
+      console.log(tempsOk);
       if (tempsOk.indexOf(false) === -1) {
-        countriesToGo.push(cityToFilter.location.country);
-        citiesToGoFrance.push(cityToFilter.location.name);
+        if (destinations[cityToFilter.location.country] === undefined) {
+          console.log(destinations[cityToFilter.location.country]);
+          console.log('Nie znalazłem kraju w obiekcie destinations');
+          destinations[cityToFilter.location.country] = [cityToFilter.location.name];
+          countries.push(cityToFilter.location.country);
+        } else {
+          console.log('Znalazłem kraj w obiekcie destinations');
+          destinations[cityToFilter.location.country].push(cityToFilter.location.name);
+        }
+        //else if (destinations[cityToFilter.location.country].indexOf(cityToFilter.location.name)===-1){
+        //   console.log('Znalazłem kraj w obiekcie destinations, ale nie znalazłem miasta');
+        //   destinations[cityToFilter.location.country].push(cityToFilter.location.name);
+        // }
+        //if countries.indexOf(cityToFilter.location.country)
+        //howManyFound ++;
+        //countriesToGo.push(cityToFilter.location.country);
+        //citiesToGoFrance.push(cityToFilter.location.name);
       }
+      console.log(countries);
+      console.log(destinations);
       // console.log(countriesToGo);
       // console.log(citiesToGoFrance);
+      // console.log(this.state);
+
+      //////NIE POWINNO BYĆ ZMIANY STATE TUTAJ! TA FUNKCJA POWINNA COŚ ZWRACAĆ, CO BĘDZIE ZAPISYWANE DO ZMIENNEJ W MIEJSCU WYWOŁANIA FUNKCJI, ITD. BEZ SENSU, BO PRZY ITERACJI DLA KAŻDEGO ID JEST OD NOWA RENDEROWANY ELEMENT (ZMIANA STATE). POPRAWIĆ TO PÓŹNIEJ!
       _this.setState({
-        countries: countriesToGo,
-        France: citiesToGoFrance,
+        //countries: countriesToGo,
+        //France: citiesToGoFrance,
+        destinations: destinations,
+        countries: countries,
         dataReady: 'ready'
       });
-      // console.log(this.state);
     };
 
     _this.state = {
       dataReady: 'beforeSearch',
+      formOk: '',
       minTemp: '',
       maxTemp: '',
       fromDate: '',
       toDate: '',
-      formOk: ''
+      destinations: {},
+      countries: []
     };
     return _this;
   }
@@ -9744,6 +9781,8 @@ var Search = function (_React$Component) {
     key: 'render',
     //koniec funkcji filterCity
     value: function render() {
+      var _this2 = this;
+
       //TODO ograniczyć wybór dat do today-today+9/10
       //https://tiffanybbrown.com/2013/10/24/date-input-in-html5-restricting-dates-and-thought-for-working-around-limitations/
       //http://stackoverflow.com/questions/17182544/disable-certain-dates-from-html5-datepicker
@@ -9775,25 +9814,33 @@ var Search = function (_React$Component) {
       var results = '';
       if (this.state.formOk === false) {
         results = 'Formularz wypełniony niepoprawnie';
-      } else if (this.state.dataReady === 'ready' && this.state.countries.length > 0 && this.state.countries.indexOf("France") !== -1) {
-        results = _react2.default.createElement(
-          'ul',
-          null,
-          this.state.countries[0],
-          ' ',
-          this.state.France.map(function (el) {
-            return _react2.default.createElement(
-              'li',
-              null,
-              el
-            );
-          }),
-          ' '
-        );
-      } else if (this.state.dataReady === 'pending') {
+      } else if (this.state.dataReady === 'pending' && this.state.formOk === true) {
         results = 'Loading...';
       } else if (this.state.dataReady === 'ready' && this.state.countries.length === 0 && this.state.formOk === true) {
         results = "Sorry, we didn't find any destinations matching your criteria.";
+      } else if (this.state.dataReady === 'ready' && this.state.countries.length > 0) {
+        results = _react2.default.createElement(
+          'ul',
+          null,
+          this.state.countries.map(function (country) {
+            return _react2.default.createElement(
+              'li',
+              null,
+              country,
+              _react2.default.createElement(
+                'ul',
+                null,
+                _this2.state.destinations[country].map(function (city) {
+                  return _react2.default.createElement(
+                    'li',
+                    null,
+                    city
+                  );
+                })
+              )
+            );
+          })
+        );
       } else if (this.state.dataReady === 'beforeSearch') {
         results = '';
       }
