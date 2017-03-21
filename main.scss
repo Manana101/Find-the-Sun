@@ -1,21 +1,28 @@
 /*variables*/
+//background colors
 $color1: black;
-$color2: black;
-$color3: grey;
+$color2: grey;
 $color4: white;
+//text colors
+$text-color1: black;
+$text-color2: grey;
+//width
 $min-width: 250px;
+$container-min-width: 225px;
+$min-width-form: 210px;
+$inner-width: 90%;
 $max-width: 1000px;
 $main-width: 65%;
-$inner-width: 90%;
-/*mixins*/
-// @mixin border($color) {
-//
-// }
-/*add flexbox mixin!!!*/
 
-/*AWD - dodać media queries?*/
-/*jednostki: czy powinno być ujednolicone - wszystko w rem itp?*/
-/*zrobić grid??*/
+/*flex-container mixin*/
+@mixin flex-container($direction, $justify-content) {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: $direction;
+  justify-content: $justify-content;
+}
+
+/*TODO: AWD - dodać media queries do hamburger menu*/
 
 /*reset css*/
 * {
@@ -25,271 +32,202 @@ $inner-width: 90%;
   list-style-type: none;
 }
 /*fonts*/
+//TODO - warszawska czcionka
 
-/*general*/
+/*styles*/
 html {
   font-size: 10px;
 }
 #app {
-  // background-color: grey;
-  // // background-image: ;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  // align-items: center;
-  flex-direction: column;
-  width: 100%;
+  @include flex-container(column, center);
   min-width: $min-width;
   min-height: 100vh;
-  /*styles*/
-  header {
-    // box-sizing: border-box;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    min-width: $min-width;
-    // max-width: $max-width;
-    // height: 8vh;
-    // height: 7%;
-    font-size: 1.6rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    color: $color3;
-    padding: 0.5em 1em 0.5em 1em;
-    background-color: $color4;
-    // border: 1px solid pink;
-    border: 2px solid $color1;
-    // margin-bottom: 25%; //to nie działa dla fixed :/
+}
+.container {
+  width: 90%;
+  min-width: $container-min-width;
+  max-width: $max-width;
+  border: 1px solid green;
+}
+header {
+  @include flex-container(row, center);
+  position: fixed;
+  top: 0;
+  width: 100%; //to tu musi być - czy to przez position: fixed? bo normalnie div ma 100% z defaultu
+  min-width: $min-width;
+  background-color: $color4;
+  border: 2px solid $color1;
+}
+//TODO: muszę zrobić tu @media i hamburgera, bo inaczej przy mniejszym ekranie nav będzie zajmował za dużo ekranu
+.header-container {
+  @include flex-container(row, space-between);
+  // border: 1px solid pink;
+  font-size: 1.6rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 0.5rem 0.5rem;
+  .logo {
+    color: $text-color1;
+    padding: 0.2em 0;
   }
-  // .background {
-  .container {
-    flex-direction: column;
-    background-color: grey;
-    border: 1px solid brown;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    align-content: space-around;
-    // flex-direction: column; //
-    // justify-content: flex-end; //
-    flex-grow: 1;
-    width: 100%;
-    min-width: $min-width;
-    // min-height: 93vh;
-    // background-image: ;
-    // padding-top: 5vh;
-    // .container {
-    //     border: 1px solid brown;
-    //     display: flex;
-    //     flex-wrap: wrap;
-    //     // flex-direction: column; //
-    //     // justify-content: space-around; //
-    //     // align-items: center;
-    //     width: $main-width;
-    //     min-width: $min-width;
-    //     max-width: $max-width;
-    //     // height: 93%;
-    //     // min-height: 100vh;
-    //     // background-image: ;
-    //     // margin: 5vh;
+  nav {
+    ul {
+      @include flex-container(row, space-between);
+      wrap: nowrap;
+      li {
+        color: $text-color2;
+        padding: 0.2rem 0.5em;
+        &:first-child{
+          padding-left: 0;
+        }
+        &:last-child{
+          padding-right: 0;
+        }
+      }
+    }
+  }
+}
+main {
+  @include flex-container(column, flex-start);
+  align-items: center;
+    flex-grow: 1; //konieczne żeby footer był zawsze na dole, nawet jeśli treść nie zajmuje całej strony
+  background-color: $color2;
+  border: 1px solid brown;
+}
+.content { //czarna ramka, białe tło
+  @include flex-container(row, center);
+  align-content: space-around;
+  width: 100%;
+  max-width: $max-width;
+  min-height: 40vh;
+  background-color: $color4;
+  border: 2px solid $color1;
+  padding: 1rem 0;
+  margin: 15vh 0 8vh 0;
+}
+#search {
+  border: 1px solid blue;
+  width: $inner-width;
+  min-width: $min-width-form;
+  h1 {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+  }
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+}
+form#search-form {
+  @include flex-container(row, space-between);
+  font-size: 1.5rem;
+  border: 1px solid red;
+}
+.form-half {
+  border: 1px solid yellow;
+  min-width: $min-width-form;//TODO: wystaje minimalnie poza inne elementy - nie widać tego, ale poprawić
+  .form-item {
+    min-width: $min-width-form; //TODO: wystaje minimalnie poza inne elementy - nie widać tego, ale poprawić
+    border: 1px solid black;
+    padding: 1rem;
+    @include flex-container(row, space-between);
+    input {
+      height: 20px;
+    }
+  }
+}
+.form-left {
+  width: 30%;
+  .form-item {
+    .temp-input {
+      width: 50px;
+    }
+  }
+}//koniec .form-left
+.form-right { //TODO: jak zrobić, żeby prawa część form najpierw się na maksa zmniejszała, a potem dopiero przeskakiwała na dół? napis (p) to rozpycha? poza tym głupio wygląda, że jest tak z prawej przy zmniejszaniu
+  @include flex-container(row, flex-start);
+  width: 65%;
+    .form-item {
+      width: 50%;
+      .date-input {
+        min-width: 135px;
+      }
+    }
+    p {
+      border: 1px solid purple;
+      font-size: 1.3rem;
+      width: 100%;
+      text-align: right;
+      padding: 1rem;
+      min-width: $min-width-form;
+    }
+}//koniec .form-right
 
-      main { //czarna ramka, białe tło
-        // align-self: flex-end;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        align-content: space-around;
-        width: 100%;
-        min-width: $min-width;
-        max-width: $max-width;
-        min-height: 60vh;
-        // max-height: 60%;
-        background-color: $color4;
-        border: 2px solid $color1;
-        // padding-top: 3%;
-        // padding-bottom: 1rem;
-        // padding: 0.5rem;
-        margin: 15vh 0 8vh 0;
-        // margin-top: 8vh;
-        // margin-bottom: 8vh;
-        #search {
-          border: 1px solid blue;
-          width: $inner-width;
-          min-width: $min-width;
-          margin: 2rem;
-          // padding: 0.5rem;
-          h1 {
-            font-size: 4rem;
-            margin: 0 2rem 1rem 1rem;
-          }
-          h2 {
-            font-size: 2rem;
-            margin: 0 2rem 1rem 1rem;
-          }
-          form#search-form {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            width: 100%;
-            min-width: $min-width;
-            font-size: 1.5rem;
-            // padding: 2%;
-            border: 1px solid red;
-            // to poniżej się powtarza: zrobić coś z tym (mixin/wspólne klasy)
-            .form-left {
-              display: flex;
-              flex-wrap: wrap;
-              // flex-grow: 2;
-              // align-items: center;
-              // justify-content: space-between;
-              border: 1px solid yellow;
-              width: 30%;
-              min-width: $min-width;
-              // padding: 2% 0;
-              .form-item {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: space-between;
-                // align-items: center;
-                // justify-content: flex-end;
-                // text-align: right;
-                width: 100%;
-                border: 1px solid orange;
-                padding: 2px 0;
-                label {
-                  margin-left: 5%;
-                }
-                .temp-input {
-                  width: 50px;
-                  // margin-right: 5px;
-                }
-              }
-            }
-            .form-right { //jak zrobić, żeby prawa część form najpierw się na maksa zmniejszała, a potem dopiero przeskakiwała na dół? napis (p) to rozpycha?
-              display: flex;
-              flex-wrap: wrap;
-              // flex-grow: 2;
-              // align-items: center;
-              justify-content: flex-end;
-              // align-content: space-around;
-              border: 1px solid yellow;
-              width: 65%;
-              min-width: $min-width;
-              // flex-shrink: 2;
-              // padding: 2%;
-              .date-container{
-                display: flex;
-                flex-wrap: wrap;
-                border: 1px solid black;
-                // justify-content: flex-end;
-                width: 100%;
-                // flex-shrink: 2;
-                .form-item {
-                  display: flex;
-                  flex-wrap: nowrap;
-                  flex-shrink: 0;
-                  justify-content: space-between;
-                  // justify-content: flex-end;
-                  // text-align: left;
-                  width: 50%;
-                  min-width: $min-width;
-                  border: 1px solid orange;
-                  // padding: 2px 0;
-                  // min-width: 135px;
-                  label {
-                    padding-right: 5px;
-                    margin-left: 5%;
-                  }
-                  .date-input { //skąd się bierze to, że wystaje minimalnie poza swojego rodzica? (widać przy max zmniejszeniu)
-                    min-width: 135px;
-                    // margin: 0;
-                    // padding: 0;
-                  }
-                }
-                p {
-                  font-size: 1.3rem;
-                  border: 1px solid purple;
-                  margin: 0.5rem 0;
-                  width: 100%;
-                  text-align: right;
-                  flex-shrink: 2;
-                }
-              }
-            }
-          }
-          .search-bar {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: flex-end;
-            width: 100%;
-            #search-button {
-              font-size: 1.5rem;
-              font-weight: bold;
-              padding: 0.5em 1em 0.5em 1em;
-              // margin: 2%;
-            }
-          }
-        } //end of search
-        #results {
-          width: $inner-width;;
-          min-width: $min-width;
-          padding: 2%;
-          // margin: 3vh 0;
-          border: 1px solid green;
-          p {
-            font-size: 1.8rem;
-            line-height: 3rem;
-            color: $color2;
-            font-weight: bold;
-            margin-bottom: 1em;
-          }
-          ul#destinations-list{
-            li.country-li{
-              font-size: 1.6rem;
-              line-height: 2.5rem;
-              color: $color2;
-              font-weight: bold;
-              ul.country-ul{
-                li.city-li{
-                  text-indent: 20px;
-                  a.google-flights-link{
-                    text-decoration: none;
-                    color: $color3;
-                    font-weight: normal;
-                  }
-                }
-              }
-            }
-          }
-        } //end of results
-      // }
-    } //end of main
-  } //end of container
-
-  footer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-content: space-between;
-    align-items: center;
-    // align-self: flex-start;
-    // position: fixed;
-    // bottom: 0;
-    width: 100%;
-    min-width: $min-width;
-    // height: 7vh;
-    font-size: 1.2rem;
+.search-bar {
+  @include flex-container(row, flex-end);
+  width: 100%;
+  min-width: $min-width-form;
+  #search-button {
+    font-size: 1.5rem;
     font-weight: bold;
     padding: 0.5em 1em 0.5em 1em;
-    // margin-top: 5vh;
-    background-color: $color4;
-    // border: 1px solid pink;
-    border: 2px solid $color1;
   }
+}
 
-} //end of app
+#results {
+  width: $inner-width;
+  min-width: $min-width-form;
+  padding: 1rem;
+  border: 1px solid green;
+  p {
+    font-size: 1.8rem;
+    line-height: 3rem;
+    color: $text-color1;
+    font-weight: bold;
+    margin-bottom: 2rem;
+  }
+}
+
+li.country-li{
+  font-size: 1.6rem;
+  line-height: 2.5rem;
+  color: $text-color1;
+  font-weight: bold;
+}
+li.city-li{
+  text-indent: 20px;
+  a.google-flights-link{
+    text-decoration: none;
+    color: $text-color2;
+    font-weight: normal;
+  }
+}
+
+footer {
+  @include flex-container(row, center);
+  background-color: $color4;
+  border: 2px solid $color1;
+  .footer-container {
+    @include flex-container(row, space-between);
+    flex-wrap: nowrap;
+    font-size: 1.4rem;
+    font-weight: bold;
+    div {
+      height: 100%;
+      padding: 0.5rem 1rem;
+    }
+    #disclaimer{
+      border: 1px solid yellow;
+      width: 60%;
+    }
+    #powered{
+      border: 1px solid red;
+      width: 40%;
+      text-align: right;
+      a {
+        text-decoration: none;
+        color: $text-color2;
+      }
+    }
+  }
+}

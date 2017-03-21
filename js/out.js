@@ -9453,12 +9453,10 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-// import destinations from '../db/cities';
-
 var Search = function (_React$Component) {
   _inherits(Search, _React$Component);
 
-  //TODO podział na subkomponenty!
+  //TODO podział na komponenty!
   function Search(props) {
     _classCallCheck(this, Search);
 
@@ -9489,7 +9487,7 @@ var Search = function (_React$Component) {
     };
 
     _this.checkFormOk = function () {
-      console.log('formOk wywołana');
+      console.log('sprawdzanie formularza');
       var toDate = new Date(_this.state.toDate);
       var fromDate = new Date(_this.state.fromDate);
       var maxTemp = parseInt(_this.state.maxTemp);
@@ -9515,17 +9513,13 @@ var Search = function (_React$Component) {
       if (_this.state.formOk === false) {
         return;
       }
-      //wyświetl 'loading'...
+      //wyświetl 'loading' i wyzeruj listę miast i krajów
       _this.setState({
         dataReady: 'pending',
         destinations: {},
         countries: []
       });
-      //zapytanie o pojedyncze miasto - tu przykładowo Paris - wywołuję funkcję
-      //let id = 1;
-      //this.search1CityFunction(id); //jako parametr podaję id z mojej bazy
-
-      //zapętlam zapytania
+      //zapytanie o miasta po ID - dla każdego ID wywołanie funkcji wyszukującej miasto
       var ids = [1, 2, 3];
       ids.forEach(function (el) {
         return _this.search1CityFunction(el);
@@ -9533,7 +9527,8 @@ var Search = function (_React$Component) {
     };
 
     _this.search1CityFunction = function (id) {
-      //zapisuję dzisiejszą datę do zmiennej. Żeby porównać ją z datami pobranymi z inputów, skracam ją do samej daty. //TODO: może być problem z ISO string podobno w różnych przeglądarkach. Spróbować zmienić to na format UTC.
+      //zapisuję dzisiejszą datę do zmiennej. Żeby porównać ją z datami pobranymi z inputów, skracam ją do samej daty.
+      //TODO: może być problem z ISO string podobno w różnych przeglądarkach. Spróbować zmienić to na format UTC.
       var currentDate = new Date().toISOString().substring(0, 10);
       //zapytanie do mojej bazy o rekord o konkretnym id
       fetch("http://localhost:3000/destinations/" + id).then(function (data) {
@@ -9542,13 +9537,12 @@ var Search = function (_React$Component) {
         //sprawdzam, czy prognoza pogody dla tego miasta była sprawdzona dzisiaj
         //TODO: tak naprawdę wystarczy sprawdzić to dla pierwszego miasta, bo wszystkie pobieram jednocześnie. Czyli tylko dla miasta o id=1. Reszta miast powinna lecieć wtedy automatycznie ifem albo elsem. Ale jeśli kiedyś będę chciała dodać zawężenie obszaru wyszukiwania, lub wyszukiwanie dla innej lokalizacji niż Warszawa, może to się przydać (nie wszystkie miasta będę za każdym razem pobierać z API)
         var checkedAt = city.checkedAt;
-
+        //warunek: jeśli miasto nie było jeszcze dziś sprawdzane, wyślij zapytanie do API i wklej zaktualizowane miasto do bazy
         if (checkedAt !== currentDate) {
-          //co robi if: jeśli prognoza pogody NIE BYŁA SPRAWDZONA DZISIAJ, wyślij zapytanie dla tego miasta do API i dodaj dane o temperaturach na najbliższe 10 dni do mojej bazy. Zaktualizuj też pole checkedAt. Potem wywołaj funkcję, która sprawdza, czy miasto spełnia kryteria użytkownika i dodaje (lub nie) miasto do odpowiednich zmiennych w state.
           console.log('prognoza dziś jeszcze nie była sprawdzona, jestem w if');
           //zapytanie o to miasto do API - prognoza na najbliższe 10 dni
           //TODO: wyszukuje mi nie do końca dobrą miejscowość, o tych samych współrzędnych geograficznych (Np. Barceloneta zamiast Barcelona). Muszę mieć więc w bazie dodatkową zmienną 'nameToShow', żeby wyświetlać dobrą nazwę miasta! Po name wyszukać się nie da, bo Palma de Mallorca znajduje mi w Meksyku (znajdzie po samym Palma, ale ja chcę, żeby się wyświetlało Palma de Mallorca.. -> czyli zmienna nameToShow tak czy siak potrzebna). Zapisać po prostu gdzieś w kodzie, jaka zmienna name odpowiada jakiej nameToShow? (taki słownik) Jeśli to jest ok rozwiązanie, to gdzie ten słownik powinnam zdefiniować? (zresztą potrzebne mi też kody lotnisk do wyszukiwania połączeń, czyli muszę mieć te dodatkowe info albo w mojej bazie, albo gdzieś w kodzie stworzone)
-          var url = "http://api.apixu.com/v1/forecast.json?key=0ffd45ac047f4cda8ae85915171303&q=" + city.location.lat + "," + city.location.lon + "&days=10";
+          var url = "http://api.apixu.com/v1/forecast.json?key=0ffd45ac047f4cda8ae85915171303&q=" + city.location.name + "&days=10";
           fetch(url).then(function (data) {
             return data.json();
           }).then(function (data) {
@@ -9656,18 +9650,12 @@ var Search = function (_React$Component) {
       .catch(function (error) {
         return console.log('error poza ifem i elsem', error);
       });
-      ///////koniec zapytania o Paris
+      ///////koniec zapytania o pojedyncze miasto
     };
 
     _this.filterCity = function (cityToFilter) {
       //console.log(cityToFilter);
       //jako parametr trzeba podać zaciągnięte dane dla pojedynczego miasta (wszystko jedno, czy z mojej bazy, czy z API)
-
-      ////////to co mam w state - dane od użytkownika:
-      // minTemp: '',
-      // maxTemp: '',
-      // fromDate: '',
-      // toDate: ''
 
       //obliczenie startDay i endDay - które dni brać pod uwagę przy filtrowaniu
       //TODO: to powinno być w osobnej funkcji, zrobione tylko raz - otrzymany wynik będzie dotyczył wyszukiwania wszystkich miast
@@ -9689,8 +9677,6 @@ var Search = function (_React$Component) {
       // console.log(endDay);
 
       //sprawdzam temperaturę w danym mieście tylko dla wybranych dni
-      //przykładowa nazwa zmiennej - powinno działać zarówno dla mojej bazy, jak i dla API cityToFilter.forecast.forecastday[0].day.avgtemp_c
-
       var tempsToCheck = [];
       for (var i = startDay; i <= endDay; i++) {
         tempsToCheck.push(cityToFilter.forecast.forecastday[i].day.avgtemp_c);
@@ -9698,16 +9684,10 @@ var Search = function (_React$Component) {
       console.log(tempsToCheck);
 
       //zmienne, które podstawię potem do state:
-      //TODO: zautomatyzować to, żebym nie musiała ręcznie tworzyć pustej tablicy dla każdego państwa. czy da się nadawać nazwy zmiennych automatycznie poprzez city.country? czy jednak żeby to działało, muszę zrobić z tego obiekt zawierający poszczególne tablice (w state)?
-      //cityToFilter.location.country
       var destinations = _this.state.destinations;
       //TODO: na razie robię sobie osobną tablicę krajów, bo nie umiem iterować po obiekcie. Ale docelowo lepiej byłoby nie tworzyć dodatkowej zmiennej, tylko iterować po obiekcie destinations przy renderowaniu
       var countries = _this.state.countries;
-      //let howManyFound = 0;
-      //let countriesToGo = [];
-      //let citiesToGoFrance = [];
       var tempsOk = [];
-      //let cityOk = false;
       //pętla, która sprawdza, czy dla każdego dnia, w zakresie dat podanym przez użytkownika, temperatura mieści się w zakresie temperatur podanym przez użytkownika. Dla każdego dnia, do talbicy tempsOk wrzuca true lub false (jeśli napotka pierwsze false, przerywa pętlę). Potem sprawdzam, czy tablica dla tego miasta zawiera false - jeśli nie ma ani jednego false, dorzucam państwo do countriesToGo oraz miasto do tablicy tego państwa.
       // console.log(this.state);
       for (var i = 0; i < tempsToCheck.length; i++) {
@@ -9719,9 +9699,9 @@ var Search = function (_React$Component) {
         }
       }
       console.log(tempsOk);
+      //if-else jest po to, żeby tylko raz dodać kraj do obiektu. Jeśli kraj już jest, dodajemy mu tylko miasto do jego tablicy.
       if (tempsOk.indexOf(false) === -1) {
         if (destinations[cityToFilter.location.country] === undefined) {
-          console.log(destinations[cityToFilter.location.country]);
           console.log('Nie znalazłem kraju w obiekcie destinations');
           destinations[cityToFilter.location.country] = [cityToFilter.location.name];
           countries.push(cityToFilter.location.country);
@@ -9729,25 +9709,12 @@ var Search = function (_React$Component) {
           console.log('Znalazłem kraj w obiekcie destinations');
           destinations[cityToFilter.location.country].push(cityToFilter.location.name);
         }
-        //else if (destinations[cityToFilter.location.country].indexOf(cityToFilter.location.name)===-1){
-        //   console.log('Znalazłem kraj w obiekcie destinations, ale nie znalazłem miasta');
-        //   destinations[cityToFilter.location.country].push(cityToFilter.location.name);
-        // }
-        //if countries.indexOf(cityToFilter.location.country)
-        //howManyFound ++;
-        //countriesToGo.push(cityToFilter.location.country);
-        //citiesToGoFrance.push(cityToFilter.location.name);
       }
       console.log(countries);
       console.log(destinations);
-      // console.log(countriesToGo);
-      // console.log(citiesToGoFrance);
-      // console.log(this.state);
 
       //////NIE POWINNO BYĆ ZMIANY STATE TUTAJ! TA FUNKCJA POWINNA COŚ ZWRACAĆ, CO BĘDZIE ZAPISYWANE DO ZMIENNEJ W MIEJSCU WYWOŁANIA FUNKCJI, ITD. BEZ SENSU, BO PRZY ITERACJI DLA KAŻDEGO ID JEST OD NOWA RENDEROWANY ELEMENT (ZMIANA STATE). POPRAWIĆ TO PÓŹNIEJ!
       _this.setState({
-        //countries: countriesToGo,
-        //France: citiesToGoFrance,
         destinations: destinations,
         countries: countries,
         dataReady: 'ready'
@@ -9768,9 +9735,11 @@ var Search = function (_React$Component) {
   }
   //funkcje obsługujące formularz:
 
+  //walidacja formularza
+  //TODO poprawić walidację - niech każdy element formularza ma swoją
   //koniec handleSearchClick
 
-  //search1CityFunction -> funkcja, która sprawdza pogodę dla pojedynczego miasta - jeśli miasto spełnia kryteria podane przez użytkownika, jest dodawane do odpowiednich zmiennych w state //przenieść ją później do osobnego pliku
+  //search1CityFunction -> funkcja, która sprawdza pogodę dla pojedynczego miasta - jeśli miasto spełnia kryteria podane przez użytkownika, jest dodawane do odpowiednich zmiennych w state //TODO: przenieść ją później do osobnego pliku?
   ///koniec funkcji search1CityFunction
 
   ///filterCity - funkcja, która sprawdza, czy dane miasto spełnia podane przez użytkownika kryteria, a jeśli tak, dodaje je do odpowiednich zmiennych w state
@@ -9782,24 +9751,6 @@ var Search = function (_React$Component) {
     //koniec funkcji filterCity
     value: function render() {
       var _this2 = this;
-
-      //TODO ograniczyć wybór dat do today-today+9/10
-      //https://tiffanybbrown.com/2013/10/24/date-input-in-html5-restricting-dates-and-thought-for-working-around-limitations/
-      //http://stackoverflow.com/questions/17182544/disable-certain-dates-from-html5-datepicker
-      //http://stackoverflow.com/questions/23671407/restrict-future-dates-in-html-5-data-input
-
-      //TODO walidacja:
-      //max temp musi być większe od min temp, DateTo musi być później niż DateFrom
-      //pola min i max nie mogą być puste, ew. dodać domyślne wartości
-      //dodać dopuszczalny zakres min i max temp?
-
-      // Search area:
-      // <select value={this.state.area} onChange={this.handleAreaChange}>
-      //   <option value='Europe'>Europe</option>
-      //   <option value='Albania'>Albania</option>
-      //   <option value='Andorra'>Andorra</option>
-      //   <option value='Armenia'>Armenia</option>
-      // </select><br/><br/>
 
       //obliczam zakres dni, który ma być możliwy do wybrania w input type='date'
       //TODO: wrzucić to gdzieś indziej...
@@ -9844,7 +9795,7 @@ var Search = function (_React$Component) {
       } else if (this.state.dataReady === 'beforeSearch') {
         results = '';
       }
-      //console.log('render, Results=', results, this.state);
+
       return _react2.default.createElement(
         'div',
         null,
@@ -9940,7 +9891,9 @@ var App = function (_React$Component2) {
 }(_react2.default.Component);
 
 document.addEventListener('DOMContentLoaded', function () {
-  _reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('app'));
+  _reactDom2.default.render(
+  // <App/>,
+  document.getElementById('app'));
 });
 
 /***/ }),
@@ -12337,7 +12290,7 @@ exports = module.exports = __webpack_require__(84)(undefined);
 
 
 // module
-exports.push([module.i, "@charset \"UTF-8\";\n/*variables*/\n/*mixins*/\n/*add flexbox mixin!!!*/\n/*AWD - dodać media queries?*/\n/*jednostki: czy powinno być ujednolicone - wszystko w rem itp?*/\n/*zrobić grid??*/\n/*reset css*/\n* {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  list-style-type: none; }\n\n/*fonts*/\n/*general*/\nhtml {\n  font-size: 10px; }\n\n#app {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: center;\n  flex-direction: column;\n  width: 100%;\n  min-width: 250px;\n  min-height: 100vh;\n  /*styles*/ }\n  #app header {\n    display: flex;\n    flex-wrap: wrap;\n    justify-content: flex-end;\n    position: fixed;\n    top: 0;\n    width: 100%;\n    min-width: 250px;\n    font-size: 1.6rem;\n    font-weight: bold;\n    text-transform: uppercase;\n    color: grey;\n    padding: 0.5em 1em 0.5em 1em;\n    background-color: white;\n    border: 2px solid black; }\n  #app .container {\n    flex-direction: column;\n    background-color: grey;\n    border: 1px solid brown;\n    display: flex;\n    flex-wrap: wrap;\n    justify-content: center;\n    align-items: center;\n    align-content: space-around;\n    flex-grow: 1;\n    width: 100%;\n    min-width: 250px; }\n    #app .container main {\n      display: flex;\n      flex-wrap: wrap;\n      justify-content: center;\n      align-items: center;\n      align-content: space-around;\n      width: 100%;\n      min-width: 250px;\n      max-width: 1000px;\n      min-height: 60vh;\n      background-color: white;\n      border: 2px solid black;\n      margin: 15vh 0 8vh 0; }\n      #app .container main #search {\n        border: 1px solid blue;\n        width: 90%;\n        min-width: 250px;\n        margin: 2rem; }\n        #app .container main #search h1 {\n          font-size: 4rem;\n          margin: 0 2rem 1rem 1rem; }\n        #app .container main #search h2 {\n          font-size: 2rem;\n          margin: 0 2rem 1rem 1rem; }\n        #app .container main #search form#search-form {\n          display: flex;\n          flex-wrap: wrap;\n          justify-content: space-between;\n          width: 100%;\n          min-width: 250px;\n          font-size: 1.5rem;\n          border: 1px solid red; }\n          #app .container main #search form#search-form .form-left {\n            display: flex;\n            flex-wrap: wrap;\n            border: 1px solid yellow;\n            width: 30%;\n            min-width: 250px; }\n            #app .container main #search form#search-form .form-left .form-item {\n              display: flex;\n              flex-wrap: wrap;\n              justify-content: space-between;\n              width: 100%;\n              border: 1px solid orange;\n              padding: 2px 0; }\n              #app .container main #search form#search-form .form-left .form-item label {\n                margin-left: 5%; }\n              #app .container main #search form#search-form .form-left .form-item .temp-input {\n                width: 50px; }\n          #app .container main #search form#search-form .form-right {\n            display: flex;\n            flex-wrap: wrap;\n            justify-content: flex-end;\n            border: 1px solid yellow;\n            width: 65%;\n            min-width: 250px; }\n            #app .container main #search form#search-form .form-right .date-container {\n              display: flex;\n              flex-wrap: wrap;\n              border: 1px solid black;\n              width: 100%; }\n              #app .container main #search form#search-form .form-right .date-container .form-item {\n                display: flex;\n                flex-wrap: nowrap;\n                flex-shrink: 0;\n                justify-content: space-between;\n                width: 50%;\n                min-width: 250px;\n                border: 1px solid orange; }\n                #app .container main #search form#search-form .form-right .date-container .form-item label {\n                  padding-right: 5px;\n                  margin-left: 5%; }\n                #app .container main #search form#search-form .form-right .date-container .form-item .date-input {\n                  min-width: 135px; }\n              #app .container main #search form#search-form .form-right .date-container p {\n                font-size: 1.3rem;\n                border: 1px solid purple;\n                margin: 0.5rem 0;\n                width: 100%;\n                text-align: right;\n                flex-shrink: 2; }\n        #app .container main #search .search-bar {\n          display: flex;\n          flex-wrap: wrap;\n          justify-content: flex-end;\n          width: 100%; }\n          #app .container main #search .search-bar #search-button {\n            font-size: 1.5rem;\n            font-weight: bold;\n            padding: 0.5em 1em 0.5em 1em; }\n      #app .container main #results {\n        width: 90%;\n        min-width: 250px;\n        padding: 2%;\n        border: 1px solid green; }\n        #app .container main #results p {\n          font-size: 1.8rem;\n          line-height: 3rem;\n          color: black;\n          font-weight: bold;\n          margin-bottom: 1em; }\n        #app .container main #results ul#destinations-list li.country-li {\n          font-size: 1.6rem;\n          line-height: 2.5rem;\n          color: black;\n          font-weight: bold; }\n          #app .container main #results ul#destinations-list li.country-li ul.country-ul li.city-li {\n            text-indent: 20px; }\n            #app .container main #results ul#destinations-list li.country-li ul.country-ul li.city-li a.google-flights-link {\n              text-decoration: none;\n              color: grey;\n              font-weight: normal; }\n  #app footer {\n    display: flex;\n    flex-wrap: wrap;\n    justify-content: space-between;\n    align-content: space-between;\n    align-items: center;\n    width: 100%;\n    min-width: 250px;\n    font-size: 1.2rem;\n    font-weight: bold;\n    padding: 0.5em 1em 0.5em 1em;\n    background-color: white;\n    border: 2px solid black; }\n", ""]);
+exports.push([module.i, "@charset \"UTF-8\";\n/*variables*/\n/*flex-container mixin*/\n/*TODO: AWD - dodać media queries do hamburger menu*/\n/*reset css*/\n* {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  list-style-type: none; }\n\n/*fonts*/\n/*styles*/\nhtml {\n  font-size: 10px; }\n\n#app {\n  display: flex;\n  flex-wrap: wrap;\n  flex-direction: column;\n  justify-content: center;\n  min-width: 250px;\n  min-height: 100vh; }\n\n.container {\n  width: 90%;\n  min-width: 225px;\n  max-width: 1000px;\n  border: 1px solid green; }\n\nheader {\n  display: flex;\n  flex-wrap: wrap;\n  flex-direction: row;\n  justify-content: center;\n  position: fixed;\n  top: 0;\n  width: 100%;\n  min-width: 250px;\n  background-color: white;\n  border: 2px solid black; }\n\n.header-container {\n  display: flex;\n  flex-wrap: wrap;\n  flex-direction: row;\n  justify-content: space-between;\n  font-size: 1.6rem;\n  font-weight: bold;\n  text-transform: uppercase;\n  padding: 0.5rem 0.5rem; }\n  .header-container .logo {\n    color: black;\n    padding: 0.2em 0; }\n  .header-container nav ul {\n    display: flex;\n    flex-wrap: wrap;\n    flex-direction: row;\n    justify-content: space-between;\n    wrap: nowrap; }\n    .header-container nav ul li {\n      color: grey;\n      padding: 0.2rem 0.5em; }\n      .header-container nav ul li:first-child {\n        padding-left: 0; }\n      .header-container nav ul li:last-child {\n        padding-right: 0; }\n\nmain {\n  display: flex;\n  flex-wrap: wrap;\n  flex-direction: column;\n  justify-content: flex-start;\n  align-items: center;\n  flex-grow: 1;\n  background-color: grey;\n  border: 1px solid brown; }\n\n.content {\n  display: flex;\n  flex-wrap: wrap;\n  flex-direction: row;\n  justify-content: center;\n  align-content: space-around;\n  width: 100%;\n  max-width: 1000px;\n  min-height: 40vh;\n  background-color: white;\n  border: 2px solid black;\n  padding: 1rem 0;\n  margin: 15vh 0 8vh 0; }\n\n#search {\n  border: 1px solid blue;\n  width: 90%;\n  min-width: 210px; }\n  #search h1 {\n    font-size: 4rem;\n    margin-bottom: 1rem; }\n  #search h2 {\n    font-size: 2rem;\n    margin-bottom: 1rem; }\n\nform#search-form {\n  display: flex;\n  flex-wrap: wrap;\n  flex-direction: row;\n  justify-content: space-between;\n  font-size: 1.5rem;\n  border: 1px solid red; }\n\n.form-half {\n  border: 1px solid yellow;\n  min-width: 210px; }\n  .form-half .form-item {\n    min-width: 210px;\n    border: 1px solid black;\n    padding: 1rem;\n    display: flex;\n    flex-wrap: wrap;\n    flex-direction: row;\n    justify-content: space-between; }\n    .form-half .form-item input {\n      height: 20px; }\n\n.form-left {\n  width: 30%; }\n  .form-left .form-item .temp-input {\n    width: 50px; }\n\n.form-right {\n  display: flex;\n  flex-wrap: wrap;\n  flex-direction: row;\n  justify-content: flex-start;\n  width: 65%; }\n  .form-right .form-item {\n    width: 50%; }\n    .form-right .form-item .date-input {\n      min-width: 135px; }\n  .form-right p {\n    border: 1px solid purple;\n    font-size: 1.3rem;\n    width: 100%;\n    text-align: right;\n    padding: 1rem;\n    min-width: 210px; }\n\n.search-bar {\n  display: flex;\n  flex-wrap: wrap;\n  flex-direction: row;\n  justify-content: flex-end;\n  width: 100%;\n  min-width: 210px; }\n  .search-bar #search-button {\n    font-size: 1.5rem;\n    font-weight: bold;\n    padding: 0.5em 1em 0.5em 1em; }\n\n#results {\n  width: 90%;\n  min-width: 210px;\n  padding: 1rem;\n  border: 1px solid green; }\n  #results p {\n    font-size: 1.8rem;\n    line-height: 3rem;\n    color: black;\n    font-weight: bold;\n    margin-bottom: 2rem; }\n\nli.country-li {\n  font-size: 1.6rem;\n  line-height: 2.5rem;\n  color: black;\n  font-weight: bold; }\n\nli.city-li {\n  text-indent: 20px; }\n  li.city-li a.google-flights-link {\n    text-decoration: none;\n    color: grey;\n    font-weight: normal; }\n\nfooter {\n  display: flex;\n  flex-wrap: wrap;\n  flex-direction: row;\n  justify-content: center;\n  background-color: white;\n  border: 2px solid black; }\n  footer .footer-container {\n    display: flex;\n    flex-wrap: wrap;\n    flex-direction: row;\n    justify-content: space-between;\n    flex-wrap: nowrap;\n    font-size: 1.4rem;\n    font-weight: bold; }\n    footer .footer-container div {\n      height: 100%;\n      padding: 0.5rem 1rem; }\n    footer .footer-container #disclaimer {\n      border: 1px solid yellow;\n      width: 60%; }\n    footer .footer-container #powered {\n      border: 1px solid red;\n      width: 40%;\n      text-align: right; }\n      footer .footer-container #powered a {\n        text-decoration: none;\n        color: grey; }\n", ""]);
 
 // exports
 

@@ -3,71 +3,70 @@
     {
       "location": {
         "name": "Paris",
-        "lat": 48.8,
-        "lon": 2.65,
-        "FlightSearchKey": "CDG,ORY,BVA,XHP,XPG",
+        "lat": 48.87,
+        "lon": 2.33,
         "country": "France"
       },
       "forecast": {
         "forecastday": [
           {
             "day": {
-              "avgtemp_c": 10.5
+              "avgtemp_c": 9.2
             }
           },
           {
             "day": {
-              "avgtemp_c": 9.9
+              "avgtemp_c": 8.3
             }
           },
           {
             "day": {
-              "avgtemp_c": 8.4
+              "avgtemp_c": 7
             }
           },
           {
             "day": {
-              "avgtemp_c": 7.6
+              "avgtemp_c": 6.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 7.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 5.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 7.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 7.4
             }
           },
           {
             "day": {
               "avgtemp_c": 10.4
             }
-          },
-          {
-            "day": {
-              "avgtemp_c": 9
-            }
-          },
-          {
-            "day": {
-              "avgtemp_c": 5.4
-            }
-          },
-          {
-            "day": {
-              "avgtemp_c": 5
-            }
-          },
-          {
-            "day": {
-              "avgtemp_c": 8.4
-            }
-          },
-          {
-            "day": {
-              "avgtemp_c": 12
-            }
           }
         ]
       },
-      "checkedAt": "2017-03-19",
+      "checkedAt": "2017-03-20",
       "id": 1
     },
     {
       "location": {
-        "name": "Palma De Mallorca",
+        "name": "Palma",
         "lat": 39.57,
         "lon": 2.65,
         "country": "Spain"
@@ -76,17 +75,12 @@
         "forecastday": [
           {
             "day": {
-              "avgtemp_c": 14.1
+              "avgtemp_c": 15
             }
           },
           {
             "day": {
-              "avgtemp_c": 15.5
-            }
-          },
-          {
-            "day": {
-              "avgtemp_c": 14.7
+              "avgtemp_c": 15.3
             }
           },
           {
@@ -101,12 +95,7 @@
           },
           {
             "day": {
-              "avgtemp_c": 17.2
-            }
-          },
-          {
-            "day": {
-              "avgtemp_c": 14.8
+              "avgtemp_c": 16.4
             }
           },
           {
@@ -116,22 +105,32 @@
           },
           {
             "day": {
-              "avgtemp_c": 14.7
+              "avgtemp_c": 15.6
             }
           },
           {
             "day": {
-              "avgtemp_c": 14
+              "avgtemp_c": 15.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.7
             }
           }
         ]
       },
-      "checkedAt": "2017-03-19",
+      "checkedAt": "2017-03-20",
       "id": 2
     },
     {
       "location": {
-        "name": "Barceloneta",
+        "name": "Barcelona",
         "lat": 41.38,
         "lon": 2.18,
         "country": "Spain"
@@ -145,22 +144,7 @@
           },
           {
             "day": {
-              "avgtemp_c": 15.5
-            }
-          },
-          {
-            "day": {
-              "avgtemp_c": 14.8
-            }
-          },
-          {
-            "day": {
-              "avgtemp_c": 13.8
-            }
-          },
-          {
-            "day": {
-              "avgtemp_c": 12.9
+              "avgtemp_c": 14.9
             }
           },
           {
@@ -170,27 +154,42 @@
           },
           {
             "day": {
-              "avgtemp_c": 14.5
+              "avgtemp_c": 13.9
             }
           },
           {
             "day": {
-              "avgtemp_c": 15.5
+              "avgtemp_c": 13.5
             }
           },
           {
             "day": {
-              "avgtemp_c": 14.9
+              "avgtemp_c": 14.1
             }
           },
           {
             "day": {
-              "avgtemp_c": 14.5
+              "avgtemp_c": 13.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 12.7
             }
           }
         ]
       },
-      "checkedAt": "2017-03-19",
+      "checkedAt": "2017-03-20",
       "id": 3
     }
   ]
