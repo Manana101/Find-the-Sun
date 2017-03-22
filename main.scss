@@ -38,7 +38,7 @@ $main-width: 65%;
 html {
   font-size: 10px;
 }
-#app {
+#site {
   @include flex-container(column, center);
   min-width: $min-width;
   min-height: 100vh;
@@ -64,10 +64,10 @@ header {
   // border: 1px solid pink;
   font-size: 1.6rem;
   font-weight: bold;
-  text-transform: uppercase;
   padding: 0.5rem 0.5rem;
   .logo {
     color: $text-color1;
+    letter-spacing: 0.1rem;
     padding: 0.2em 0;
   }
   nav {
@@ -75,6 +75,7 @@ header {
       @include flex-container(row, space-between);
       wrap: nowrap;
       li {
+        text-transform: uppercase;
         color: $text-color2;
         padding: 0.2rem 0.5em;
         &:first-child{
@@ -90,9 +91,9 @@ header {
 main {
   @include flex-container(column, flex-start);
   align-items: center;
-    flex-grow: 1; //konieczne żeby footer był zawsze na dole, nawet jeśli treść nie zajmuje całej strony
+  flex-grow: 1; //konieczne żeby footer był zawsze na dole, nawet jeśli treść nie zajmuje całej strony
   background-color: $color2;
-  border: 1px solid brown;
+  // border: 1px solid brown;
 }
 .content { //czarna ramka, białe tło
   @include flex-container(row, center);

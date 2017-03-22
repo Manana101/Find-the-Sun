@@ -2,14 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Find your weather</title>
+  <title>Find the Sun</title>
 </head>
 <body>
   <div id="app">
+    <div id='site'>
       <header>
         <div class="container header-container">
           <div class='logo'>
-            Find your weather
+            Find the Sun
           </div>
           <nav>
             <ul>
@@ -20,116 +21,109 @@
           </nav>
         </div>
       </header>
-    <main>
-      <div class="container main-container">
-        <section class='content'>
-          <div id='search'>
-            <h1>Hello, Warsovian!</h1>
-            <h2>Find out where you can fly to enjoy your dream weather.</h2>
-            <form id='search-form'>
-            <!-- Search area:
-            <select value={this.state.area} onChange={this.handleAreaChange}>
-              <option value='Europe'>Europe</option>
-              <option value='Albania'>Albania</option>
-              <option value='Andorra'>Andorra</option>
-              <option value='Armenia'>Armenia</option>
-            </select><br/><br/> -->
-            <div class='form-half form-left'>
-              <div class='form-item'>
-                <label for="min-temp-input">Min. temp. (Celsius):</label><input type='number' id='min-temp-input' class='temp-input'/>
-              </div>
-              <div class='form-item temp-input'>
-                <label for="max-temp-input">Max. temp. (Celsius):</label><input type='number' id='max-temp-input' class='temp-input'/>
-              </div>
-            </div>
-            <div class='form-half form-right'>
-              <!-- <div class='date-container'> -->
+      <main>
+        <div class="container main-container">
+          <section class='content'>
+            <div id='search'>
+              <h1>Hello, Warsovian!</h1>
+              <h2>Find out where you can fly to enjoy your dream weather.</h2>
+              <form id='search-form'>
+              <div class='form-half form-left'>
                 <div class='form-item'>
-                  <label for="from-date-input">From:</label><input type='date' id='from-date-input' class='date-input'/>
+                  <label for="min-temp-input">Min. temp. (Celsius):</label><input type='number' id='min-temp-input' class='temp-input'/>
                 </div>
-                <div class='form-item'>
-                  <label for="to-date-input">To*:</label><input type='date' id='to-date-input' class='date-input'/>
+                <div class='form-item temp-input'>
+                  <label for="max-temp-input">Max. temp. (Celsius):</label><input type='number' id='max-temp-input' class='temp-input'/>
                 </div>
-                <!-- <div class='empty-div'></div> -->
-                <p>*We can check the weather for max. 10 days from now</p>
-              <!-- </div> -->
+              </div>
+              <div class='form-half form-right'>
+                <!-- <div class='date-container'> -->
+                  <div class='form-item'>
+                    <label for="from-date-input">From:</label><input type='date' id='from-date-input' class='date-input'/>
+                  </div>
+                  <div class='form-item'>
+                    <label for="to-date-input">To*:</label><input type='date' id='to-date-input' class='date-input'/>
+                  </div>
+                  <!-- <div class='empty-div'></div> -->
+                  <p>*We can check the weather for max. 10 days from now</p>
+                <!-- </div> -->
+              </div>
+              <div class='search-bar'>
+                <button id='search-button'>Search</button>
+              </div>
+              </form>
             </div>
-            <div class='search-bar'>
-              <button id='search-button'>Search</button>
+            <div id='results'>
+              <ul id='destinations-list'>
+              <p>Click on the country name, to see cities matching your search.<br/>
+              Click on the city name to find flights.</p>
+                <li class='country-li' id='spain'>Spain
+
+                  <ul class='country-ul'>
+                    <li class='city-li' id='barcelona'><a class='google-flights-link' href='https://www.google.pl/flights/?gl=pl#search;f=WAW,WMI,RWA;t=BCN,YJB;d=2017-04-14;r=2017-04-21;a=A3,EI,SU,BT,CA,UX,AF,9U,JU,AB,AZ,OS,AD,B2,BA,SN,FB,CI,CZ,OU,OK,LY,EW,AY,HU,IB,KL,LO,LH,LG,IG,DY,D8,FR,SK,SQ,P7,QS,LX,TP,RO,TK,PS,VY,W6,MF' target='blank'>Barcelona</a>
+                    </li>
+
+                    <li class='city-li' id='palma-de-mallorca'><a class='google-flights-link' href='https://www.google.pl/flights/?gl=pl#search;f=WAW,WMI,RWA;t=PMI;d=2017-04-14;r=2017-04-21;a=A3,EI,SU,BT,CA,UX,AF,9U,JU,AB,AZ,OS,AD,B2,BA,SN,FB,CI,CZ,OU,OK,LY,EW,AY,HU,IB,KL,LO,LH,LG,IG,DY,D8,FR,SK,SQ,P7,QS,LX,TP,RO,TK,PS,VY,W6,MF' target='blank'>Palma de Mallorca</a>
+                    </li>
+
+                  </ul>
+
+                </li>
+
+                <li class='country-li' id='israel'>Israel
+
+                  <ul class='country-ul'>
+                    <li class='city-li' id='eilat'><a class='google-flights-link' href='https://www.google.pl/flights/?gl=pl#search;f=WAW,WMI,RWA;t=VDA;d=2017-04-14;r=2017-04-21;a=A3,EI,SU,BT,CA,UX,AF,9U,JU,AB,AZ,OS,AD,B2,BA,SN,FB,CI,CZ,OU,OK,LY,EW,AY,HU,IB,KL,LO,LH,LG,IG,DY,D8,FR,SK,SQ,P7,QS,LX,TP,RO,TK,PS,VY,W6,MF' target='blank'>Eilat</a>
+                    </li>
+
+                    <li class='city-li' id='tel-aviv'><a class='google-flights-link' href='https://www.google.pl/flights/?gl=pl#search;f=WAW,WMI,RWA;t=TLV;d=2017-04-14;r=2017-04-21;a=A3,EI,SU,BT,CA,UX,AF,9U,JU,AB,AZ,OS,AD,B2,BA,SN,FB,CI,CZ,OU,OK,LY,EW,AY,HU,IB,KL,LO,LH,LG,IG,DY,D8,FR,SK,SQ,P7,QS,LX,TP,RO,TK,PS,VY,W6,MF' target='blank'>Tel-Aviv</a>
+                    </li>
+
+                  </ul>
+
+                </li>
+
+                <li class='country-li' id='spain'>Spain
+
+                  <ul class='country-ul'>
+                    <li class='city-li' id='barcelona'><a class='google-flights-link' href='https://www.google.pl/flights/?gl=pl#search;f=WAW,WMI,RWA;t=BCN,YJB;d=2017-04-14;r=2017-04-21;a=A3,EI,SU,BT,CA,UX,AF,9U,JU,AB,AZ,OS,AD,B2,BA,SN,FB,CI,CZ,OU,OK,LY,EW,AY,HU,IB,KL,LO,LH,LG,IG,DY,D8,FR,SK,SQ,P7,QS,LX,TP,RO,TK,PS,VY,W6,MF' target='blank'>Barcelona</a>
+                    </li>
+
+                    <li class='city-li' id='palma-de-mallorca'><a class='google-flights-link' href='https://www.google.pl/flights/?gl=pl#search;f=WAW,WMI,RWA;t=PMI;d=2017-04-14;r=2017-04-21;a=A3,EI,SU,BT,CA,UX,AF,9U,JU,AB,AZ,OS,AD,B2,BA,SN,FB,CI,CZ,OU,OK,LY,EW,AY,HU,IB,KL,LO,LH,LG,IG,DY,D8,FR,SK,SQ,P7,QS,LX,TP,RO,TK,PS,VY,W6,MF' target='blank'>Palma de Mallorca</a>
+                    </li>
+
+                  </ul>
+
+                </li>
+
+                <!-- <li class='country-li' id='israel'>Israel
+
+                  <ul class='country-ul'>
+                    <li class='city-li' id='eilat'><a class='google-flights-link' href='https://www.google.pl/flights/?gl=pl#search;f=WAW,WMI,RWA;t=VDA;d=2017-04-14;r=2017-04-21;a=A3,EI,SU,BT,CA,UX,AF,9U,JU,AB,AZ,OS,AD,B2,BA,SN,FB,CI,CZ,OU,OK,LY,EW,AY,HU,IB,KL,LO,LH,LG,IG,DY,D8,FR,SK,SQ,P7,QS,LX,TP,RO,TK,PS,VY,W6,MF' target='blank'>Eilat</a>
+                    </li>
+
+                    <li class='city-li' id='tel-aviv'><a class='google-flights-link' href='https://www.google.pl/flights/?gl=pl#search;f=WAW,WMI,RWA;t=TLV;d=2017-04-14;r=2017-04-21;a=A3,EI,SU,BT,CA,UX,AF,9U,JU,AB,AZ,OS,AD,B2,BA,SN,FB,CI,CZ,OU,OK,LY,EW,AY,HU,IB,KL,LO,LH,LG,IG,DY,D8,FR,SK,SQ,P7,QS,LX,TP,RO,TK,PS,VY,W6,MF' target='blank'>Tel-Aviv</a>
+                    </li>
+
+                  </ul>
+
+                </li> -->
+              </ul>
+            </div> <!-- end of results-->
+          </section> <!--end section .content-->
+        </div> <!--end div .container-->
+      </main> <!--end of main-->
+      <footer>
+        <div class='container footer-container'>
+            <div id='disclaimer'>
+              Disclaimer: Results are based on a weather forecast. Weather forecasts do not always come true. Please don't blame us for ruining your holiday :)
             </div>
-            </form>
-          </div>
-          <div id='results'>
-            <p>Click on the country name, to see cities matching your search.<br/>
-            Click on the city name to find flights.</p>
-
-             <ul id='destinations-list'>
-              <li class='country-li' id='spain'>Spain
-
-                <ul class='country-ul'>
-                  <li class='city-li' id='barcelona'><a class='google-flights-link' href='https://www.google.pl/flights/?gl=pl#search;f=WAW,WMI,RWA;t=BCN,YJB;d=2017-04-14;r=2017-04-21;a=A3,EI,SU,BT,CA,UX,AF,9U,JU,AB,AZ,OS,AD,B2,BA,SN,FB,CI,CZ,OU,OK,LY,EW,AY,HU,IB,KL,LO,LH,LG,IG,DY,D8,FR,SK,SQ,P7,QS,LX,TP,RO,TK,PS,VY,W6,MF' target='blank'>Barcelona</a>
-                  </li>
-
-                  <li class='city-li' id='palma-de-mallorca'><a class='google-flights-link' href='https://www.google.pl/flights/?gl=pl#search;f=WAW,WMI,RWA;t=PMI;d=2017-04-14;r=2017-04-21;a=A3,EI,SU,BT,CA,UX,AF,9U,JU,AB,AZ,OS,AD,B2,BA,SN,FB,CI,CZ,OU,OK,LY,EW,AY,HU,IB,KL,LO,LH,LG,IG,DY,D8,FR,SK,SQ,P7,QS,LX,TP,RO,TK,PS,VY,W6,MF' target='blank'>Palma de Mallorca</a>
-                  </li>
-
-                </ul>
-
-              </li>
-
-              <li class='country-li' id='israel'>Israel
-
-                <ul class='country-ul'>
-                  <li class='city-li' id='eilat'><a class='google-flights-link' href='https://www.google.pl/flights/?gl=pl#search;f=WAW,WMI,RWA;t=VDA;d=2017-04-14;r=2017-04-21;a=A3,EI,SU,BT,CA,UX,AF,9U,JU,AB,AZ,OS,AD,B2,BA,SN,FB,CI,CZ,OU,OK,LY,EW,AY,HU,IB,KL,LO,LH,LG,IG,DY,D8,FR,SK,SQ,P7,QS,LX,TP,RO,TK,PS,VY,W6,MF' target='blank'>Eilat</a>
-                  </li>
-
-                  <li class='city-li' id='tel-aviv'><a class='google-flights-link' href='https://www.google.pl/flights/?gl=pl#search;f=WAW,WMI,RWA;t=TLV;d=2017-04-14;r=2017-04-21;a=A3,EI,SU,BT,CA,UX,AF,9U,JU,AB,AZ,OS,AD,B2,BA,SN,FB,CI,CZ,OU,OK,LY,EW,AY,HU,IB,KL,LO,LH,LG,IG,DY,D8,FR,SK,SQ,P7,QS,LX,TP,RO,TK,PS,VY,W6,MF' target='blank'>Tel-Aviv</a>
-                  </li>
-
-                </ul>
-
-              </li>
-
-              <li class='country-li' id='spain'>Spain
-
-                <ul class='country-ul'>
-                  <li class='city-li' id='barcelona'><a class='google-flights-link' href='https://www.google.pl/flights/?gl=pl#search;f=WAW,WMI,RWA;t=BCN,YJB;d=2017-04-14;r=2017-04-21;a=A3,EI,SU,BT,CA,UX,AF,9U,JU,AB,AZ,OS,AD,B2,BA,SN,FB,CI,CZ,OU,OK,LY,EW,AY,HU,IB,KL,LO,LH,LG,IG,DY,D8,FR,SK,SQ,P7,QS,LX,TP,RO,TK,PS,VY,W6,MF' target='blank'>Barcelona</a>
-                  </li>
-
-                  <li class='city-li' id='palma-de-mallorca'><a class='google-flights-link' href='https://www.google.pl/flights/?gl=pl#search;f=WAW,WMI,RWA;t=PMI;d=2017-04-14;r=2017-04-21;a=A3,EI,SU,BT,CA,UX,AF,9U,JU,AB,AZ,OS,AD,B2,BA,SN,FB,CI,CZ,OU,OK,LY,EW,AY,HU,IB,KL,LO,LH,LG,IG,DY,D8,FR,SK,SQ,P7,QS,LX,TP,RO,TK,PS,VY,W6,MF' target='blank'>Palma de Mallorca</a>
-                  </li>
-
-                </ul>
-
-              </li>
-
-              <!-- <li class='country-li' id='israel'>Israel
-
-                <ul class='country-ul'>
-                  <li class='city-li' id='eilat'><a class='google-flights-link' href='https://www.google.pl/flights/?gl=pl#search;f=WAW,WMI,RWA;t=VDA;d=2017-04-14;r=2017-04-21;a=A3,EI,SU,BT,CA,UX,AF,9U,JU,AB,AZ,OS,AD,B2,BA,SN,FB,CI,CZ,OU,OK,LY,EW,AY,HU,IB,KL,LO,LH,LG,IG,DY,D8,FR,SK,SQ,P7,QS,LX,TP,RO,TK,PS,VY,W6,MF' target='blank'>Eilat</a>
-                  </li>
-
-                  <li class='city-li' id='tel-aviv'><a class='google-flights-link' href='https://www.google.pl/flights/?gl=pl#search;f=WAW,WMI,RWA;t=TLV;d=2017-04-14;r=2017-04-21;a=A3,EI,SU,BT,CA,UX,AF,9U,JU,AB,AZ,OS,AD,B2,BA,SN,FB,CI,CZ,OU,OK,LY,EW,AY,HU,IB,KL,LO,LH,LG,IG,DY,D8,FR,SK,SQ,P7,QS,LX,TP,RO,TK,PS,VY,W6,MF' target='blank'>Tel-Aviv</a>
-                  </li>
-
-                </ul>
-
-              </li> -->
-            </ul>
-          </div> <!-- end of results-->
-        </section> <!--end section .content-->
-      </div> <!--end div .container-->
-    </main> <!--end of main-->
-    <footer>
-      <div class='container footer-container'>
-          <div id='disclaimer'>
-            Disclaimer: Results are based on a weather forecast. Weather forecasts do not always come true. Please don't blame us for ruining your holiday :)
-          </div>
-          <div id='powered'>
-            Powered by <a href='https://www.apixu.com/' target='blank'>Apixu.com</a>
-          </div>
-      </div>
-    </footer>
+            <div id='powered'>
+              Powered by <a href='https://www.apixu.com/' target='blank'>Apixu.com</a>
+            </div>
+        </div>
+      </footer>
+    </div> <!--end of site-->
   </div> <!--end of app-->
   <script src="js/out.js"></script>
 </body>
