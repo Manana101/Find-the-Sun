@@ -92,14 +92,34 @@ export class Search extends React.Component{
     return <div id='search'>
       <h1>Hello, Warsovian!</h1>
       <h2>Find out where you can fly to enjoy your dream weather.</h2>
-      <form>
-        Min. temp. (Celsius): <input type='number' value={this.state.minTemp} onChange={this.handleMinTempChange}/><br/><br/>
-        Max. temp. (Celsius): <input type='number' value={this.state.maxTemp} onChange={this.handleMaxTempChange}/><br/><br/>
-        From: <input type='date' min={today} max={todayPlus9} value={this.state.fromDate} onChange={this.handleFromDateChange}/><br/><br/>
-        To*: <input type='date' min={today} max={todayPlus9} value={this.state.toDate} onChange={this.handleToDateChange}/><br/><br/>
-        *We can check the weather max. 10 days from now<br/><br/>
-      <div>{this.state.formOk === false? 'Formularz wypełniony niepoprawnie' : ''}</div>
-        <button onClick={this.handleSearchClick}>Search</button>
+      <form id='search-form'>
+        <div className='form-half form-left'>
+          <div className='form-item'>
+            <label for="min-temp-input">Min. temp. (Celsius):</label>
+            <input type='number' value={this.state.minTemp} onChange={this.handleMinTempChange} id='min-temp-input'/>
+          </div>
+          <div className='form-item'>
+            <label for="max-temp-input">Max. temp. (Celsius):</label>
+            <input type='number' value={this.state.maxTemp} onChange={this.handleMaxTempChange} id='max-temp-input'/>
+          </div>
+        </div>
+        <div className='form-half form-right'>
+          <div className='form-item'>
+            <label for="from-date-input">From:</label>
+            <input type='date' min={today} max={todayPlus9} value={this.state.fromDate} onChange={this.handleFromDateChange} id='from-date-input'/>
+          </div>
+          <div className='form-item'>
+            <label for="to-date-input">To*:</label>
+            <input type='date' min={today} max={todayPlus9} value={this.state.toDate} onChange={this.handleToDateChange} id='to-date-input'/>
+          </div>
+          <p>*We can check the weather for max. 10 days from now</p>
+        </div>
+        <div className='search-bar'>
+          <div className='alert'>
+            {this.state.formOk === false? 'Formularz wypełniony niepoprawnie' : ''}
+          </div>
+          <button onClick={this.handleSearchClick} id='search-button'>Search</button>
+        </div>
       </form>
     </div>;
   }//koniec render

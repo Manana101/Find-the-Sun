@@ -6,6 +6,7 @@ $color4: white;
 //text colors
 $text-color1: black;
 $text-color2: grey;
+$text-color3: red;
 //width
 $min-width: 250px;
 $container-min-width: 225px;
@@ -140,7 +141,7 @@ form#search-form {
 .form-left {
   width: 30%;
   .form-item {
-    .temp-input {
+    input {
       width: 50px;
     }
   }
@@ -150,7 +151,7 @@ form#search-form {
   width: 65%;
     .form-item {
       width: 50%;
-      .date-input {
+      input {
         min-width: 135px;
       }
     }
@@ -165,9 +166,15 @@ form#search-form {
 }//koniec .form-right
 
 .search-bar {
-  @include flex-container(row, flex-end);
+  @include flex-container(row, space-between);
+  align-items: center;
   width: 100%;
   min-width: $min-width-form;
+  .alert {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: $text-color3;
+  }
   #search-button {
     font-size: 1.5rem;
     font-weight: bold;
