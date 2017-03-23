@@ -29,6 +29,7 @@ class Home extends React.Component{
   }
   //TODO: dodaj warunek, by results nie był w ogóle renderowany, jeśli this.state.formOk === false
   render(){
+    console.log('jestem w home', this.state.formOk);
     return <div className="container main-container">
       <section className='content'>
         <Search formInfoFn={this.formInfoFn}/>

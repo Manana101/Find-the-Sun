@@ -11,17 +11,7 @@
         "forecastday": [
           {
             "day": {
-              "avgtemp_c": 8.4
-            }
-          },
-          {
-            "day": {
-              "avgtemp_c": 7.3
-            }
-          },
-          {
-            "day": {
-              "avgtemp_c": 8.8
+              "avgtemp_c": 8.7
             }
           },
           {
@@ -31,37 +21,48 @@
           },
           {
             "day": {
-              "avgtemp_c": 9.3
+              "avgtemp_c": 9.6
             }
           },
           {
             "day": {
-              "avgtemp_c": 8.7
+              "avgtemp_c": 9.5
             }
           },
           {
             "day": {
-              "avgtemp_c": 8.3
+              "avgtemp_c": 11.5
             }
           },
           {
             "day": {
-              "avgtemp_c": 7.8
+              "avgtemp_c": 13.2
             }
           },
           {
             "day": {
-              "avgtemp_c": 9.2
+              "avgtemp_c": 12.2
             }
           },
           {
             "day": {
-              "avgtemp_c": 10
+              "avgtemp_c": 13.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 12.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 11.7
             }
           }
         ]
       },
-      "checkedAt": "2017-03-21",
+      "checkedAt": "2017-03-23",
+      "status": "new",
       "id": 1
     },
     {
@@ -75,57 +76,58 @@
         "forecastday": [
           {
             "day": {
-              "avgtemp_c": 15
-            }
-          },
-          {
-            "day": {
-              "avgtemp_c": 15.3
-            }
-          },
-          {
-            "day": {
-              "avgtemp_c": 15.1
-            }
-          },
-          {
-            "day": {
               "avgtemp_c": 13.7
             }
           },
           {
             "day": {
-              "avgtemp_c": 16.4
+              "avgtemp_c": 9.3
             }
           },
           {
             "day": {
-              "avgtemp_c": 14.5
+              "avgtemp_c": 12.7
             }
           },
           {
             "day": {
-              "avgtemp_c": 15.6
+              "avgtemp_c": 15.7
             }
           },
           {
             "day": {
-              "avgtemp_c": 15.9
+              "avgtemp_c": 16.6
             }
           },
           {
             "day": {
-              "avgtemp_c": 15
+              "avgtemp_c": 16.8
             }
           },
           {
             "day": {
-              "avgtemp_c": 13.7
+              "avgtemp_c": 16.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 17.9
             }
           }
         ]
       },
-      "checkedAt": "2017-03-20",
+      "checkedAt": "2017-03-23",
+      "status": "new",
       "id": 2
     },
     {
@@ -139,7 +141,32 @@
         "forecastday": [
           {
             "day": {
-              "avgtemp_c": 15.5
+              "avgtemp_c": 12.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 12.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.5
             }
           },
           {
@@ -149,47 +176,23 @@
           },
           {
             "day": {
-              "avgtemp_c": 13.3
+              "avgtemp_c": 15.3
             }
           },
           {
             "day": {
-              "avgtemp_c": 13.9
+              "avgtemp_c": 15.8
             }
           },
           {
             "day": {
-              "avgtemp_c": 13.5
-            }
-          },
-          {
-            "day": {
-              "avgtemp_c": 14.1
-            }
-          },
-          {
-            "day": {
-              "avgtemp_c": 13.7
-            }
-          },
-          {
-            "day": {
-              "avgtemp_c": 13.8
-            }
-          },
-          {
-            "day": {
-              "avgtemp_c": 13.8
-            }
-          },
-          {
-            "day": {
-              "avgtemp_c": 12.7
+              "avgtemp_c": 16.3
             }
           }
         ]
       },
-      "checkedAt": "2017-03-20",
+      "checkedAt": "2017-03-23",
+      "status": "new",
       "id": 3
     }
   ]

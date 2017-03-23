@@ -204,6 +204,7 @@ li.country-li{
 }
 li.city-li{
   text-indent: 20px;
+  color: $text-color2;//usunąć potem jak dodam linki
   a.google-flights-link{
     text-decoration: none;
     color: $text-color2;

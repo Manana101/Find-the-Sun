@@ -47,7 +47,7 @@ export class Search extends React.Component{
       });
       //oraz przekaż rodzicowi, że został wysłany niepoprawny formularz - jeśli otrzymałeś w propsie funkcję
       if ( typeof this.props.formInfoFn === 'function' ){
-        this.props.formInfoFn(this.state.formOk, this.state.minTemp, this.state.maxTemp, this.state.fromDate, this.state.toDate);
+        this.props.formInfoFn(false, this.state.minTemp, this.state.maxTemp, this.state.fromDate, this.state.toDate);
       }
     //jeśli formularz jest wypełniony poprawnie, zmień formOk w state na true - jeśli alert był wcześniej wyświetlony, to zniknie
     } else if (isFormOk === true){
@@ -58,7 +58,7 @@ export class Search extends React.Component{
       //oraz przekaż rodzicowi wyniki formularza - jeśli otrzymałeś w propsie funkcję
       if ( typeof this.props.formInfoFn === 'function' ){
         console.log('jestem w Search w wywołaniu funkcji z propsów z parametrami');
-        this.props.formInfoFn(this.state.formOk, this.state.minTemp, this.state.maxTemp, this.state.fromDate, this.state.toDate);
+        this.props.formInfoFn(true, this.state.minTemp, this.state.maxTemp, this.state.fromDate, this.state.toDate);
       }
     };
   } //koniec handleSearchClick
@@ -95,21 +95,21 @@ export class Search extends React.Component{
       <form id='search-form'>
         <div className='form-half form-left'>
           <div className='form-item'>
-            <label for="min-temp-input">Min. temp. (Celsius):</label>
+            <label htmlFor="min-temp-input">Min. temp. (Celsius):</label>
             <input type='number' value={this.state.minTemp} onChange={this.handleMinTempChange} id='min-temp-input'/>
           </div>
           <div className='form-item'>
-            <label for="max-temp-input">Max. temp. (Celsius):</label>
+            <label htmlFor="max-temp-input">Max. temp. (Celsius):</label>
             <input type='number' value={this.state.maxTemp} onChange={this.handleMaxTempChange} id='max-temp-input'/>
           </div>
         </div>
         <div className='form-half form-right'>
           <div className='form-item'>
-            <label for="from-date-input">From:</label>
+            <label htmlFor="from-date-input">From:</label>
             <input type='date' min={today} max={todayPlus9} value={this.state.fromDate} onChange={this.handleFromDateChange} id='from-date-input'/>
           </div>
           <div className='form-item'>
-            <label for="to-date-input">To*:</label>
+            <label htmlFor="to-date-input">To*:</label>
             <input type='date' min={today} max={todayPlus9} value={this.state.toDate} onChange={this.handleToDateChange} id='to-date-input'/>
           </div>
           <p>*We can check the weather for max. 10 days from now</p>
