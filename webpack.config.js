@@ -2,6 +2,11 @@
 module.exports = {
   entry: ['whatwg-fetch', './js/app.jsx'],
   output: { filename: "./js/out.js" },
+  devServer: {
+    inline: true,
+    contentBase: './',
+    port: 3001
+  },
   watch: true,
   module: {
     loaders: [
@@ -13,6 +18,10 @@ module.exports = {
       {
         test: /\.scss$/,
         loaders: ['style-loader', 'css-loader', 'sass-loader']
+      },
+      {
+        test: /\.(jpg|png|woff|woff2|eot|ttf|svg)$/,
+        loader: 'url-loader?limit=100000'
       }
     ]
   }

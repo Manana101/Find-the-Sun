@@ -346,7 +346,7 @@ export class Results extends React.Component{
       console.log('results should appear');
       results = <ul id='destinations-list'>
         <p>Click on the country name, to see cities matching your search.<br/>
-        Click on the city name to find flights.</p>
+        <span>Click on the city name to find flights.</span></p>
       {this.state.countries.map(country=>{
           return <li className='country-li'>{country}
             <ul>{this.state.destinations[country].map(city=>{

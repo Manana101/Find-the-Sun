@@ -1,8 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {IndexLink, Router, Route, Link, IndexRoute, hashHistory} from 'react-router';
 import '../main.scss';
 import {Search} from './search.jsx';
 import {Results} from './results.jsx';
+import {About} from './about.jsx';
+import {NotFound} from './not_found.jsx';
 
 class Home extends React.Component{
   constructor(props){
@@ -27,15 +30,12 @@ class Home extends React.Component{
       formOk: formOkfromSearch
     })
   }
-  //TODO: dodaj warunek, by results nie był w ogóle renderowany, jeśli this.state.formOk === false
   render(){
     console.log('jestem w home', this.state.formOk);
-    return <div className="container main-container">
-      <section className='content'>
+    return <section className='content'>
         <Search formInfoFn={this.formInfoFn}/>
         <Results minTemp={this.state.minTemp} maxTemp={this.state.maxTemp} fromDate={this.state.fromDate} toDate={this.state.toDate} formOk={this.state.formOk}/>
       </section>
-    </div>
   }
 }
 
@@ -58,14 +58,6 @@ class Header extends React.Component {
   }
 }
 
-class Main extends React.Component {
-  render(){
-    return <main>
-      {this.props.children}
-    </main>;
-  }
-}
-
 //TODO? tu może być disclaimer, który się otwiera, tak jak na RW
 class Footer extends React.Component {
   render(){
@@ -82,16 +74,29 @@ class Footer extends React.Component {
   }
 }
 
-
-class App extends React.Component {
+class Template extends React.Component {
   render(){
     return <div id='site'>
       <Header/>
-      <Main>
-            <Home/>
-      </Main>
+      <main>
+        <div className="container main-container">
+          {this.props.children}
+        </div>
+      </main>
       <Footer/>
     </div>
+  }
+}
+
+class App extends React.Component {
+  render(){
+    return <Router history={hashHistory}>
+<Route path='/' component={Template}>
+<IndexRoute component={Home} />
+<Route path='/about' component={About} />
+<Route path='*' component={NotFound} />
+</Route>
+</Router>
   }
 }
 
