@@ -27,14 +27,19 @@ export class Results extends React.Component{
       this.search();
     }
   }
-
+  //TODO: obsługa błędów!!! dodać timeout?
   search = () => {
     //wyświetl 'loading' i nie uruchamiaj znowu funkcji search, dopóki data nie będzie ready
     this.setState({
       dataReady: 'loading'
     })
     console.log('jestem w funkcji search w results, więc zaczynam iterować po miastach');
-    let ids = [1,2,3];
+    let ids = [];
+    for (var i = 0; i < 73; i++) {
+      ids.push(i+1);
+    }
+    console.log(ids);
+    //czy te funkcje mogą być tu w środku funkcji search? czy powinny być poza nią?
     this.getCities = ids => ids.map(id => this.getCity(id));
 
     this.getCity = (id) => {
@@ -212,25 +217,58 @@ export class Results extends React.Component{
       } //koniec else
     }//koniec getActualForecast
 
-    //TODO: tu niepotrzebne są 2 funkcje, zrobić z tego jedną, która od razu operuje na tablicy
-    this.updateForecasts = actualForecastsArray => actualForecastsArray.map(actualForecast => this.updateForecast(actualForecast));
 
+    //updateForecasts - funkcja, która aktualizuje miasto po mieście (dopiero jak pierwsze się doda do bazy, zaczyna dodawać drugie itp - bo robiąc wszystkie PUT jednocześnie json server odmawia dostępu)
+    //TODO: zmienić to na jakąś sprytną pętlę? czy tak może zostać?
+
+    //updateForecast - funkcja która aktualizuje w mojej bazie pojedyncze miasto
     this.updateForecast = (actualForecast) => {
-      if (actualForecast.status === "new"){
-        //dodaję zaktualizone miasto do mojej bazy na odpowiednie miejsce (po id)
-                    fetch("http://localhost:3000/destinations/"+actualForecast.id, {
-                            method: 'put',
-                            body: JSON.stringify(actualForecast),
-                            headers: {
-                                'Accept': 'application/json',
-                                'Content-Type': 'application/json'
-                            }
-                        }).then(
-                          console.log('dodałem do bazy zaktualizowane miasto o id ', actualForecast.id)
-                        ).catch(error=>console.log('error podczas updejtowania miasta o id ', actualForecast.id, ' w mojej bazie, error: ', error))
-      }
-      return actualForecast;
+      console.log('jestem w updateForecast, aktualne id to: ', actualForecast.id);
+      return fetch("http://localhost:3000/destinations/"+actualForecast.id, {
+              method: 'put',
+              body: JSON.stringify(actualForecast),
+              headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json'
+              }
+          }).then(result => {
+              console.log('dodałem do bazy zaktualizowane miasto o id ', actualForecast.id);
+              console.log('co zwraca PUT: ', result);
+          }).catch(error=>console.log('error podczas updejtowania miasta o id ', actualForecast.id, ' w mojej bazie, error: ', error));
     }
+
+    this.updateForecasts = actualForecastsArray => {
+      actualForecastsArray.reduce((sum, curr) =>
+        this.updateForecast(curr).then(result => {
+          console.log(result);
+          
+        })
+      )
+      // for (var i = 0; i < actualForecastsArray.length; i++) {
+      //   if (actualForecastsArray[i].status === "new"){
+      //     let oneCityPromise = Promise.resolve(actualForecastsArray[i]);
+      //     oneCityPromise
+      //     .then(actualForecast => this.updateForecast(actualForecast)).then(console.log('Promesa dla id ', actualForecastsArray[i], 'spełniona')).catch(error => console.log('error w pętli w actualForecastsArray dla id ', actualForecastsArray[i], error))
+      //   }
+      // }
+    }
+
+    //to poniżej niestety wcale nie dzieje się sekwencyjnie (nie czeka na promised resolved) - dlaczego?
+    // this.updateForecasts = actualForecastsArray => {
+    //   this.updateSequential = index => {
+    //     console.log('updateSequential wywołana dla id: ', actualForecastsArray[index].id);
+    //     if (index >= actualForecastsArray.length) {
+    //       console.log('skończyłem updejtować miasta');
+    //       return;
+    //     } else {
+    //       let startUpdateChain = Promise.resolve(actualForecastsArray);
+    //       startUpdateChain.then(this.updateForecast(actualForecastsArray[index]))
+    //       .then(result => this.updateSequential(index+1))
+    //       .catch(error => console.log('error w updateForecasts', error));
+    //     }
+    //   }
+    //   this.updateSequential(0);
+    // }
 
     this.filterCities = actualForecastsArray => {
       //zmienne, które podstawię potem do state:
@@ -322,8 +360,13 @@ export class Results extends React.Component{
     .then(actualForecastsArray => {
       console.log('actualForecastsArray z PromiseChain w Fetch', actualForecastsArray);
       //TODO: tu niepotrzebnie robię tablicę wywołań funkcji, zmienić to na jedną funkcję, która operuje od razu na tablicy miast
-      this.updateForecasts(actualForecastsArray);//updateForecasts tworzy tablicę, w której wywołana jest funkcja updateForecast dla każdego miasta z tablicy. updateForecast sprawdza, czy miasto ma status new - jeśli tak, wrzuca miasto na odpowiednie miejsce do mojej bazy (aktualizuje bazę). Efektem jest actualForecastsArray w niezmienionej postaci (to samo co funkcja dostała w parametrze).
-      //Nie chcę czekać z wyświetleniem wyników, aż baza zostanie zaktualizowana (nie ma takiej potrzeby), więc nie używam tu Promise.all(), i lecę od razu z kolejną funkcją w tym samym then (samo actualForecastsArray nie ulega tu żadnej zmianie)
+      let startAsynchronousUpdateForecasts = Promise.resolve(actualForecastsArray);
+      startAsynchronousUpdateForecasts.then(actualForecastsArray => {
+        return this.updateForecasts(actualForecastsArray)
+      })//updateForecasts dla każdego miasta po kolei uruchamia funkcję updateForecast. Funkcja updateForecast sprawdza, czy miasto ma status new - jeśli tak, wrzuca miasto na odpowiednie miejsce do mojej bazy (aktualizuje bazę). Ważne - miasta są dodawane po kolei, bo wysłanie wielu PUT do mojej bazy jednocześnie nie jest możliwe. Dopiero, kiedy jeden fetch się zakończy, uruchamiany jest kolejny.
+      .catch(error => console.log('error z startAsynchronousUpdateForecasts', error));
+
+      //Nie chcę czekać z wyświetleniem wyników, aż baza zostanie zaktualizowana (nie ma takiej potrzeby), więc lecę w tym samym then z funkcją filterCities(nie czekam na wykonanie się updejtowania bazy, które dzieje się asynchronicznie).
       this.filterCities(actualForecastsArray);//filterCities dla każdego miasta z tablicy sprawdza, czy spełnione są kryteria wyszukiwania - jeśli tak, miasto jest dodawane do odpowiednich zmiennych (countries i destinations). Na końcu aktualizowany jest state (countries, destinations, dataReady).
     })
     .catch(error => console.log('error z search', error));

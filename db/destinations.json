@@ -2,6 +2,331 @@
   "destinations": [
     {
       "location": {
+        "name": "Brussels",
+        "lat": 50.83,
+        "lon": 4.33,
+        "country": "Belgium"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 12
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.8
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-29",
+      "status": "new",
+      "id": 1
+    },
+    {
+      "location": {
+        "name": "Bourgas",
+        "lat": 42.5,
+        "lon": 27.47,
+        "country": "Bulgaria"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 10.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 11.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 6.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 7.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.8
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-29",
+      "status": "new",
+      "id": 2
+    },
+    {
+      "location": {
+        "name": "Split",
+        "lat": 43.51,
+        "lon": 16.46,
+        "country": "Croatia"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 14.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 12.9
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-29",
+      "status": "new",
+      "id": 3
+    },
+    {
+      "location": {
+        "name": "Larnaca",
+        "lat": 34.92,
+        "lon": 33.63,
+        "country": "Cyprus"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 16.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 19
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 17.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 18.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 19.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 18
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 17.1
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-29",
+      "status": "new",
+      "id": 4
+    },
+    {
+      "location": {
+        "name": "Billund",
+        "lat": 55.73,
+        "lon": 9.12,
+        "country": "Denmark"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 8.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 11.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 5.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.2
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-29",
+      "status": "new",
+      "id": 5
+    },
+    {
+      "location": {
         "name": "Paris",
         "lat": 48.87,
         "lon": 2.33,
@@ -9,11 +334,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 12.2
-            }
-          },
           {
             "day": {
               "avgtemp_c": 13.8
@@ -58,50 +378,225 @@
             "day": {
               "avgtemp_c": 7.4
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.5
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-28",
+      "checkedAt": "2017-03-29",
       "status": "new",
-      "id": 1
+      "id": 6
     },
     {
       "location": {
-        "name": "Palma",
-        "lat": 39.57,
-        "lon": 2.65,
-        "country": "Spain"
+        "name": "Toulouse",
+        "lat": 43.6,
+        "lon": 1.43,
+        "country": "France"
       },
       "forecast": {
         "forecastday": [
           {
             "day": {
-              "avgtemp_c": 15.1
+              "avgtemp_c": 14.9
             }
           },
           {
             "day": {
-              "avgtemp_c": 14.3
+              "avgtemp_c": 15.7
             }
           },
           {
             "day": {
-              "avgtemp_c": 14.6
+              "avgtemp_c": 11.8
             }
           },
           {
             "day": {
-              "avgtemp_c": 15.5
+              "avgtemp_c": 9.8
             }
           },
           {
             "day": {
-              "avgtemp_c": 14.1
+              "avgtemp_c": 9.6
             }
           },
           {
             "day": {
-              "avgtemp_c": 14.7
+              "avgtemp_c": 10
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 7.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.6
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-29",
+      "status": "new",
+      "id": 7
+    },
+    {
+      "location": {
+        "name": "Kutaissi",
+        "lat": 42.26,
+        "lon": 42.72,
+        "country": "Georgia"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 10.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 12.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 11.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 11.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 12.6
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-29",
+      "status": "new",
+      "id": 8
+    },
+    {
+      "location": {
+        "name": "Cologne",
+        "lat": 50.93,
+        "lon": 6.95,
+        "country": "Germany"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 11.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 12.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 11.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 12
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 11.5
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-29",
+      "status": "new",
+      "id": 9
+    },
+    {
+      "location": {
+        "name": "Baden-Baden",
+        "lat": 48.75,
+        "lon": 8.25,
+        "country": "Germany"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 12.1
             }
           },
           {
@@ -116,7 +611,1657 @@
           },
           {
             "day": {
-              "avgtemp_c": 12.7
+              "avgtemp_c": 10.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 6.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.4
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-29",
+      "status": "new",
+      "id": 10
+    },
+    {
+      "location": {
+        "name": "Memmingen",
+        "lat": 47.98,
+        "lon": 10.17,
+        "country": "Germany"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 11
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 11.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 5.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 6.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 6.6
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-29",
+      "status": "new",
+      "id": 11
+    },
+    {
+      "location": {
+        "name": "Kerkyra",
+        "lat": 39.62,
+        "lon": 19.92,
+        "country": "Greece"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 16.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 17.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 17.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 17.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.1
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-29",
+      "status": "new",
+      "id": 12
+    },
+    {
+      "location": {
+        "name": "Athens",
+        "lat": 37.98,
+        "lon": 23.72,
+        "country": "Greece"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 12.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 12.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.5
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-28",
+      "status": "new",
+      "id": 13
+    },
+    {
+      "location": {
+        "name": "Chania",
+        "lat": 35.51,
+        "lon": 24.03,
+        "country": "Greece"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 12.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 12.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 12.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 18.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.1
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-28",
+      "status": "new",
+      "id": 14
+    },
+    {
+      "location": {
+        "name": "Thessaloniki",
+        "lat": 40.64,
+        "lon": 22.93,
+        "country": "Greece"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 14.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 11.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 12.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 11.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 11.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 12
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.8
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-28",
+      "status": "new",
+      "id": 15
+    },
+    {
+      "location": {
+        "name": "Budapest",
+        "lat": 47.5,
+        "lon": 19.08,
+        "country": "Hungary"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 13.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 12.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 12.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.7
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-28",
+      "status": "new",
+      "id": 16
+    },
+    {
+      "location": {
+        "name": "Reykjavik",
+        "lat": 64.15,
+        "lon": -21.95,
+        "country": "Iceland"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 4.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 4.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 4.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 3.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 6.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 3.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 2.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 3.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 2
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-28",
+      "status": "new",
+      "id": 17
+    },
+    {
+      "location": {
+        "name": "Dublin",
+        "lat": 53.33,
+        "lon": -6.25,
+        "country": "Ireland"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 11
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 6.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 6.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 5.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 11.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.7
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-28",
+      "status": "new",
+      "id": 18
+    },
+    {
+      "location": {
+        "name": "Shannon",
+        "lat": 52.7,
+        "lon": -8.86,
+        "country": "Ireland"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 11.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 7.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 7.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 6.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 6.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 6.9
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-28",
+      "status": "new",
+      "id": 19
+    },
+    {
+      "location": {
+        "name": "Eilat",
+        "lat": 29.56,
+        "lon": 34.95,
+        "country": "Israel"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 23.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 25.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 23.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 19.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 18.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 21.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 24
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 22.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 21.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 20.2
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-28",
+      "status": "new",
+      "id": 20
+    },
+    {
+      "location": {
+        "name": "Tel Aviv",
+        "lat": 32.07,
+        "lon": 34.77,
+        "country": "Israel"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 19.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 21.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 18.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 17
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 19.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 20.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 17.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.9
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-28",
+      "status": "new",
+      "id": 21
+    },
+    {
+      "location": {
+        "name": "Alghero",
+        "lat": 40.56,
+        "lon": 8.32,
+        "country": "Italy"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 13.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.6
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-29",
+      "status": "new",
+      "id": 22
+    },
+    {
+      "location": {
+        "name": "Cagliari",
+        "lat": 39.22,
+        "lon": 9.12,
+        "country": "Italy"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 14.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 12.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 12.3
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-29",
+      "status": "new",
+      "id": 23
+    },
+    {
+      "location": {
+        "name": "Bari",
+        "lat": 41.13,
+        "lon": 16.85,
+        "country": "Italy"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 12.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.4
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-29",
+      "status": "new",
+      "id": 24
+    },
+    {
+      "location": {
+        "name": "Catania",
+        "lat": 37.5,
+        "lon": 15.1,
+        "country": "Italy"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 13.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 17.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 11.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 11.6
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-29",
+      "status": "new",
+      "id": 25
+    },
+    {
+      "location": {
+        "name": "Trapani",
+        "lat": 38.02,
+        "lon": 12.48,
+        "country": "Italy"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 15.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 17.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.9
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-29",
+      "status": "new",
+      "id": 26
+    },
+    {
+      "location": {
+        "name": "San Giuliano Terme",
+        "lat": 43.77,
+        "lon": 10.43,
+        "country": "Italy"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 15.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 12.6
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-29",
+      "status": "new",
+      "id": 27
+    },
+    {
+      "location": {
+        "name": "Bergamo",
+        "lat": 45.68,
+        "lon": 9.72,
+        "country": "Italy"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 13.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 11.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 11.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 11.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-29",
+      "status": "new",
+      "id": 28
+    },
+    {
+      "location": {
+        "name": "Naples",
+        "lat": 40.83,
+        "lon": 14.25,
+        "country": "Italy"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 15.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 17.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.9
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-28",
+      "status": "new",
+      "id": 29
+    },
+    {
+      "location": {
+        "name": "Rome",
+        "lat": 41.9,
+        "lon": 12.48,
+        "country": "Italy"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 14
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 12.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 11.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 11.4
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-28",
+      "status": "new",
+      "id": 30
+    },
+    {
+      "location": {
+        "name": "Turin",
+        "lat": 45.05,
+        "lon": 7.67,
+        "country": "Italy"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 16.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 19.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 11.8
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-28",
+      "status": "new",
+      "id": 31
+    },
+    {
+      "location": {
+        "name": "Verona",
+        "lat": 45.45,
+        "lon": 11,
+        "country": "Italy"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 15.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 12.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 11.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 12.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.4
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-28",
+      "status": "new",
+      "id": 32
+    },
+    {
+      "location": {
+        "name": "Bologna",
+        "lat": 44.48,
+        "lon": 11.33,
+        "country": "Italy"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 15.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 17.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 18.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 12.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 11.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.7
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-28",
+      "status": "new",
+      "id": 33
+    },
+    {
+      "location": {
+        "name": "Pisa",
+        "lat": 43.72,
+        "lon": 10.38,
+        "country": "Italy"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 15.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 12.6
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-28",
+      "status": "new",
+      "id": 34
+    },
+    {
+      "location": {
+        "name": "Venice",
+        "lat": 45.44,
+        "lon": 12.33,
+        "country": "Italy"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 16.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 17.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 18.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14
             }
           },
           {
@@ -128,7 +2273,722 @@
       },
       "checkedAt": "2017-03-28",
       "status": "new",
-      "id": 2
+      "id": 35
+    },
+    {
+      "location": {
+        "name": "Vilnius",
+        "lat": 54.68,
+        "lon": 25.32,
+        "country": "Lithuania"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 2.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 2.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 6.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 12
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 11.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 7.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 5.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 6.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.3
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-28",
+      "status": "new",
+      "id": 36
+    },
+    {
+      "location": {
+        "name": "Valletta",
+        "lat": 35.9,
+        "lon": 14.51,
+        "country": "Malta"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 14.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 17.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 19
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 17.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16.1
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-28",
+      "status": "new",
+      "id": 37
+    },
+    {
+      "location": {
+        "name": "Eindhoven",
+        "lat": 51.44,
+        "lon": 5.48,
+        "country": "Netherlands"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 12.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 11.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 11.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 11.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 11.9
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-28",
+      "status": "new",
+      "id": 38
+    },
+    {
+      "location": {
+        "name": "Bergen",
+        "lat": 60.39,
+        "lon": 5.32,
+        "country": "Norway"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 6.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 7.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 6.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 4.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 7.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 5.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 6.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 6.8
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-28",
+      "status": "new",
+      "id": 39
+    },
+    {
+      "location": {
+        "name": "Oslo",
+        "lat": 59.92,
+        "lon": 10.75,
+        "country": "Norway"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 2.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 2.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 6.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 7.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 5.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 5.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 6.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 7.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.5
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-28",
+      "status": "new",
+      "id": 40
+    },
+    {
+      "location": {
+        "name": "Lisbon",
+        "lat": 38.72,
+        "lon": -9.13,
+        "country": "Portugal"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 16.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 17.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 17.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 17.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 18.6
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-29",
+      "status": "new",
+      "id": 41
+    },
+    {
+      "location": {
+        "name": "Porto",
+        "lat": 41.15,
+        "lon": -8.62,
+        "country": "Portugal"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 15.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 12.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 12.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 17
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 17.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 17.9
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-29",
+      "status": "new",
+      "id": 42
+    },
+    {
+      "location": {
+        "name": "Faro",
+        "lat": 37.02,
+        "lon": -7.93,
+        "country": "Portugal"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 17.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 17.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 17.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 17.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 17.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 18
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 17.1
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-29",
+      "status": "new",
+      "id": 43
+    },
+    {
+      "location": {
+        "name": "Bucharest",
+        "lat": 44.43,
+        "lon": 26.1,
+        "country": "Romania"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 14.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 11.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 11.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 11.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.8
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-29",
+      "status": "new",
+      "id": 44
+    },
+    {
+      "location": {
+        "name": "Bratislava",
+        "lat": 48.15,
+        "lon": 17.12,
+        "country": "Slovakia"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 12.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 11.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.7
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-29",
+      "status": "new",
+      "id": 45
+    },
+    {
+      "location": {
+        "name": "Alicante",
+        "lat": 10.89,
+        "lon": 123.02,
+        "country": "Philippines"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 29.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 29.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 29.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 28.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 28.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 28.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 28.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 28.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 28.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 28.2
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-29",
+      "status": "new",
+      "id": 46
     },
     {
       "location": {
@@ -139,11 +2999,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 13.5
-            }
-          },
           {
             "day": {
               "avgtemp_c": 15.4
@@ -188,12 +3043,1707 @@
             "day": {
               "avgtemp_c": 12.5
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.9
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-29",
+      "status": "new",
+      "id": 47
+    },
+    {
+      "location": {
+        "name": "Santander",
+        "lat": 43.46,
+        "lon": -3.8,
+        "country": "Spain"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 16
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 17.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 12.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 11.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 12.6
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-29",
+      "status": "new",
+      "id": 48
+    },
+    {
+      "location": {
+        "name": "Puerto Del Rosario",
+        "lat": 28.5,
+        "lon": -13.87,
+        "country": "Spain"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 19.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 20.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 21.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 21.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 20.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 19.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 19.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 19.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 19.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 18.7
+            }
           }
         ]
       },
       "checkedAt": "2017-03-28",
       "status": "new",
-      "id": 3
+      "id": 49
+    },
+    {
+      "location": {
+        "name": "Telde",
+        "lat": 28,
+        "lon": -15.42,
+        "country": "Spain"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 19.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 20.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 21.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 22.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 21.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 20.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 20
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 19.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 18.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 18.8
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-28",
+      "status": "new",
+      "id": 50
+    },
+    {
+      "location": {
+        "name": "Madrid",
+        "lat": 40.4,
+        "lon": -3.68,
+        "country": "Spain"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 14.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 12.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 12.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 12.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 12.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.5
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-28",
+      "status": "new",
+      "id": 51
+    },
+    {
+      "location": {
+        "name": "Malaga",
+        "lat": 36.72,
+        "lon": -4.42,
+        "country": "Spain"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 14.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 17.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 17.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 17
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.4
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-28",
+      "status": "new",
+      "id": 52
+    },
+    {
+      "location": {
+        "name": "Palma",
+        "lat": 39.57,
+        "lon": 2.65,
+        "country": "Spain"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 14.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 12.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.2
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-28",
+      "status": "new",
+      "id": 53
+    },
+    {
+      "location": {
+        "name": "Casas La Balsilla De Taray",
+        "lat": 36.83,
+        "lon": -2.68,
+        "country": "Spain"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 15.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.9
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-28",
+      "status": "new",
+      "id": 54
+    },
+    {
+      "location": {
+        "name": "San Miguel (San Miguel Tenextepec)",
+        "lat": 19.26,
+        "lon": -100.03,
+        "country": "Mexico"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 17.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 17.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 18.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 18.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 18.8
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-28",
+      "status": "new",
+      "id": 55
+    },
+    {
+      "location": {
+        "name": "Valencia",
+        "lat": 10.18,
+        "lon": -68,
+        "country": "Venezuela"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 26.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 26.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 26.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 26.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 26.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 26.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 26.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 24.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 27.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 27.5
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-28",
+      "status": "new",
+      "id": 56
+    },
+    {
+      "location": {
+        "name": "Goteborg",
+        "lat": 57.72,
+        "lon": 11.97,
+        "country": "Sweden"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 5.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 4.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 7.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 7.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 6.7
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-28",
+      "status": "new",
+      "id": 57
+    },
+    {
+      "location": {
+        "name": "Malmo",
+        "lat": 55.6,
+        "lon": 13,
+        "country": "Sweden"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 7.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 5.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 11
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 7.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 5.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.9
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-28",
+      "status": "new",
+      "id": 58
+    },
+    {
+      "location": {
+        "name": "Stockholm",
+        "lat": 59.33,
+        "lon": 18.05,
+        "country": "Sweden"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 2.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 1.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 7.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 4.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 3.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 4.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 7.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.3
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-28",
+      "status": "new",
+      "id": 59
+    },
+    {
+      "location": {
+        "name": "Basel",
+        "lat": 47.57,
+        "lon": 7.6,
+        "country": "Switzerland"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 12.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 6.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 6.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.8
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-28",
+      "status": "new",
+      "id": 60
+    },
+    {
+      "location": {
+        "name": "Aberdeen",
+        "lat": 57.15,
+        "lon": -2.13,
+        "country": "United Kingdom"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 8.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 6.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 6.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-29",
+      "status": "new",
+      "id": 61
+    },
+    {
+      "location": {
+        "name": "Birmingham",
+        "lat": 52.49,
+        "lon": -1.86,
+        "country": "United Kingdom"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 11.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 7.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 7.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 6.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.4
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-29",
+      "status": "new",
+      "id": 62
+    },
+    {
+      "location": {
+        "name": "Bristol",
+        "lat": 51.48,
+        "lon": -2.57,
+        "country": "United Kingdom"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 12.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 11.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 7.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 6.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 7.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.7
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-29",
+      "status": "new",
+      "id": 63
+    },
+    {
+      "location": {
+        "name": "Sheffield",
+        "lat": 53.38,
+        "lon": -1.47,
+        "country": "United Kingdom"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 10.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 11
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 7.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 6.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 7.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 6.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 7.9
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-29",
+      "status": "new",
+      "id": 64
+    },
+    {
+      "location": {
+        "name": "Glasgow",
+        "lat": 55.86,
+        "lon": -4.25,
+        "country": "United Kingdom"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 9.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 6.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 6.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 4.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 7
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-28",
+      "status": "new",
+      "id": 65
+    },
+    {
+      "location": {
+        "name": "Liverpool",
+        "lat": 53.42,
+        "lon": -2.94,
+        "country": "United Kingdom"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 10.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 11.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.6
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.8
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-28",
+      "status": "new",
+      "id": 66
+    },
+    {
+      "location": {
+        "name": "London",
+        "lat": 51.52,
+        "lon": -0.11,
+        "country": "United Kingdom"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 12.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 11.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.8
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-28",
+      "status": "new",
+      "id": 67
+    },
+    {
+      "location": {
+        "name": "Belfast",
+        "lat": 54.58,
+        "lon": -5.93,
+        "country": "United Kingdom"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 10.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 7.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 6.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 6.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-28",
+      "status": "new",
+      "id": 68
+    },
+    {
+      "location": {
+        "name": "Edinburgh",
+        "lat": 55.95,
+        "lon": -3.16,
+        "country": "United Kingdom"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 9.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 11.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 7.3
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 5.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 7.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 5.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.9
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-28",
+      "status": "new",
+      "id": 69
+    },
+    {
+      "location": {
+        "name": "Leeds",
+        "lat": 51.24,
+        "lon": 0.61,
+        "country": "United Kingdom"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 12
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 11.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 7.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.5
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-28",
+      "status": "new",
+      "id": 70
+    },
+    {
+      "location": {
+        "name": "Manchester",
+        "lat": 53.48,
+        "lon": -2.25,
+        "country": "United Kingdom"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 10.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 7.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 7.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 6.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 6.9
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-28",
+      "status": "new",
+      "id": 71
+    },
+    {
+      "location": {
+        "name": "Newcastle Upon Tyne",
+        "lat": 54.97,
+        "lon": -1.6,
+        "country": "United Kingdom"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 10.5
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 11.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.4
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 7.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 7.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 6.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.7
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 7.8
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-28",
+      "status": "new",
+      "id": 72
+    },
+    {
+      "location": {
+        "name": "Kiev",
+        "lat": 50.43,
+        "lon": 30.52,
+        "country": "Ukraine"
+      },
+      "forecast": {
+        "forecastday": [
+          {
+            "day": {
+              "avgtemp_c": 6.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 6.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 4.8
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.2
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.1
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 7.9
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 11
+            }
+          },
+          {
+            "day": {
+              "avgtemp_c": 12.1
+            }
+          }
+        ]
+      },
+      "checkedAt": "2017-03-28",
+      "status": "new",
+      "id": 73
     }
   ]
 }
