@@ -44,8 +44,8 @@ export class Results extends React.Component{
 
     this.getCity = (id) => {
       return fetch("http://localhost:3000/destinations/"+id)
-      .then(data => {console.log('then');return data.json()})
-      .catch(error => console.log('error z getCities', error));
+      .then(data => {console.log('wysłałem zapytanie GET do mojej bazy dla id: ', id);return data.json()})
+      .catch(error => console.log('error z getCity przy id: ', id, error));
     }//koniec getCity
 
     this.getActualForecasts = citiesArray => citiesArray.map(city => this.getActualForecast(city));
@@ -219,56 +219,44 @@ export class Results extends React.Component{
 
 
     //updateForecasts - funkcja, która aktualizuje miasto po mieście (dopiero jak pierwsze się doda do bazy, zaczyna dodawać drugie itp - bo robiąc wszystkie PUT jednocześnie json server odmawia dostępu)
-    //TODO: zmienić to na jakąś sprytną pętlę? czy tak może zostać?
-
-    //updateForecast - funkcja która aktualizuje w mojej bazie pojedyncze miasto
-    this.updateForecast = (actualForecast) => {
-      console.log('jestem w updateForecast, aktualne id to: ', actualForecast.id);
-      return fetch("http://localhost:3000/destinations/"+actualForecast.id, {
-              method: 'put',
-              body: JSON.stringify(actualForecast),
-              headers: {
-                  'Accept': 'application/json',
-                  'Content-Type': 'application/json'
-              }
-          }).then(result => {
-              console.log('dodałem do bazy zaktualizowane miasto o id ', actualForecast.id);
-              console.log('co zwraca PUT: ', result);
-          }).catch(error=>console.log('error podczas updejtowania miasta o id ', actualForecast.id, ' w mojej bazie, error: ', error));
-    }
 
     this.updateForecasts = actualForecastsArray => {
-      actualForecastsArray.reduce((sum, curr) =>
-        this.updateForecast(curr).then(result => {
-          console.log(result);
-          
-        })
-      )
-      // for (var i = 0; i < actualForecastsArray.length; i++) {
-      //   if (actualForecastsArray[i].status === "new"){
-      //     let oneCityPromise = Promise.resolve(actualForecastsArray[i]);
-      //     oneCityPromise
-      //     .then(actualForecast => this.updateForecast(actualForecast)).then(console.log('Promesa dla id ', actualForecastsArray[i], 'spełniona')).catch(error => console.log('error w pętli w actualForecastsArray dla id ', actualForecastsArray[i], error))
-      //   }
-      // }
+      let index = 0;
+      this.updateForecast = index => {
+        if (actualForecastsArray[index].status === "new"){
+          return fetch("http://localhost:3000/destinations/"+actualForecastsArray[index].id, {
+                  method: 'put',
+                  body: JSON.stringify(actualForecastsArray[index]),
+                  headers: {
+                      'Accept': 'application/json',
+                      'Content-Type': 'application/json'
+                  }
+              }).then(result => {
+                  console.log('dodałem do bazy zaktualizowane miasto o id ', actualForecastsArray[index].id);
+                  console.log('co zwraca PUT: ', result);
+                  index ++;
+                  if (index < actualForecastsArray.length){
+                    console.log('Włączam updejt dla id: ', actualForecastsArray[index].id)
+                    this.updateForecast(index);
+                  } else {
+                    console.log('updejtowanie bazy zakończone, ostatnie zaktualizowane id to: ', index);
+                  }
+              }).catch(error=>console.log('error podczas updejtowania miasta o id ', actualForecastsArray[index].id, ' w mojej bazie, error: ', error));
+        } else {
+          console.log("Nie updejtuję miasta o id ", actualForecastsArray[index].id , "w mojej bazie, bo ma status old");
+          index ++;
+          if (index < actualForecastsArray.length){
+            console.log('Włączam updejt dla id: ', actualForecastsArray[index].id)
+            this.updateForecast(index);
+          } else {
+            console.log('updejtowanie bazy zakończone, ostatnie id dla którego wykonano updateForecast to: ', index);
+          }
+        }
+      }
+      //uruchomienie pierwszego updejtu:
+      console.log('Włączam updejt dla id: ', index+1);
+      this.updateForecast(index);
     }
-
-    //to poniżej niestety wcale nie dzieje się sekwencyjnie (nie czeka na promised resolved) - dlaczego?
-    // this.updateForecasts = actualForecastsArray => {
-    //   this.updateSequential = index => {
-    //     console.log('updateSequential wywołana dla id: ', actualForecastsArray[index].id);
-    //     if (index >= actualForecastsArray.length) {
-    //       console.log('skończyłem updejtować miasta');
-    //       return;
-    //     } else {
-    //       let startUpdateChain = Promise.resolve(actualForecastsArray);
-    //       startUpdateChain.then(this.updateForecast(actualForecastsArray[index]))
-    //       .then(result => this.updateSequential(index+1))
-    //       .catch(error => console.log('error w updateForecasts', error));
-    //     }
-    //   }
-    //   this.updateSequential(0);
-    // }
 
     this.filterCities = actualForecastsArray => {
       //zmienne, które podstawię potem do state:

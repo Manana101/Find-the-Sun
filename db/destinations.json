@@ -11,11 +11,6 @@
         "forecastday": [
           {
             "day": {
-              "avgtemp_c": 12
-            }
-          },
-          {
-            "day": {
               "avgtemp_c": 15.4
             }
           },
@@ -58,10 +53,15 @@
             "day": {
               "avgtemp_c": 10.8
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.8
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-29",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 1
     },
@@ -74,11 +74,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 10.5
-            }
-          },
           {
             "day": {
               "avgtemp_c": 11.9
@@ -123,10 +118,15 @@
             "day": {
               "avgtemp_c": 8.8
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.2
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-29",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 2
     },
@@ -139,11 +139,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 14.1
-            }
-          },
           {
             "day": {
               "avgtemp_c": 15.8
@@ -188,10 +183,15 @@
             "day": {
               "avgtemp_c": 12.9
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 12.3
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-29",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 3
     },
@@ -204,11 +204,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 16.8
-            }
-          },
           {
             "day": {
               "avgtemp_c": 19
@@ -253,10 +248,15 @@
             "day": {
               "avgtemp_c": 17.1
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16.9
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-29",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 4
     },
@@ -269,11 +269,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 8.2
-            }
-          },
           {
             "day": {
               "avgtemp_c": 8.6
@@ -318,10 +313,15 @@
             "day": {
               "avgtemp_c": 8.2
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 7.5
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-29",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 5
     },
@@ -334,11 +334,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 13.8
-            }
-          },
           {
             "day": {
               "avgtemp_c": 14.6
@@ -383,10 +378,15 @@
             "day": {
               "avgtemp_c": 10.5
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.1
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-29",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 6
     },
@@ -399,11 +399,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 14.9
-            }
-          },
           {
             "day": {
               "avgtemp_c": 15.7
@@ -448,10 +443,15 @@
             "day": {
               "avgtemp_c": 9.6
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.6
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-29",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 7
     },
@@ -464,11 +464,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 10.3
-            }
-          },
           {
             "day": {
               "avgtemp_c": 13
@@ -513,10 +508,15 @@
             "day": {
               "avgtemp_c": 12.6
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.8
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-29",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 8
     },
@@ -529,11 +529,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 11.9
-            }
-          },
           {
             "day": {
               "avgtemp_c": 15.8
@@ -578,10 +573,15 @@
             "day": {
               "avgtemp_c": 11.5
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-29",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 9
     },
@@ -594,11 +594,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 12.1
-            }
-          },
           {
             "day": {
               "avgtemp_c": 13.9
@@ -643,10 +638,15 @@
             "day": {
               "avgtemp_c": 9.4
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.1
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-29",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 10
     },
@@ -659,11 +659,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 11
-            }
-          },
           {
             "day": {
               "avgtemp_c": 11.7
@@ -708,10 +703,15 @@
             "day": {
               "avgtemp_c": 6.6
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 6.6
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-29",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 11
     },
@@ -724,11 +724,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 16.1
-            }
-          },
           {
             "day": {
               "avgtemp_c": 17.2
@@ -773,10 +768,15 @@
             "day": {
               "avgtemp_c": 14.1
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.3
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-29",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 12
     },
@@ -789,11 +789,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 12.5
-            }
-          },
           {
             "day": {
               "avgtemp_c": 13.5
@@ -838,10 +833,15 @@
             "day": {
               "avgtemp_c": 14.5
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.6
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-28",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 13
     },
@@ -854,11 +854,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 12.4
-            }
-          },
           {
             "day": {
               "avgtemp_c": 12.9
@@ -903,10 +898,15 @@
             "day": {
               "avgtemp_c": 14.1
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16.3
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-28",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 14
     },
@@ -919,11 +919,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 14.3
-            }
-          },
           {
             "day": {
               "avgtemp_c": 15.3
@@ -968,10 +963,15 @@
             "day": {
               "avgtemp_c": 10.8
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.1
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-28",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 15
     },
@@ -984,11 +984,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 13.4
-            }
-          },
           {
             "day": {
               "avgtemp_c": 13.5
@@ -1033,10 +1028,15 @@
             "day": {
               "avgtemp_c": 10.7
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.8
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-28",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 16
     },
@@ -1049,11 +1049,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 4.1
-            }
-          },
           {
             "day": {
               "avgtemp_c": 4.3
@@ -1098,10 +1093,15 @@
             "day": {
               "avgtemp_c": 2
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 4.7
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-28",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 17
     },
@@ -1116,11 +1116,6 @@
         "forecastday": [
           {
             "day": {
-              "avgtemp_c": 11
-            }
-          },
-          {
-            "day": {
               "avgtemp_c": 10.9
             }
           },
@@ -1131,17 +1126,17 @@
           },
           {
             "day": {
-              "avgtemp_c": 8.6
+              "avgtemp_c": 8.7
             }
           },
           {
             "day": {
-              "avgtemp_c": 6.3
+              "avgtemp_c": 6.2
             }
           },
           {
             "day": {
-              "avgtemp_c": 8
+              "avgtemp_c": 8.1
             }
           },
           {
@@ -1151,7 +1146,7 @@
           },
           {
             "day": {
-              "avgtemp_c": 5.6
+              "avgtemp_c": 5.7
             }
           },
           {
@@ -1163,10 +1158,15 @@
             "day": {
               "avgtemp_c": 8.7
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.6
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-28",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 18
     },
@@ -1179,11 +1179,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 11.9
-            }
-          },
           {
             "day": {
               "avgtemp_c": 10.9
@@ -1228,10 +1223,15 @@
             "day": {
               "avgtemp_c": 6.9
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.1
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-28",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 19
     },
@@ -1244,11 +1244,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 23.3
-            }
-          },
           {
             "day": {
               "avgtemp_c": 25.3
@@ -1293,10 +1288,15 @@
             "day": {
               "avgtemp_c": 20.2
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 21.6
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-28",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 20
     },
@@ -1309,11 +1309,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 19.8
-            }
-          },
           {
             "day": {
               "avgtemp_c": 21.5
@@ -1358,10 +1353,15 @@
             "day": {
               "avgtemp_c": 15.9
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 17.6
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-28",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 21
     },
@@ -1374,11 +1374,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 13.2
-            }
-          },
           {
             "day": {
               "avgtemp_c": 13.8
@@ -1423,10 +1418,15 @@
             "day": {
               "avgtemp_c": 13.6
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.9
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-29",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 22
     },
@@ -1439,11 +1439,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 14.3
-            }
-          },
           {
             "day": {
               "avgtemp_c": 16.1
@@ -1488,10 +1483,15 @@
             "day": {
               "avgtemp_c": 12.3
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 12.8
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-29",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 23
     },
@@ -1504,11 +1504,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 12.8
-            }
-          },
           {
             "day": {
               "avgtemp_c": 13.8
@@ -1553,10 +1548,15 @@
             "day": {
               "avgtemp_c": 13.4
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 12.8
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-29",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 24
     },
@@ -1569,11 +1569,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 13.8
-            }
-          },
           {
             "day": {
               "avgtemp_c": 15.4
@@ -1618,10 +1613,15 @@
             "day": {
               "avgtemp_c": 11.6
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 11.7
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-29",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 25
     },
@@ -1634,11 +1634,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 15.3
-            }
-          },
           {
             "day": {
               "avgtemp_c": 15.5
@@ -1683,10 +1678,15 @@
             "day": {
               "avgtemp_c": 14.9
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.9
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-29",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 26
     },
@@ -1699,11 +1699,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 15.5
-            }
-          },
           {
             "day": {
               "avgtemp_c": 16.7
@@ -1748,10 +1743,15 @@
             "day": {
               "avgtemp_c": 12.6
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.5
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-29",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 27
     },
@@ -1764,11 +1764,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 13.9
-            }
-          },
           {
             "day": {
               "avgtemp_c": 15.1
@@ -1813,10 +1808,15 @@
             "day": {
               "avgtemp_c": 10
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.8
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-29",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 28
     },
@@ -1829,11 +1829,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 15.9
-            }
-          },
           {
             "day": {
               "avgtemp_c": 16.9
@@ -1878,10 +1873,15 @@
             "day": {
               "avgtemp_c": 13.9
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.9
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-28",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 29
     },
@@ -1894,11 +1894,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 14
-            }
-          },
           {
             "day": {
               "avgtemp_c": 14.7
@@ -1943,10 +1938,15 @@
             "day": {
               "avgtemp_c": 11.4
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 12
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-28",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 30
     },
@@ -1959,11 +1959,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 16.1
-            }
-          },
           {
             "day": {
               "avgtemp_c": 19.3
@@ -2008,10 +2003,15 @@
             "day": {
               "avgtemp_c": 11.8
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-28",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 31
     },
@@ -2024,11 +2024,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 15.5
-            }
-          },
           {
             "day": {
               "avgtemp_c": 15.9
@@ -2073,10 +2068,15 @@
             "day": {
               "avgtemp_c": 10.4
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.7
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-28",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 32
     },
@@ -2089,11 +2089,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 15.9
-            }
-          },
           {
             "day": {
               "avgtemp_c": 17.6
@@ -2138,10 +2133,15 @@
             "day": {
               "avgtemp_c": 10.7
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.8
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-28",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 33
     },
@@ -2154,11 +2154,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 15.5
-            }
-          },
           {
             "day": {
               "avgtemp_c": 16.7
@@ -2203,10 +2198,15 @@
             "day": {
               "avgtemp_c": 12.6
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.5
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-28",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 34
     },
@@ -2219,11 +2219,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 16.9
-            }
-          },
           {
             "day": {
               "avgtemp_c": 17.3
@@ -2268,10 +2263,15 @@
             "day": {
               "avgtemp_c": 13.4
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.6
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-28",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 35
     },
@@ -2284,11 +2284,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 2.1
-            }
-          },
           {
             "day": {
               "avgtemp_c": 2.7
@@ -2333,10 +2328,15 @@
             "day": {
               "avgtemp_c": 9.3
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.7
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-28",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 36
     },
@@ -2349,11 +2349,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 14.8
-            }
-          },
           {
             "day": {
               "avgtemp_c": 16.2
@@ -2398,10 +2393,15 @@
             "day": {
               "avgtemp_c": 16.1
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.9
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-28",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 37
     },
@@ -2414,11 +2414,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 12.1
-            }
-          },
           {
             "day": {
               "avgtemp_c": 15.8
@@ -2463,10 +2458,15 @@
             "day": {
               "avgtemp_c": 11.9
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10.8
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-28",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 38
     },
@@ -2479,11 +2479,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 6.2
-            }
-          },
           {
             "day": {
               "avgtemp_c": 7.6
@@ -2528,10 +2523,15 @@
             "day": {
               "avgtemp_c": 6.8
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 6.4
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-28",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 39
     },
@@ -2544,11 +2544,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 2.6
-            }
-          },
           {
             "day": {
               "avgtemp_c": 2.7
@@ -2593,10 +2588,15 @@
             "day": {
               "avgtemp_c": 8.5
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.4
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-28",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 40
     },
@@ -2609,11 +2609,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 16.2
-            }
-          },
           {
             "day": {
               "avgtemp_c": 16
@@ -2658,10 +2653,15 @@
             "day": {
               "avgtemp_c": 18.6
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 17.9
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-29",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 41
     },
@@ -2674,11 +2674,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 15.4
-            }
-          },
           {
             "day": {
               "avgtemp_c": 15.1
@@ -2723,10 +2718,15 @@
             "day": {
               "avgtemp_c": 17.9
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 18
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-29",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 42
     },
@@ -2739,11 +2739,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 17.3
-            }
-          },
           {
             "day": {
               "avgtemp_c": 17.2
@@ -2788,10 +2783,15 @@
             "day": {
               "avgtemp_c": 17.1
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 16.6
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-29",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 43
     },
@@ -2804,11 +2804,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 14.3
-            }
-          },
           {
             "day": {
               "avgtemp_c": 14.3
@@ -2853,10 +2848,15 @@
             "day": {
               "avgtemp_c": 8.8
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 10
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-29",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 44
     },
@@ -2869,11 +2869,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 12.6
-            }
-          },
           {
             "day": {
               "avgtemp_c": 13
@@ -2918,10 +2913,15 @@
             "day": {
               "avgtemp_c": 9.7
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 12
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-29",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 45
     },
@@ -2986,7 +2986,7 @@
           }
         ]
       },
-      "checkedAt": "2017-03-29",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 46
     },
@@ -2999,11 +2999,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 15.4
-            }
-          },
           {
             "day": {
               "avgtemp_c": 14.7
@@ -3048,10 +3043,15 @@
             "day": {
               "avgtemp_c": 13.9
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.1
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-29",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 47
     },
@@ -3064,11 +3064,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 16
-            }
-          },
           {
             "day": {
               "avgtemp_c": 17.7
@@ -3113,10 +3108,15 @@
             "day": {
               "avgtemp_c": 12.6
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 12.3
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-29",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 48
     },
@@ -3129,11 +3129,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 19.4
-            }
-          },
           {
             "day": {
               "avgtemp_c": 20.4
@@ -3178,10 +3173,15 @@
             "day": {
               "avgtemp_c": 18.7
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 18.9
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-28",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 49
     },
@@ -3194,11 +3194,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 19.7
-            }
-          },
           {
             "day": {
               "avgtemp_c": 20.3
@@ -3243,10 +3238,15 @@
             "day": {
               "avgtemp_c": 18.8
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 18.7
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-28",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 50
     },
@@ -3259,11 +3259,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 14.9
-            }
-          },
           {
             "day": {
               "avgtemp_c": 15.3
@@ -3308,10 +3303,15 @@
             "day": {
               "avgtemp_c": 15.5
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 17.6
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-28",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 51
     },
@@ -3324,11 +3324,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 14.9
-            }
-          },
           {
             "day": {
               "avgtemp_c": 15.3
@@ -3373,10 +3368,15 @@
             "day": {
               "avgtemp_c": 14.4
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-28",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 52
     },
@@ -3389,11 +3389,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 14.3
-            }
-          },
           {
             "day": {
               "avgtemp_c": 14.6
@@ -3438,10 +3433,15 @@
             "day": {
               "avgtemp_c": 15.2
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 14.8
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-28",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 53
     },
@@ -3454,11 +3454,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 15.2
-            }
-          },
           {
             "day": {
               "avgtemp_c": 16.7
@@ -3503,10 +3498,15 @@
             "day": {
               "avgtemp_c": 14.9
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 15.5
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-28",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 54
     },
@@ -3519,11 +3519,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 17.3
-            }
-          },
           {
             "day": {
               "avgtemp_c": 17.6
@@ -3568,10 +3563,15 @@
             "day": {
               "avgtemp_c": 18.8
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 18.4
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-28",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 55
     },
@@ -3584,11 +3584,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 26.8
-            }
-          },
           {
             "day": {
               "avgtemp_c": 26.2
@@ -3633,10 +3628,15 @@
             "day": {
               "avgtemp_c": 27.5
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 25.8
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-28",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 56
     },
@@ -3649,11 +3649,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 5.8
-            }
-          },
           {
             "day": {
               "avgtemp_c": 4.9
@@ -3698,10 +3693,15 @@
             "day": {
               "avgtemp_c": 6.7
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 6.9
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-28",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 57
     },
@@ -3714,11 +3714,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 7.4
-            }
-          },
           {
             "day": {
               "avgtemp_c": 5.7
@@ -3763,10 +3758,15 @@
             "day": {
               "avgtemp_c": 8.9
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-28",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 58
     },
@@ -3779,11 +3779,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 2.6
-            }
-          },
           {
             "day": {
               "avgtemp_c": 1.9
@@ -3828,10 +3823,15 @@
             "day": {
               "avgtemp_c": 8.3
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 7.1
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-28",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 59
     },
@@ -3844,11 +3844,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 12.6
-            }
-          },
           {
             "day": {
               "avgtemp_c": 13.9
@@ -3893,10 +3888,15 @@
             "day": {
               "avgtemp_c": 8.8
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.4
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-28",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 60
     },
@@ -3909,11 +3909,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 8.5
-            }
-          },
           {
             "day": {
               "avgtemp_c": 10.7
@@ -3958,10 +3953,15 @@
             "day": {
               "avgtemp_c": 8
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 6.8
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-29",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 61
     },
@@ -3974,11 +3974,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 11.1
-            }
-          },
           {
             "day": {
               "avgtemp_c": 13.2
@@ -4023,10 +4018,15 @@
             "day": {
               "avgtemp_c": 9.4
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.4
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-29",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 62
     },
@@ -4039,11 +4039,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 12.4
-            }
-          },
           {
             "day": {
               "avgtemp_c": 13.1
@@ -4088,10 +4083,15 @@
             "day": {
               "avgtemp_c": 8.7
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.5
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-29",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 63
     },
@@ -4104,11 +4104,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 10.6
-            }
-          },
           {
             "day": {
               "avgtemp_c": 13.5
@@ -4153,10 +4148,15 @@
             "day": {
               "avgtemp_c": 7.9
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.2
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-29",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 64
     },
@@ -4169,11 +4169,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 9.1
-            }
-          },
           {
             "day": {
               "avgtemp_c": 10.5
@@ -4218,10 +4213,15 @@
             "day": {
               "avgtemp_c": 7
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 6.9
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-28",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 65
     },
@@ -4234,11 +4234,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 10.7
-            }
-          },
           {
             "day": {
               "avgtemp_c": 13.3
@@ -4283,10 +4278,15 @@
             "day": {
               "avgtemp_c": 8.8
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.8
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-28",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 66
     },
@@ -4299,11 +4299,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 12.7
-            }
-          },
           {
             "day": {
               "avgtemp_c": 13.9
@@ -4348,10 +4343,15 @@
             "day": {
               "avgtemp_c": 9.8
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.6
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-28",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 67
     },
@@ -4364,11 +4364,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 10.1
-            }
-          },
           {
             "day": {
               "avgtemp_c": 10.1
@@ -4413,10 +4408,15 @@
             "day": {
               "avgtemp_c": 8
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.8
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-28",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 68
     },
@@ -4429,11 +4429,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 9.3
-            }
-          },
           {
             "day": {
               "avgtemp_c": 11.9
@@ -4478,10 +4473,15 @@
             "day": {
               "avgtemp_c": 8.9
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 7.6
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-28",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 69
     },
@@ -4494,11 +4494,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 12
-            }
-          },
           {
             "day": {
               "avgtemp_c": 13.7
@@ -4543,10 +4538,15 @@
             "day": {
               "avgtemp_c": 9.5
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 9.4
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-28",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 70
     },
@@ -4559,11 +4559,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 10.7
-            }
-          },
           {
             "day": {
               "avgtemp_c": 13.2
@@ -4608,10 +4603,15 @@
             "day": {
               "avgtemp_c": 6.9
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8.3
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-28",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 71
     },
@@ -4624,11 +4624,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 10.5
-            }
-          },
           {
             "day": {
               "avgtemp_c": 13.1
@@ -4673,10 +4668,15 @@
             "day": {
               "avgtemp_c": 7.8
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 8
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-28",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 72
     },
@@ -4689,11 +4689,6 @@
       },
       "forecast": {
         "forecastday": [
-          {
-            "day": {
-              "avgtemp_c": 6.1
-            }
-          },
           {
             "day": {
               "avgtemp_c": 6.9
@@ -4738,10 +4733,15 @@
             "day": {
               "avgtemp_c": 12.1
             }
+          },
+          {
+            "day": {
+              "avgtemp_c": 13.4
+            }
           }
         ]
       },
-      "checkedAt": "2017-03-28",
+      "checkedAt": "2017-03-30",
       "status": "new",
       "id": 73
     }
