@@ -1,0 +1,88 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+export class DestinationsList extends React.Component {
+  render(){
+    //TODO: zaciągać to z jsona, sformatować.
+    return <section className='content'>
+        <div className='text-content'>
+          <h1>Full list of destinations that are searched through</h1>
+          <p class='destinations-full-list'>
+            Brussels,
+            Bourgas,
+            Split,
+            Larnaca,
+            Billund,
+            Paris,
+            Toulouse,
+            Kutaisi,
+            Cologne,
+            Baden-Baden,
+            Memmingen,
+            Korfu,
+            Athens,
+            Chania (Crete),
+            Thessaloniki,
+            Budapest,
+            Reykjavik,
+            Dublin,
+            Shannon,
+            Eilat,
+            Tel-Aviv,
+            Alghero (Sardinia),
+            Cagliari (Sardinia),
+            Bari,
+            Catania (Sicily),
+            Trapani (Sicily),
+            Lamezia Terme,
+            Milan/Bergamo,
+            Naples,
+            Rome,
+            Turin,
+            Verona,
+            Bologna,
+            Pisa,
+            Venice,
+            Vilnius,
+            Valletta,
+            Eindhoven,
+            Bergen,
+            Oslo,
+            Lisbon,
+            Porto,
+            Faro,
+            Bucharest,
+            Bratislava,
+            Alicante,
+            Barcelona,
+            Santander,
+            Fuertaventura,
+            Gran Canaria,
+            Madrid,
+            Malaga,
+            Palma de Mallorca,
+            Sevilla,
+            Tenerife,
+            Valencia,
+            Göteborg,
+            Malmo,
+            Stockholm,
+            Basel,
+            Aberdeen,
+            Birmingham,
+            Bristol,
+            Sheffield,
+            Glasgow,
+            Liverpool,
+            London,
+            Belfast,
+            Edinburgh,
+            Leeds,
+            Manchester,
+            Newcastle,
+            Kiev.
+            </p>
+        </div>
+      </section>
+  }
+}

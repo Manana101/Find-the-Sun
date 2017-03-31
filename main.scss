@@ -7,8 +7,9 @@ $color4: white;
 $text-color1: black;
 $text-color2: grey;
 $text-color3: red;
+$text-color4: #c29114; //logo
 //width
-$min-width: 250px;
+$min-width: 225px;
 $container-min-width: 225px;
 $min-width-form: 210px;
 $inner-width: 90%;
@@ -57,28 +58,30 @@ header {
   width: 100%; //to tu musi być - czy to przez position: fixed? bo normalnie div ma 100% z defaultu
   min-width: $min-width;
   background-color: $color4;
-  border: 2px solid $color1;
+  border-top: 2px solid $color1;
+  border-bottom: 2px solid $color1;
 }
 //TODO: muszę zrobić tu @media i hamburgera, bo inaczej przy mniejszym ekranie nav będzie zajmował za dużo ekranu
 .header-container {
   @include flex-container(row, space-between);
+  align-items: center;
   // border: 1px solid pink;
-  font-size: 1.6rem;
   font-weight: bold;
   padding: 0.5rem 0.5rem;
-  .logo {
-    color: $text-color1;
-    letter-spacing: 0.1rem;
-    padding: 0.2em 0;
-  }
   nav {
     ul {
       @include flex-container(row, space-between);
       wrap: nowrap;
       li {
+        .link{
+          color: $text-color1;
+        }
+        .active{
+          color: $text-color4;;
+        }
         text-transform: uppercase;
-        color: $text-color2;
-        padding: 0.2rem 0.5em;
+        padding: 0.4rem 0.5rem;
+        font-size: 1.4rem;
         &:first-child{
           padding-left: 0;
         }
@@ -88,6 +91,16 @@ header {
       }
     }
   }
+}
+.logo {
+  font-size: 1.8rem;
+  letter-spacing: 0.1rem;
+  padding: 0.4rem 0;
+  color: $text-color4;
+}
+.link, a {
+  text-decoration: none;
+  color: $text-color4;
 }
 main {
   @include flex-container(column, flex-start);
@@ -109,9 +122,55 @@ main {
   background-color: $color4;
   border: 2px solid $color1;
   padding: 1rem 0;
-  margin: 15vh 0 8vh 0;
+  margin: 20vh 0 8vh 0;
 }
-#search {
+.text-content{
+  @include flex-container(column, center);
+  align-items: center;
+  padding: 0 1rem;
+  width: 100%;
+  text-align: center;
+  // text-align: justify;
+  p {
+    font-size: 1.6rem;
+    line-height: 1.2em;
+    width: 80%;
+    margin: 1rem 0;
+    // display: none;
+  }
+  // .destinations-full-list{
+  //   text-align: justify;
+  // }
+  h1{
+    font-size: 2rem;
+    font-weight: bold;
+    // text-align: center;
+    padding: 2rem 0;
+    letter-spacing: 0.1rem;
+  }
+  h2{
+    font-size: 1.6rem;
+    font-weight: bold;
+    padding-top: 1.5rem;
+  }
+  button{
+    cursor: pointer;
+    color: $text-color4;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    padding: 0.7rem 2rem;
+    background-color: white;
+    border: 2px solid $text-color4;
+    border-radius: 1.5rem;
+  }
+  .note {
+    color: $text-color4;
+    text-transform: uppercase;
+  }
+}
+#form {
   border: 1px solid blue;
   width: $inner-width;
   min-width: $min-width-form;
@@ -152,6 +211,7 @@ form#search-form {
 }//koniec .form-left
 .form-right { //TODO: jak zrobić, żeby prawa część form najpierw się na maksa zmniejszała, a potem dopiero przeskakiwała na dół? napis (p) to rozpycha? poza tym głupio wygląda, że jest tak z prawej przy zmniejszaniu
   @include flex-container(row, flex-start);
+  flex-grow: 1;
   width: 65%;
     .form-item {
       width: 50%;
@@ -163,7 +223,7 @@ form#search-form {
       border: 1px solid purple;
       font-size: 1.3rem;
       width: 100%;
-      text-align: right;
+      // text-align: right;
       padding: 1rem;
       min-width: $min-width-form;
     }
@@ -172,17 +232,21 @@ form#search-form {
 .search-bar {
   @include flex-container(row, space-between);
   align-items: center;
+  flex-wrap: nowrap;
   width: 100%;
   min-width: $min-width-form;
   .alert {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: $text-color3;
+    margin: 0.5rem 1rem;
+    p {
+      font-size: 1.5rem;
+      color: $text-color3;
+    }
   }
   #search-button {
     font-size: 1.5rem;
     font-weight: bold;
     padding: 0.5em 1em 0.5em 1em;
+    align-self: flex-start;
   }
 }
 
@@ -222,7 +286,8 @@ li.city-li{
 footer {
   @include flex-container(row, center);
   background-color: $color4;
-  border: 2px solid $color1;
+  border-top: 2px solid $color1;
+  border-bottom: 2px solid $color1;
   .footer-container {
     @include flex-container(row, space-between);
     flex-wrap: nowrap;
@@ -242,7 +307,7 @@ footer {
       text-align: right;
       a {
         text-decoration: none;
-        color: $text-color2;
+        color: $text-color4;
       }
     }
   }
