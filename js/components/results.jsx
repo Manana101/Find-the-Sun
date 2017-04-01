@@ -45,7 +45,9 @@ export class Results extends React.Component{
     this.getCity = (id) => {
       return fetch("http://localhost:3000/destinations/"+id)
       .then(data => {console.log('wysłałem zapytanie GET do mojej bazy dla id: ', id);return data.json()})
-      .catch(error => console.log('error z getCity przy id: ', id, error));
+      .catch(error => {
+        console.log('error z getCity przy id: ', id, error);
+      });
     }//koniec getCity
 
     this.getActualForecasts = citiesArray => citiesArray.map(city => this.getActualForecast(city));
@@ -357,7 +359,13 @@ export class Results extends React.Component{
       //Nie chcę czekać z wyświetleniem wyników, aż baza zostanie zaktualizowana (nie ma takiej potrzeby), więc lecę w tym samym then z funkcją filterCities(nie czekam na wykonanie się updejtowania bazy, które dzieje się asynchronicznie).
       this.filterCities(actualForecastsArray);//filterCities dla każdego miasta z tablicy sprawdza, czy spełnione są kryteria wyszukiwania - jeśli tak, miasto jest dodawane do odpowiednich zmiennych (countries i destinations). Na końcu aktualizowany jest state (countries, destinations, dataReady).
     })
-    .catch(error => console.log('error z search', error));
+    .catch(error => {
+      console.log('error z search', error);
+      this.setState({
+        dataReady: 'error'
+      });
+      console.log(this.state);
+    });
   }//koniec funkcji search
 
   render(){
@@ -370,6 +378,8 @@ export class Results extends React.Component{
     } else if (this.state.dataReady ==='loading'){
       console.log('results loading');
       results = <p>Loading...</p>;
+    } else if (this.state.dataReady === 'error') {
+      results = <p>Sorry, search doesn't work yet!</p>
     } else if (this.state.dataReady === 'ready' && this.state.noResultsFound === true){
       console.log('results empty');
       results = <p>Sorry, we didn't find any destinations matching your criteria.</p>;

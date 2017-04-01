@@ -96,7 +96,7 @@ export class Form extends React.Component{
         <div className='form-half form-left'>
           <div className='form-item'>
             <label htmlFor="min-temp-input">Min. temp. (Celsius):</label>
-            <input type='number' value={this.state.minTemp} onChange={this.handleMinTempChange} id='min-temp-input'/>
+            <input type='number' value={this.state.minTemp} onChange={this.handleMinTempChange} id='min-temp-input' />
           </div>
           <div className='form-item'>
             <label htmlFor="max-temp-input">Max. temp. (Celsius):</label>
@@ -106,11 +106,11 @@ export class Form extends React.Component{
         <div className='form-half form-right'>
           <div className='form-item'>
             <label htmlFor="from-date-input">From:</label>
-            <input type='date' min={today} max={todayPlus9} value={this.state.fromDate} onChange={this.handleFromDateChange} id='from-date-input'/>
+            <input type='date' min={today} max={todayPlus9} value={this.state.fromDate} onChange={this.handleFromDateChange} id='from-date-input' placeholder='mm/dd/yyyy'/>
           </div>
           <div className='form-item'>
             <label htmlFor="to-date-input">To*:</label>
-            <input type='date' min={today} max={todayPlus9} value={this.state.toDate} onChange={this.handleToDateChange} id='to-date-input'/>
+            <input type='date' min={today} max={todayPlus9} value={this.state.toDate} onChange={this.handleToDateChange} id='to-date-input' placeholder='mm/dd/yyyy'/>
           </div>
           <p>*We can check the weather for max. 10 days from now</p>
         </div>
@@ -118,7 +118,9 @@ export class Form extends React.Component{
           <div className='alert'>
             {this.state.formOk === false? <p>To proceed, please answer all the questions. 'Max. temp' can't be lower than 'Min. temp'. 'To' date can't be earlier than 'From' date.</p> : ''}
           </div>
-          <button onClick={this.handleSearchClick} id='search-button'>Search</button>
+          <div className='button-div'>
+            <button onClick={this.handleSearchClick} id='search-button'>Search</button>
+          </div>
         </div>
       </form>
     </div>;
