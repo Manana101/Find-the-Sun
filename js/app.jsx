@@ -11,6 +11,7 @@ import {DestinationsList} from './components/destinations.jsx';
 import {NotFound} from './components/not_found.jsx';
 
 
+
 class App extends React.Component {
   render(){
     return <Router history={hashHistory}>

@@ -32,13 +32,15 @@ $main-width: 65%;
   padding: 0;
   box-sizing: border-box;
   list-style-type: none;
+  font-size: 100%;
+  font-family: "Times New Roman", Times, serif;
 }
 /*fonts*/
-//TODO - warszawska czcionka
+//TODO - fajniejsza czcionka
 
 /*styles*/
 html {
-  font-size: 10px;
+  font-size: 0.625em; //=10px
 }
 #site {
   @include flex-container(column, center);
@@ -49,7 +51,7 @@ html {
   width: 90%;
   min-width: $container-min-width;
   max-width: $max-width;
-  border: 1px solid green;
+  // border: 1px solid green;
 }
 header {
   @include flex-container(row, center);
@@ -58,7 +60,7 @@ header {
   width: 100%; //to tu musi być - czy to przez position: fixed? bo normalnie div ma 100% z defaultu
   min-width: $min-width;
   background-color: $color4;
-  border-top: 2px solid $color1;
+  // border-top: 2px solid $color1;
   border-bottom: 2px solid $color1;
 }
 //TODO: muszę zrobić tu @media i hamburgera, bo inaczej przy mniejszym ekranie nav będzie zajmował za dużo ekranu
@@ -171,56 +173,63 @@ main {
   }
 }
 #form {
-  border: 1px solid blue;
+  // border: 1px solid blue;
   width: $inner-width;
   min-width: $min-width-form;
   h1 {
     font-size: 4rem;
-    margin-bottom: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
   }
   h2 {
     font-size: 2rem;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
   }
 }
 form#search-form {
   @include flex-container(row, space-between);
   font-size: 1.5rem;
-  border: 1px solid red;
+  // border: 1px solid red;
 }
 .form-half {
-  border: 1px solid yellow;
-  min-width: $min-width-form;//TODO: wystaje minimalnie poza inne elementy - nie widać tego, ale poprawić
+  // border: 1px solid yellow;
+  min-width: $min-width-form;
   .form-item {
-    min-width: $min-width-form; //TODO: wystaje minimalnie poza inne elementy - nie widać tego, ale poprawić
-    border: 1px solid black;
+    min-width: $min-width-form;
+    // border: 1px solid black;
     padding: 1rem;
+    line-height: 25px !important; //to override firefox defaults
     @include flex-container(row, space-between);
     input {
-      height: 20px;
+      height: 25px !important; //to override firefox defaults
+      line-height: 25px !important; //to override firefox defaults
     }
   }
 }
 .form-left {
-  width: 30%;
+  @include flex-container(row, flex-start);
+  align-items: flex-start;
+  align-content: flex-start;
+  width: 50%;
   .form-item {
+    width: 30%;
     input {
       width: 50px;
     }
   }
 }//koniec .form-left
 .form-right { //TODO: jak zrobić, żeby prawa część form najpierw się na maksa zmniejszała, a potem dopiero przeskakiwała na dół? napis (p) to rozpycha? poza tym głupio wygląda, że jest tak z prawej przy zmniejszaniu
-  @include flex-container(row, flex-start);
-  flex-grow: 1;
-  width: 65%;
+  @include flex-container(row, space-between);
+  // flex-grow: 1;
+  width: 50%;
     .form-item {
-      width: 50%;
+      width: 40%;
       input {
-        min-width: 135px;
+        width: 135px;
       }
     }
     p {
-      border: 1px solid purple;
+      // border: 1px solid purple;
       font-size: 1.3rem;
       width: 100%;
       // text-align: right;
@@ -236,17 +245,28 @@ form#search-form {
   width: 100%;
   min-width: $min-width-form;
   .alert {
+    // border: 1px solid pink;
+    width: 90%;
     margin: 0.5rem 1rem;
     p {
       font-size: 1.5rem;
       color: $text-color3;
     }
   }
-  #search-button {
-    font-size: 1.5rem;
-    font-weight: bold;
-    padding: 0.5em 1em 0.5em 1em;
+  .button-div {
+    @include flex-container(row-reverse, space-between);
+    width: 10%;
+    min-width: 9rem;
+    flex-grow: 1;
     align-self: flex-start;
+    // border: 1px solid green;
+    #search-button {
+      width: 100%;
+      font-size: 1.5rem;
+      font-weight: bold;
+      padding: 0.5em 1em 0.5em 1em;
+      margin-bottom: 1rem;
+    }
   }
 }
 
@@ -254,7 +274,7 @@ form#search-form {
   width: $inner-width;
   min-width: $min-width-form;
   padding: 1rem;
-  border: 1px solid green;
+  // border: 1px solid green;
   p {
     font-size: 1.6rem;
     line-height: 3rem;
@@ -287,7 +307,7 @@ footer {
   @include flex-container(row, center);
   background-color: $color4;
   border-top: 2px solid $color1;
-  border-bottom: 2px solid $color1;
+  // border-bottom: 2px solid $color1;
   .footer-container {
     @include flex-container(row, space-between);
     flex-wrap: nowrap;
@@ -298,11 +318,11 @@ footer {
       padding: 0.5rem 1rem;
     }
     #disclaimer{
-      border: 1px solid yellow;
+      // border: 1px solid yellow;
       width: 60%;
     }
     #powered{
-      border: 1px solid red;
+      // border: 1px solid red;
       width: 40%;
       text-align: right;
       a {

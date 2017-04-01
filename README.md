@@ -1,2 +1,2 @@
-# coders_lab_final_project
+# Find the Sun
 Final project created during Coder's Lab Front-End course

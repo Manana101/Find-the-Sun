@@ -17,6 +17,10 @@ export class About extends React.Component {
           Because of the limited access to the weather forecast API, for the time being only 73 cities are searched through<br/>
         (you can find the full list <Link to="/about/destinations" className='link'>here</Link>). These particular destinations were chosen because they can be reached from Warsaw, Poland, with a direct, low-cost flight (i.e. with Wizzair or Ryanair, as of 12/03/2017). This is the reason why the app only works optimally for people who live in Warsaw.
         </p>
+        <h2 className='question'>What do 'Min.Temp' and 'Max.Temp.' mean?</h2>
+        <p className='answer'>
+          'Min.Temp.' and 'Max.Temp.' refer to minimum and maximum average temperature for a given day. A given destination will appear in the results only if average temperature in this destination, for every day in the range you specified, falls between your chosen 'Min.Temp.' and 'Max.Temp.'. That means that temperature in this destination can be sometimes lower than 'Min.Temp.' or higher than 'Max.Temp.' (but average temperature will be in the range that you specified).
+        </p>
         <h2 className='question'>How do you check weather forecasts?</h2>
         <p className='answer'>
           Weather forecasts are taken from <a href='https://www.apixu.com/' target='blank'>Apixu.com</a> weather API. Because of the limited access to the API, forecasts are checked only once per day. After being checked for the first time on a given day, forecasts are storred in our local database for the rest of the day. Therefore, you might find more actual weather forecasts if you connect to the API directly.
