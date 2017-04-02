@@ -12910,8 +12910,20 @@ var Form = exports.Form = function (_React$Component) {
 
     _this.handleSearchClick = function (event) {
       event.preventDefault();
+      //obliczam zakres dni, który ma być możliwy do wybrania w input type='date' (tutaj, bo chcę to przekazać w propsach do results)
+
+      var toDateMs = new Date(_this.state.toDate).getTime();
+      var toDateDays = Math.floor(toDateMs / _this.oneDayInMs); //in days instead of ms
+      var fromDateMs = new Date(_this.state.fromDate).getTime();
+      var fromDateDays = Math.floor(fromDateMs / _this.oneDayInMs); //in days instead of ms
+      //
+      // console.log('toDate: ', toDate);
+      // console.log('fromDate: ', fromDate);
+      // console.log('today: ', today);
+      // console.log('todayPlus9: ', todayPlus9);
+
       //walidacja formularza - wywołuję osobną funkcję
-      var isFormOk = _this.checkFormOk(); //wynik to true lub false
+      var isFormOk = _this.checkFormOk(toDateDays, fromDateDays, _this.todayDays, _this.todayDaysPlus9); //wynik to true lub false
       //jeśli formularz jest wypełniony niepoprawnie, zmień formOk w state na false - co spowoduje wyświetlenie odpowiedniej informacji
       if (isFormOk === false) {
         console.log('formOk z if w handleSearchClick w komponencie Form', isFormOk);
@@ -12920,7 +12932,7 @@ var Form = exports.Form = function (_React$Component) {
         });
         //oraz przekaż rodzicowi, że został wysłany niepoprawny formularz - jeśli otrzymałeś w propsie funkcję
         if (typeof _this.props.formInfoFn === 'function') {
-          _this.props.formInfoFn(false, _this.state.minTemp, _this.state.maxTemp, _this.state.fromDate, _this.state.toDate);
+          _this.props.formInfoFn(false, _this.state.minTemp, _this.state.maxTemp, toDateDays, fromDateDays, _this.todayDays, _this.todayDaysPlus9);
         }
         //jeśli formularz jest wypełniony poprawnie, zmień formOk w state na true - jeśli alert był wcześniej wyświetlony, to zniknie
       } else if (isFormOk === true) {
@@ -12931,18 +12943,16 @@ var Form = exports.Form = function (_React$Component) {
         //oraz przekaż rodzicowi wyniki formularza - jeśli otrzymałeś w propsie funkcję
         if (typeof _this.props.formInfoFn === 'function') {
           console.log('jestem w Form w wywołaniu funkcji z propsów z parametrami');
-          _this.props.formInfoFn(true, _this.state.minTemp, _this.state.maxTemp, _this.state.fromDate, _this.state.toDate);
+          _this.props.formInfoFn(true, _this.state.minTemp, _this.state.maxTemp, toDateDays, fromDateDays, _this.todayDays, _this.todayDaysPlus9);
         }
       };
     };
 
-    _this.checkFormOk = function () {
+    _this.checkFormOk = function (toDate, fromDate, today, todayPlus9) {
       console.log('sprawdzanie formularza');
-      var toDate = new Date(_this.state.toDate);
-      var fromDate = new Date(_this.state.fromDate);
       var maxTemp = parseInt(_this.state.maxTemp);
       var minTemp = parseInt(_this.state.minTemp);
-      if (toDate >= fromDate && maxTemp >= minTemp && _this.state.toDate != '' && _this.state.fromDate != '' && _this.state.minTemp != '' && _this.state.maxTemp != '') {
+      if (toDate <= todayPlus9 && fromDate >= today && toDate >= fromDate && maxTemp >= minTemp && _this.state.toDate != '' && _this.state.fromDate != '' && _this.state.minTemp != '' && _this.state.maxTemp != '') {
         console.log('formOK');
         return true;
       } else {
@@ -12951,6 +12961,10 @@ var Form = exports.Form = function (_React$Component) {
       }
     };
 
+    _this.oneDayInMs = 1000 * 60 * 60 * 24;
+    var todayMs = Date.now();
+    _this.todayDays = Math.floor(todayMs / _this.oneDayInMs); //in days instead of ms
+    _this.todayDaysPlus9 = _this.todayDays + 9; //in days instead of ms
     _this.state = {
       minTemp: '',
       maxTemp: '',
@@ -12969,16 +12983,11 @@ var Form = exports.Form = function (_React$Component) {
 
   _createClass(Form, [{
     key: 'render',
+    //koniec checkFormOk
     value: function render() {
       //obliczam zakres dni, który ma być możliwy do wybrania w input type='date'
-      //TODO: wrzucić to gdzieś indziej...
-      var today = new Date().toISOString().substring(0, 10);
-      var todayMs = new Date(today).getTime();
-      var oneDayInMs = 1000 * 60 * 60 * 24;
-      var todayPlus9Ms = todayMs + 9 * oneDayInMs;
-      var todayPlus9Date = new Date(todayPlus9Ms);
-      var todayPlus9 = todayPlus9Date.toISOString().substring(0, 10);
-
+      var today = new Date(this.todayDays * this.oneDayInMs).toISOString().substring(0, 10);
+      var todayPlus9 = new Date(this.todayDaysPlus9 * this.oneDayInMs).toISOString().substring(0, 10);
       return _react2.default.createElement(
         'div',
         { id: 'form' },
@@ -13030,7 +13039,7 @@ var Form = exports.Form = function (_React$Component) {
                 { htmlFor: 'from-date-input' },
                 'From:'
               ),
-              _react2.default.createElement('input', { type: 'date', min: today, max: todayPlus9, value: this.state.fromDate, onChange: this.handleFromDateChange, id: 'from-date-input', placeholder: 'mm/dd/yyyy' })
+              _react2.default.createElement('input', { type: 'date', min: today, max: todayPlus9, value: this.state.fromDate, onChange: this.handleFromDateChange, id: 'from-date-input', placeholder: 'yyyy-mm-dd' })
             ),
             _react2.default.createElement(
               'div',
@@ -13040,7 +13049,7 @@ var Form = exports.Form = function (_React$Component) {
                 { htmlFor: 'to-date-input' },
                 'To*:'
               ),
-              _react2.default.createElement('input', { type: 'date', min: today, max: todayPlus9, value: this.state.toDate, onChange: this.handleToDateChange, id: 'to-date-input', placeholder: 'mm/dd/yyyy' })
+              _react2.default.createElement('input', { type: 'date', min: today, max: todayPlus9, value: this.state.toDate, onChange: this.handleToDateChange, id: 'to-date-input', placeholder: 'yyyy-mm-dd' })
             ),
             _react2.default.createElement(
               'p',
@@ -13057,7 +13066,39 @@ var Form = exports.Form = function (_React$Component) {
               this.state.formOk === false ? _react2.default.createElement(
                 'p',
                 null,
-                'To proceed, please answer all the questions. \'Max. temp\' can\'t be lower than \'Min. temp\'. \'To\' date can\'t be earlier than \'From\' date.'
+                _react2.default.createElement(
+                  'ul',
+                  null,
+                  ' Incorrect form! Please make sure that:',
+                  _react2.default.createElement(
+                    'li',
+                    { key: 'all-questions' },
+                    '- all the questions are answered'
+                  ),
+                  _react2.default.createElement(
+                    'li',
+                    { key: 'temps-logic' },
+                    '- \'Max. temp\' is higher or equal to \'Min. temp\''
+                  ),
+                  _react2.default.createElement(
+                    'li',
+                    { key: 'dates-logic' },
+                    '- \'To\' date is later or equal to \'From\' date'
+                  ),
+                  _react2.default.createElement(
+                    'li',
+                    { key: 'dates-format' },
+                    '- both dates are in the suggested format'
+                  ),
+                  _react2.default.createElement(
+                    'li',
+                    { key: 'dates-between' },
+                    '- both dates are between ',
+                    today,
+                    ' and ',
+                    todayPlus9
+                  )
+                )
               ) : ''
             ),
             _react2.default.createElement(
@@ -13147,7 +13188,7 @@ var Header = exports.Header = function (_React$Component) {
               null,
               _react2.default.createElement(
                 'li',
-                null,
+                { key: 'search' },
                 _react2.default.createElement(
                   _reactRouter.IndexLink,
                   { to: '/search', className: 'link', activeClassName: 'active' },
@@ -13156,7 +13197,7 @@ var Header = exports.Header = function (_React$Component) {
               ),
               _react2.default.createElement(
                 'li',
-                null,
+                { key: 'about' },
                 _react2.default.createElement(
                   _reactRouter.IndexLink,
                   { to: '/about', className: 'link', activeClassName: 'active' },
@@ -13165,7 +13206,7 @@ var Header = exports.Header = function (_React$Component) {
               ),
               _react2.default.createElement(
                 'li',
-                null,
+                { key: 'author' },
                 _react2.default.createElement(
                   _reactRouter.IndexLink,
                   { to: '/author', className: 'link', activeClassName: 'active' },
@@ -13403,7 +13444,7 @@ var Results = exports.Results = function (_React$Component) {
       };
 
       _this.getCity = function (id) {
-        return fetch("http://localhost:3000/destinations/" + id).then(function (data) {
+        return fetch("http://find-the-sun.com:3000/destinations/" + id).then(function (data) {
           console.log('wysłałem zapytanie GET do mojej bazy dla id: ', id);return data.json();
         }).catch(function (error) {
           console.log('error z getCity przy id: ', id, error);
@@ -13568,7 +13609,7 @@ var Results = exports.Results = function (_React$Component) {
         var index = 0;
         _this.updateForecast = function (index) {
           if (actualForecastsArray[index].status === "new") {
-            return fetch("http://localhost:3000/destinations/" + actualForecastsArray[index].id, {
+            return fetch("http://find-the-sun.com:3000/destinations/" + actualForecastsArray[index].id, {
               method: 'put',
               body: JSON.stringify(actualForecastsArray[index]),
               headers: {
@@ -13611,21 +13652,13 @@ var Results = exports.Results = function (_React$Component) {
         //TODO: na razie robię sobie osobną tablicę krajów, bo nie umiem iterować po obiekcie. Ale docelowo lepiej byłoby nie tworzyć dodatkowej zmiennej, tylko iterować po obiekcie destinations przy renderowaniu
 
         //obliczenie startDay i endDay - które dni brać pod uwagę przy filtrowaniu
-        //TODO: być może trzeba zamienić ISOString na UTC
 
         //obliczanie różnicy pomiędzy dzisiaj a dniem wylotu w dniach -> wynik oznacza, od którego dnia zacząć sprawdzać temperaturę (dzień 0 = dzisiaj);
-        var currentDateString = new Date().toISOString().substring(0, 10);
-        var currentDateMs = new Date(currentDateString).getTime();
-        var fromDateMs = new Date(_this.props.fromDate).getTime();
-        var diffToStartMs = fromDateMs - currentDateMs;
-        var oneDayInMs = 1000 * 60 * 60 * 24;
-        var startDay = Math.round(diffToStartMs / oneDayInMs);
+        var startDay = _this.props.fromDateDays - _this.props.todayDays;
         // console.log(startDay);
 
         //obliczanie różnicy pomiędzy dzisiaj a dniem powrotu w dniach -> wynik oznacza, do którego dnia sprawdzać temperaturę (dzień 0 = dzisiaj);
-        var toDateMs = new Date(_this.props.toDate).getTime();
-        var diffToEndMs = toDateMs - currentDateMs;
-        var endDay = Math.round(diffToEndMs / oneDayInMs);
+        var endDay = _this.props.toDateDays - _this.props.todayDays;
         // console.log(endDay);
 
         actualForecastsArray.forEach(function (cityToFilter) {
@@ -13761,7 +13794,7 @@ var Results = exports.Results = function (_React$Component) {
         results = _react2.default.createElement(
           'p',
           null,
-          'Sorry, search doesn\'t work yet!'
+          'Something went wrong. Please try again later.'
         );
       } else if (this.state.dataReady === 'ready' && this.state.noResultsFound === true) {
         console.log('results empty');
@@ -13772,32 +13805,24 @@ var Results = exports.Results = function (_React$Component) {
         );
       } else if (this.state.dataReady === 'ready' && this.state.noResultsFound === false) {
         console.log('results should appear');
+        //dodać jak ustawię poniższe:
+        // <p>Click on the country name, to see cities matching your search.<br/>
+        // <span>Click on the city name to find flights.</span></p>
         results = _react2.default.createElement(
           'ul',
           { id: 'destinations-list' },
-          _react2.default.createElement(
-            'p',
-            null,
-            'Click on the country name, to see cities matching your search.',
-            _react2.default.createElement('br', null),
-            _react2.default.createElement(
-              'span',
-              null,
-              'Click on the city name to find flights.'
-            )
-          ),
           this.state.countries.map(function (country) {
             return _react2.default.createElement(
               'li',
-              { className: 'country-li' },
+              { className: 'country-li', key: _this2.state.destinations[country] },
               country,
               _react2.default.createElement(
                 'ul',
-                null,
+                { className: 'city-ul' },
                 _this2.state.destinations[country].map(function (city) {
                   return _react2.default.createElement(
                     'li',
-                    { className: 'city-li' },
+                    { className: 'city-li', key: city },
                     city
                   );
                 })
@@ -13861,23 +13886,28 @@ var Search = exports.Search = function (_React$Component) {
     //TODO: sprawdzić, czy działa przekazywanie informacji bez użycia state (czy results będzie się updejtował)
     var _this = _possibleConstructorReturn(this, (Search.__proto__ || Object.getPrototypeOf(Search)).call(this, props));
 
-    _this.formInfoFn = function (formOkFromForm, minTempFromForm, maxTempFromForm, fromDateFromForm, toDateFromForm) {
+    _this.formInfoFn = function (formOkFromForm, minTempFromForm, maxTempFromForm, toDateDays, fromDateDays, todayDays, todayDaysPlus9) {
       console.log('jestem w Search w odebraniu parametrów');
+      //czy to musi być robione przez zmianę state? może wystarczy to zapisać w zmiennych?
       _this.setState({
         minTemp: minTempFromForm,
         maxTemp: maxTempFromForm,
-        fromDate: fromDateFromForm,
-        toDate: toDateFromForm,
-        formOk: formOkFromForm
+        formOk: formOkFromForm,
+        toDateDays: toDateDays,
+        fromDateDays: fromDateDays,
+        todayDays: todayDays,
+        todayDaysPlus9: todayDaysPlus9
       });
     };
 
     _this.state = {
       minTemp: '',
       maxTemp: '',
-      fromDate: '',
-      toDate: '',
-      formOk: false
+      formOk: false,
+      toDateDays: '',
+      fromDateDays: '',
+      todayDays: '',
+      todayDaysPlus9: ''
     };
     return _this;
   }
@@ -13892,7 +13922,7 @@ var Search = exports.Search = function (_React$Component) {
         'section',
         { className: 'content' },
         _react2.default.createElement(_form.Form, { formInfoFn: this.formInfoFn }),
-        _react2.default.createElement(_results.Results, { minTemp: this.state.minTemp, maxTemp: this.state.maxTemp, fromDate: this.state.fromDate, toDate: this.state.toDate, formOk: this.state.formOk })
+        _react2.default.createElement(_results.Results, { formOk: this.state.formOk, minTemp: this.state.minTemp, maxTemp: this.state.maxTemp, toDateDays: this.state.toDateDays, fromDateDays: this.state.fromDateDays, todayDays: this.state.todayDays, todayDaysPlus9: this.state.todayDaysPlus9 })
       );
     }
   }]);
@@ -15894,7 +15924,7 @@ exports = module.exports = __webpack_require__(126)(undefined);
 
 
 // module
-exports.push([module.i, "@charset \"UTF-8\";\n/*variables*/\n/*flex-container mixin*/\n/*TODO: AWD - dodać media queries do hamburger menu*/\n/*reset css*/\n* {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  list-style-type: none;\n  font-size: 100%;\n  font-family: \"Times New Roman\", Times, serif; }\n/*fonts*/\n/*styles*/\nhtml {\n  font-size: 0.625em; }\n#site {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  min-width: 225px;\n  min-height: 100vh; }\n.container {\n  width: 90%;\n  min-width: 225px;\n  max-width: 1000px; }\nheader {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  position: fixed;\n  top: 0;\n  width: 100%;\n  min-width: 225px;\n  background-color: white;\n  border-bottom: 2px solid black; }\n.header-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  font-weight: bold;\n  padding: 0.5rem 0.5rem; }\n.header-container nav ul {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    wrap: nowrap; }\n.header-container nav ul li {\n      text-transform: uppercase;\n      padding: 0.4rem 0.5rem;\n      font-size: 1.4rem; }\n.header-container nav ul li .link {\n        color: black; }\n.header-container nav ul li .active {\n        color: #c29114; }\n.header-container nav ul li:first-child {\n        padding-left: 0; }\n.header-container nav ul li:last-child {\n        padding-right: 0; }\n.logo {\n  font-size: 1.8rem;\n  letter-spacing: 0.1rem;\n  padding: 0.4rem 0;\n  color: #c29114; }\n.link, a {\n  text-decoration: none;\n  color: #c29114; }\nmain {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  background-image: url(" + __webpack_require__(253) + ");\n  background-repeat: no-repeat;\n  background-size: cover;\n  background-attachment: fixed; }\n.content {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -ms-flex-line-pack: distribute;\n      align-content: space-around;\n  width: 100%;\n  max-width: 1000px;\n  min-height: 40vh;\n  background-color: white;\n  border: 2px solid black;\n  padding: 1rem 0;\n  margin: 20vh 0 8vh 0; }\n.text-content {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  padding: 0 1rem;\n  width: 100%;\n  text-align: center; }\n.text-content p {\n    font-size: 1.6rem;\n    line-height: 1.2em;\n    width: 80%;\n    margin: 1rem 0; }\n.text-content h1 {\n    font-size: 2rem;\n    font-weight: bold;\n    padding: 2rem 0;\n    letter-spacing: 0.1rem; }\n.text-content h2 {\n    font-size: 1.6rem;\n    font-weight: bold;\n    padding-top: 1.5rem; }\n.text-content button {\n    cursor: pointer;\n    color: #c29114;\n    font-size: 1.8rem;\n    font-weight: bold;\n    margin-top: 2rem;\n    margin-bottom: 1rem;\n    padding: 0.7rem 2rem;\n    background-color: white;\n    border: 2px solid #c29114;\n    border-radius: 1.5rem; }\n.text-content .note {\n    color: #c29114;\n    text-transform: uppercase; }\n#form {\n  width: 90%;\n  min-width: 210px; }\n#form h1 {\n    font-size: 4rem;\n    margin-top: 1rem;\n    margin-bottom: 2rem; }\n#form h2 {\n    font-size: 2rem;\n    margin-bottom: 2rem; }\nform#search-form {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  font-size: 1.5rem; }\n.form-half {\n  min-width: 210px; }\n.form-half .form-item {\n    min-width: 210px;\n    padding: 1rem;\n    line-height: 25px !important;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between; }\n.form-half .form-item input {\n      height: 25px !important;\n      line-height: 25px !important; }\n.form-left {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n  -webkit-box-align: start;\n      -ms-flex-align: start;\n          align-items: flex-start;\n  -ms-flex-line-pack: start;\n      align-content: flex-start;\n  width: 50%; }\n.form-left .form-item {\n    width: 30%; }\n.form-left .form-item input {\n      width: 50px; }\n.form-right {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  width: 50%; }\n.form-right .form-item {\n    width: 40%; }\n.form-right .form-item input {\n      width: 135px; }\n.form-right p {\n    font-size: 1.3rem;\n    width: 100%;\n    padding: 1rem;\n    min-width: 210px; }\n.search-bar {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -ms-flex-wrap: nowrap;\n      flex-wrap: nowrap;\n  width: 100%;\n  min-width: 210px; }\n.search-bar .alert {\n    width: 90%;\n    margin: 0.5rem 1rem; }\n.search-bar .alert p {\n      font-size: 1.5rem;\n      color: red; }\n.search-bar .button-div {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: reverse;\n        -ms-flex-direction: row-reverse;\n            flex-direction: row-reverse;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    width: 10%;\n    min-width: 9rem;\n    -webkit-box-flex: 1;\n        -ms-flex-positive: 1;\n            flex-grow: 1;\n    -ms-flex-item-align: start;\n        align-self: flex-start; }\n.search-bar .button-div #search-button {\n      width: 100%;\n      font-size: 1.5rem;\n      font-weight: bold;\n      padding: 0.5em 1em 0.5em 1em;\n      margin-bottom: 1rem; }\n#results {\n  width: 90%;\n  min-width: 210px;\n  padding: 1rem; }\n#results p {\n    font-size: 1.6rem;\n    line-height: 3rem;\n    font-weight: bold;\n    margin-bottom: 2rem;\n    color: black; }\n#results p span {\n      color: grey; }\nli.country-li {\n  font-size: 1.6rem;\n  line-height: 2.5rem;\n  color: black;\n  font-weight: bold; }\nli.city-li {\n  text-indent: 20px;\n  color: grey; }\nli.city-li a.google-flights-link {\n    text-decoration: none;\n    color: grey;\n    font-weight: normal; }\nfooter {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  background-color: white;\n  border-top: 2px solid black; }\nfooter .footer-container {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    -ms-flex-wrap: nowrap;\n        flex-wrap: nowrap;\n    font-size: 1.4rem;\n    font-weight: bold; }\nfooter .footer-container div {\n      height: 100%;\n      padding: 0.5rem 1rem; }\nfooter .footer-container #disclaimer {\n      width: 60%; }\nfooter .footer-container #powered {\n      width: 40%;\n      text-align: right; }\nfooter .footer-container #powered a {\n        text-decoration: none;\n        color: #c29114; }\n", ""]);
+exports.push([module.i, "@charset \"UTF-8\";\n/*variables*/\n/*flex-container mixin*/\n/*TODO: AWD - dodać media queries do hamburger menu*/\n/*reset css*/\n* {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  list-style-type: none;\n  font-size: 100%;\n  font-family: \"Times New Roman\", Times, serif; }\n/*fonts*/\n/*styles*/\nhtml {\n  font-size: 0.625em; }\n#site {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  min-width: 225px;\n  min-height: 100vh; }\n.container {\n  width: 90%;\n  min-width: 225px;\n  max-width: 1000px; }\nheader {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  position: fixed;\n  top: 0;\n  width: 100%;\n  min-width: 225px;\n  background-color: white;\n  border-bottom: 2px solid black; }\n.header-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  font-weight: bold;\n  padding: 0.5rem 0.5rem; }\n.header-container nav ul {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    wrap: nowrap; }\n.header-container nav ul li {\n      text-transform: uppercase;\n      padding: 0.4rem 0.5rem;\n      font-size: 1.4rem; }\n.header-container nav ul li .link {\n        color: black; }\n.header-container nav ul li .active {\n        color: #c29114; }\n.header-container nav ul li:first-child {\n        padding-left: 0; }\n.header-container nav ul li:last-child {\n        padding-right: 0; }\n.logo {\n  font-size: 1.8rem;\n  letter-spacing: 0.1rem;\n  padding: 0.4rem 0;\n  color: #c29114; }\n.link, a {\n  text-decoration: none;\n  color: #c29114; }\nmain {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  background-image: url(" + __webpack_require__(253) + ");\n  background-repeat: no-repeat;\n  background-size: cover;\n  background-attachment: fixed; }\n.content {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -ms-flex-line-pack: distribute;\n      align-content: space-around;\n  width: 100%;\n  max-width: 1000px;\n  min-height: 40vh;\n  background-color: white;\n  border: 2px solid black;\n  padding: 1rem 0;\n  margin: 20vh 0 8vh 0; }\n.text-content {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  padding: 0 1rem;\n  width: 100%;\n  text-align: center; }\n.text-content p {\n    font-size: 1.6rem;\n    line-height: 1.2em;\n    width: 80%;\n    margin: 1rem 0; }\n.text-content h1 {\n    font-size: 2rem;\n    font-weight: bold;\n    padding: 2rem 0;\n    letter-spacing: 0.1rem; }\n.text-content h2 {\n    font-size: 1.6rem;\n    font-weight: bold;\n    padding-top: 1.5rem; }\n.text-content button {\n    cursor: pointer;\n    color: #c29114;\n    font-size: 1.8rem;\n    font-weight: bold;\n    margin-top: 2rem;\n    margin-bottom: 1rem;\n    padding: 0.7rem 2rem;\n    background-color: white;\n    border: 2px solid #c29114;\n    border-radius: 1.5rem; }\n.text-content .note {\n    color: #c29114;\n    text-transform: uppercase; }\n#form {\n  width: 90%;\n  min-width: 210px; }\n#form h1 {\n    font-size: 4rem;\n    margin: 1rem 1rem 2rem 1rem; }\n#form h2 {\n    font-size: 2rem;\n    margin: 0 1rem 2rem 1rem; }\nform#search-form {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  font-size: 1.5rem; }\n.form-half {\n  min-width: 210px; }\n.form-half .form-item {\n    min-width: 210px;\n    padding: 1rem;\n    line-height: 25px !important;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between; }\n.form-half .form-item input {\n      height: 25px !important;\n      line-height: 25px !important; }\n.form-left {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n  -webkit-box-align: start;\n      -ms-flex-align: start;\n          align-items: flex-start;\n  -ms-flex-line-pack: start;\n      align-content: flex-start;\n  width: 50%; }\n.form-left .form-item {\n    width: 30%; }\n.form-left .form-item input {\n      width: 50px; }\n.form-right {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  width: 50%; }\n.form-right .form-item {\n    width: 40%; }\n.form-right .form-item input {\n      width: 135px; }\n.form-right p {\n    font-size: 1.3rem;\n    width: 100%;\n    padding: 1rem;\n    min-width: 210px; }\n.search-bar {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -ms-flex-wrap: nowrap;\n      flex-wrap: nowrap;\n  width: 100%;\n  min-width: 210px; }\n.search-bar .alert {\n    width: 90%;\n    margin: 0.5rem 1rem; }\n.search-bar .alert p {\n      font-size: 1.5rem;\n      color: red; }\n.search-bar .button-div {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: reverse;\n        -ms-flex-direction: row-reverse;\n            flex-direction: row-reverse;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    width: 10%;\n    min-width: 9rem;\n    -webkit-box-flex: 1;\n        -ms-flex-positive: 1;\n            flex-grow: 1;\n    -ms-flex-item-align: start;\n        align-self: flex-start; }\n.search-bar .button-div #search-button {\n      width: 100%;\n      font-size: 1.5rem;\n      font-weight: bold;\n      padding: 0.5em 1em 0.5em 1em;\n      margin: 1rem; }\n#results {\n  width: 90%;\n  min-width: 210px;\n  padding: 0 1rem 1rem 1rem; }\n#results p {\n    font-size: 1.6rem;\n    line-height: 2.5rem;\n    font-weight: bold;\n    color: black;\n    margin-bottom: 2rem; }\n#results p span {\n      color: #c29114; }\nli.country-li {\n  font-size: 1.6rem;\n  line-height: 2.5rem;\n  color: black;\n  font-weight: bold; }\nli.city-li {\n  display: inline-block;\n  text-indent: 20px;\n  color: #c29114; }\nli.city-li a.google-flights-link {\n    text-decoration: none;\n    color: #c29114;\n    font-weight: normal; }\nfooter {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  background-color: white;\n  border-top: 2px solid black; }\nfooter .footer-container {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    -ms-flex-wrap: nowrap;\n        flex-wrap: nowrap;\n    font-size: 1.4rem;\n    font-weight: bold; }\nfooter .footer-container div {\n      height: 100%;\n      padding: 0.5rem 1rem; }\nfooter .footer-container #disclaimer {\n      width: 60%; }\nfooter .footer-container #powered {\n      width: 40%;\n      text-align: right; }\nfooter .footer-container #powered a {\n        text-decoration: none;\n        color: #c29114; }\n", ""]);
 
 // exports
 

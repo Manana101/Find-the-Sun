@@ -178,12 +178,11 @@ main {
   min-width: $min-width-form;
   h1 {
     font-size: 4rem;
-    margin-top: 1rem;
-    margin-bottom: 2rem;
+    margin: 1rem 1rem 2rem 1rem;
   }
   h2 {
     font-size: 2rem;
-    margin-bottom: 2rem;
+    margin: 0 1rem 2rem 1rem;
   }
 }
 form#search-form {
@@ -265,7 +264,7 @@ form#search-form {
       font-size: 1.5rem;
       font-weight: bold;
       padding: 0.5em 1em 0.5em 1em;
-      margin-bottom: 1rem;
+      margin: 1rem;
     }
   }
 }
@@ -273,16 +272,16 @@ form#search-form {
 #results {
   width: $inner-width;
   min-width: $min-width-form;
-  padding: 1rem;
+  padding: 0 1rem 1rem 1rem;
   // border: 1px solid green;
   p {
     font-size: 1.6rem;
-    line-height: 3rem;
+    line-height: 2.5rem;
     font-weight: bold;
-    margin-bottom: 2rem;
     color: $text-color1;
+    margin-bottom: 2rem;
     span {
-      color: $text-color2;
+      color: $text-color4;
     }
   }
 }
@@ -293,12 +292,16 @@ li.country-li{
   color: $text-color1;
   font-weight: bold;
 }
+// ul.city-ul{
+//   display: inline-block;
+// }
 li.city-li{
+  display: inline-block;
   text-indent: 20px;
-  color: $text-color2;//usunąć potem jak dodam linki
+  color: $text-color4;//usunąć potem jak dodam linki
   a.google-flights-link{
     text-decoration: none;
-    color: $text-color2;
+    color: $text-color4;
     font-weight: normal;
   }
 }

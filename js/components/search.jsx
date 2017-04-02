@@ -10,27 +10,32 @@ export class Search extends React.Component{
     this.state={
       minTemp: '',
       maxTemp: '',
-      fromDate: '',
-      toDate: '',
-      formOk: false
+      formOk: false,
+      toDateDays: '',
+      fromDateDays: '',
+      todayDays: '',
+      todayDaysPlus9: ''
     }
   }
   //funkcja do odbierania od Form informacji:
-  formInfoFn = (formOkFromForm, minTempFromForm, maxTempFromForm, fromDateFromForm, toDateFromForm) => {
+  formInfoFn = (formOkFromForm, minTempFromForm, maxTempFromForm, toDateDays, fromDateDays, todayDays, todayDaysPlus9) => {
   console.log('jestem w Search w odebraniu parametrów');
+  //czy to musi być robione przez zmianę state? może wystarczy to zapisać w zmiennych?
     this.setState({
       minTemp: minTempFromForm,
       maxTemp: maxTempFromForm,
-      fromDate: fromDateFromForm,
-      toDate: toDateFromForm,
-      formOk: formOkFromForm
+      formOk: formOkFromForm,
+      toDateDays: toDateDays,
+      fromDateDays: fromDateDays,
+      todayDays: todayDays,
+      todayDaysPlus9: todayDaysPlus9
     })
   }
   render(){
     console.log('jestem w Search', this.state.formOk);
     return <section className='content'>
         <Form formInfoFn={this.formInfoFn}/>
-        <Results minTemp={this.state.minTemp} maxTemp={this.state.maxTemp} fromDate={this.state.fromDate} toDate={this.state.toDate} formOk={this.state.formOk}/>
+        <Results formOk={this.state.formOk} minTemp={this.state.minTemp} maxTemp={this.state.maxTemp} toDateDays={this.state.toDateDays} fromDateDays={this.state.fromDateDays} todayDays={this.state.todayDays} todayDaysPlus9={this.state.todayDaysPlus9}/>
       </section>
   }
 }

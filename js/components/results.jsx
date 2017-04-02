@@ -43,7 +43,7 @@ export class Results extends React.Component{
     this.getCities = ids => ids.map(id => this.getCity(id));
 
     this.getCity = (id) => {
-      return fetch("http://localhost:3000/destinations/"+id)
+      return fetch("http://find-the-sun.com:3000/destinations/"+id)
       .then(data => {console.log('wysłałem zapytanie GET do mojej bazy dla id: ', id);return data.json()})
       .catch(error => {
         console.log('error z getCity przy id: ', id, error);
@@ -226,7 +226,7 @@ export class Results extends React.Component{
       let index = 0;
       this.updateForecast = index => {
         if (actualForecastsArray[index].status === "new"){
-          return fetch("http://localhost:3000/destinations/"+actualForecastsArray[index].id, {
+          return fetch("http://find-the-sun.com:3000/destinations/"+actualForecastsArray[index].id, {
                   method: 'put',
                   body: JSON.stringify(actualForecastsArray[index]),
                   headers: {
@@ -267,21 +267,13 @@ export class Results extends React.Component{
       //TODO: na razie robię sobie osobną tablicę krajów, bo nie umiem iterować po obiekcie. Ale docelowo lepiej byłoby nie tworzyć dodatkowej zmiennej, tylko iterować po obiekcie destinations przy renderowaniu
 
       //obliczenie startDay i endDay - które dni brać pod uwagę przy filtrowaniu
-      //TODO: być może trzeba zamienić ISOString na UTC
 
       //obliczanie różnicy pomiędzy dzisiaj a dniem wylotu w dniach -> wynik oznacza, od którego dnia zacząć sprawdzać temperaturę (dzień 0 = dzisiaj);
-      let currentDateString = new Date().toISOString().substring(0, 10);
-      let currentDateMs = new Date(currentDateString).getTime()
-      let fromDateMs = new Date(this.props.fromDate).getTime();
-      let diffToStartMs = fromDateMs - currentDateMs;
-      let oneDayInMs = 1000*60*60*24;
-      let startDay = Math.round(diffToStartMs/oneDayInMs);
+      let startDay = this.props.fromDateDays - this.props.todayDays;
       // console.log(startDay);
 
       //obliczanie różnicy pomiędzy dzisiaj a dniem powrotu w dniach -> wynik oznacza, do którego dnia sprawdzać temperaturę (dzień 0 = dzisiaj);
-      let toDateMs = new Date(this.props.toDate).getTime();
-      let diffToEndMs = toDateMs - currentDateMs;
-      let endDay = Math.round(diffToEndMs/oneDayInMs);
+      let endDay = this.props.toDateDays - this.props.todayDays;
       // console.log(endDay);
 
       actualForecastsArray.forEach(cityToFilter => {
@@ -379,19 +371,20 @@ export class Results extends React.Component{
       console.log('results loading');
       results = <p>Loading...</p>;
     } else if (this.state.dataReady === 'error') {
-      results = <p>Sorry, search doesn't work yet!</p>
+      results = <p>Something went wrong. Please try again later.</p>
     } else if (this.state.dataReady === 'ready' && this.state.noResultsFound === true){
       console.log('results empty');
       results = <p>Sorry, we didn't find any destinations matching your criteria.</p>;
     } else if (this.state.dataReady === 'ready' && this.state.noResultsFound === false) {
       console.log('results should appear');
+      //dodać jak ustawię poniższe:
+      // <p>Click on the country name, to see cities matching your search.<br/>
+      // <span>Click on the city name to find flights.</span></p>
       results = <ul id='destinations-list'>
-        <p>Click on the country name, to see cities matching your search.<br/>
-        <span>Click on the city name to find flights.</span></p>
       {this.state.countries.map(country=>{
-          return <li className='country-li'>{country}
-            <ul>{this.state.destinations[country].map(city=>{
-                return <li className='city-li'>
+          return <li className='country-li' key={this.state.destinations[country]}>{country}
+            <ul className='city-ul'>{this.state.destinations[country].map(city=>{
+                return <li className='city-li' key={city}>
                   {city}
                 </li>
               })

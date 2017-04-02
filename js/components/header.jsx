@@ -12,9 +12,9 @@ export class Header extends React.Component {
           </div>
           <nav>
             <ul>
-              <li><IndexLink to="/search" className='link' activeClassName="active">Search</IndexLink></li>
-              <li><IndexLink to="/about" className='link' activeClassName="active">About</IndexLink></li>
-              <li><IndexLink to="/author" className='link' activeClassName="active">Author</IndexLink></li>
+              <li key='search'><IndexLink to="/search" className='link' activeClassName="active">Search</IndexLink></li>
+              <li key='about'><IndexLink to="/about" className='link' activeClassName="active">About</IndexLink></li>
+              <li key='author'><IndexLink to="/author" className='link' activeClassName="active">Author</IndexLink></li>
             </ul>
           </nav>
         </div>
