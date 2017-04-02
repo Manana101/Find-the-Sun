@@ -10,12 +10,11 @@ export class About extends React.Component {
         <h2 className='question'>How does it work?</h2>
         <p className='answer'>
           When you click on the search button, we search through a list of destinations, for each one of them checking if the weather forecast for the period you specified matches your criteria.<br/>
-          If you would like to know the details, you can read the <a href='https://github.com/Manana101/coders_lab_final_project/blob/master/README.md' target='blank'>docs</a>.
+        If you want to know the details, you can find them <a href='https://github.com/Manana101/coders_lab_final_project/blob/master/README.md' target='blank'>here</a>.
         </p>
         <h2 className='question'>What destinations are searched through?</h2>
         <p className='answer'>
-          Because of the limited access to the weather forecast API, for the time being only 73 cities are searched through<br/>
-        (you can find the full list <Link to="/about/destinations" className='link'>here</Link>). These particular destinations were chosen because they can be reached from Warsaw, Poland, with a direct, low-cost flight (i.e. with Wizzair or Ryanair, as of 12/03/2017). This is the reason why the app only works optimally for people who live in Warsaw.
+          For the time being, the weather is checked in 73 destinations that can be reached from Warsaw, Poland, with a direct, low-cost flight (i.e. with Wizzair or Ryanair, as of 12/03/2017). This is the reason why the app only works optimally for people who live in Warsaw (you can find the list of these 73 destinations <Link to="/about/destinations" className='link'>here</Link>).
         </p>
         <h2 className='question'>What do 'Min.Temp' and 'Max.Temp.' mean?</h2>
         <p className='answer'>
