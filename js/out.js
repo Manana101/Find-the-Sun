@@ -12634,10 +12634,10 @@ var About = exports.About = function (_React$Component) {
             { className: 'answer' },
             'When you click on the search button, we search through a list of destinations, for each one of them checking if the weather forecast for the period you specified matches your criteria.',
             _react2.default.createElement('br', null),
-            'If you want to know the details, you can find them ',
+            'If you would like to know how the app exactly works, or you would like to see the code, please have a look ',
             _react2.default.createElement(
               'a',
-              { href: 'https://github.com/Manana101/coders_lab_final_project/blob/master/README.md', target: 'blank' },
+              { href: 'https://github.com/Manana101/Find-the-Sun', target: 'blank' },
               'here'
             ),
             '.'
@@ -12909,6 +12909,9 @@ var Form = exports.Form = function (_React$Component) {
     _this.handleSearchClick = function (event) {
       event.preventDefault();
       //obliczam zakres dni, który ma być możliwy do wybrania w input type='date' (tutaj, bo chcę to przekazać w propsach do results)
+      console.log(_this.state.toDate);
+      console.dir(_this.state.toDate);
+      console.log(_this.state.fromDate);
 
       var toDateMs = new Date(_this.state.toDate).getTime();
       var toDateDays = Math.floor(toDateMs / _this.oneDayInMs); //in days instead of ms
@@ -12930,7 +12933,7 @@ var Form = exports.Form = function (_React$Component) {
         });
         //oraz przekaż rodzicowi, że został wysłany niepoprawny formularz - jeśli otrzymałeś w propsie funkcję
         if (typeof _this.props.formInfoFn === 'function') {
-          _this.props.formInfoFn(false, _this.state.minTemp, _this.state.maxTemp, toDateDays, fromDateDays, _this.todayDays, _this.todayDaysPlus9);
+          _this.props.formInfoFn(false, _this.state.minTemp, _this.state.maxTemp, _this.state.fromDate, _this.state.toDate, toDateDays, fromDateDays, _this.todayDays, _this.todayDaysPlus9);
         }
         //jeśli formularz jest wypełniony poprawnie, zmień formOk w state na true - jeśli alert był wcześniej wyświetlony, to zniknie
       } else if (isFormOk === true) {
@@ -12941,7 +12944,7 @@ var Form = exports.Form = function (_React$Component) {
         //oraz przekaż rodzicowi wyniki formularza - jeśli otrzymałeś w propsie funkcję
         if (typeof _this.props.formInfoFn === 'function') {
           console.log('jestem w Form w wywołaniu funkcji z propsów z parametrami');
-          _this.props.formInfoFn(true, _this.state.minTemp, _this.state.maxTemp, toDateDays, fromDateDays, _this.todayDays, _this.todayDaysPlus9);
+          _this.props.formInfoFn(true, _this.state.minTemp, _this.state.maxTemp, _this.state.fromDate, _this.state.toDate, toDateDays, fromDateDays, _this.todayDays, _this.todayDaysPlus9);
         }
       };
     };
@@ -12963,6 +12966,7 @@ var Form = exports.Form = function (_React$Component) {
     var todayMs = Date.now();
     _this.todayDays = Math.floor(todayMs / _this.oneDayInMs); //in days instead of ms
     _this.todayDaysPlus9 = _this.todayDays + 9; //in days instead of ms
+    console.log(_this.todayDays);
     _this.state = {
       minTemp: '',
       maxTemp: '',
@@ -13457,9 +13461,9 @@ var Results = exports.Results = function (_React$Component) {
 
       _this.getActualForecast = function (city) {
         console.log('city.id z getActualForecast: ', city.id);
-        var currentDate = new Date().toISOString().substring(0, 10);
+        // let currentDate = new Date().toISOString().substring(0, 10);
         var checkedAt = city.checkedAt;
-        if (checkedAt !== currentDate) {
+        if (checkedAt !== _this.props.todayDays) {
           console.log('prognoza dziś jeszcze nie była sprawdzona, jestem w if, zaraz zrobię fetch do API dla city.id: ', city.id);
           var url = "http://api.apixu.com/v1/forecast.json?key=0ffd45ac047f4cda8ae85915171303&q=" + city.location.name + "&days=10";
           return fetch(url).then(function (data) {
@@ -13530,7 +13534,7 @@ var Results = exports.Results = function (_React$Component) {
                   }
                 }]
               },
-              "checkedAt": currentDate,
+              "checkedAt": _this.props.todayDays,
               "status": "new",
               "id": city.id
             };
@@ -13591,7 +13595,7 @@ var Results = exports.Results = function (_React$Component) {
                 }
               }]
             },
-            "checkedAt": city.checkedAt,
+            "checkedAt": _this.props.todayDays,
             "status": "old",
             "id": city.id
           };
@@ -13776,6 +13780,14 @@ var Results = exports.Results = function (_React$Component) {
       var _this2 = this;
 
       console.log('results render');
+      var names = __webpack_require__(257);
+      var fromDate = this.props.fromDate;
+      var toDate = this.props.toDate;
+      console.log(fromDate);
+      console.log(toDate);
+      // console.log(names);
+      // console.log(names['Barcelona']);
+      // console.log(names['Barcelona'][0]);
       //zmienna results i warunek - co ma się wyświetlać w zależności od etapu załadowania danych i od tego czy znaleziono przynajmniej 1 miasto do wyświetlenia
       var results = '';
       if (this.props.formOk === false) {
@@ -13809,11 +13821,21 @@ var Results = exports.Results = function (_React$Component) {
         results = _react2.default.createElement(
           'ul',
           { id: 'destinations-list' },
+          _react2.default.createElement(
+            'p',
+            null,
+            _react2.default.createElement(
+              'span',
+              null,
+              'Click on the city name to find flights.'
+            )
+          ),
           this.state.countries.map(function (country) {
             return _react2.default.createElement(
               'li',
               { className: 'country-li', key: _this2.state.destinations[country] },
               country,
+              ':',
               _react2.default.createElement(
                 'ul',
                 { className: 'city-ul' },
@@ -13821,7 +13843,11 @@ var Results = exports.Results = function (_React$Component) {
                   return _react2.default.createElement(
                     'li',
                     { className: 'city-li', key: city },
-                    city
+                    _react2.default.createElement(
+                      'a',
+                      { 'class': 'google-flights-link', href: 'https://www.google.pl/flights/?gl=pl#search;f=WAW,WMI,RWA;t=' + names[city][1] + ';d=' + _this2.props.fromDate.toString() + ';r=' + _this2.props.toDate.toString() + ';a=A3,EI,SU,BT,CA,UX,AF,9U,JU,AB,AZ,OS,AD,B2,BA,SN,FB,CI,CZ,OU,OK,LY,EW,AY,HU,IB,KL,LO,LH,LG,IG,DY,D8,FR,SK,SQ,P7,QS,LX,TP,RO,TK,PS,VY,W6,MF;so=p', target: 'blank' },
+                      names[city][0]
+                    )
                   );
                 })
               )
@@ -13884,12 +13910,14 @@ var Search = exports.Search = function (_React$Component) {
     //TODO: sprawdzić, czy działa przekazywanie informacji bez użycia state (czy results będzie się updejtował)
     var _this = _possibleConstructorReturn(this, (Search.__proto__ || Object.getPrototypeOf(Search)).call(this, props));
 
-    _this.formInfoFn = function (formOkFromForm, minTempFromForm, maxTempFromForm, toDateDays, fromDateDays, todayDays, todayDaysPlus9) {
+    _this.formInfoFn = function (formOkFromForm, minTempFromForm, maxTempFromForm, fromDateFromForm, toDateFromForm, toDateDays, fromDateDays, todayDays, todayDaysPlus9) {
       console.log('jestem w Search w odebraniu parametrów');
       //czy to musi być robione przez zmianę state? może wystarczy to zapisać w zmiennych?
       _this.setState({
         minTemp: minTempFromForm,
         maxTemp: maxTempFromForm,
+        fromDate: fromDateFromForm,
+        toDate: toDateFromForm,
         formOk: formOkFromForm,
         toDateDays: toDateDays,
         fromDateDays: fromDateDays,
@@ -13916,11 +13944,12 @@ var Search = exports.Search = function (_React$Component) {
     key: 'render',
     value: function render() {
       console.log('jestem w Search', this.state.formOk);
+      console.log('this.state.todayDays: ', this.state.todayDays);
       return _react2.default.createElement(
         'section',
         { className: 'content' },
         _react2.default.createElement(_form.Form, { formInfoFn: this.formInfoFn }),
-        _react2.default.createElement(_results.Results, { formOk: this.state.formOk, minTemp: this.state.minTemp, maxTemp: this.state.maxTemp, toDateDays: this.state.toDateDays, fromDateDays: this.state.fromDateDays, todayDays: this.state.todayDays, todayDaysPlus9: this.state.todayDaysPlus9 })
+        _react2.default.createElement(_results.Results, { formOk: this.state.formOk, minTemp: this.state.minTemp, maxTemp: this.state.maxTemp, fromDate: this.state.fromDate, toDate: this.state.toDate, toDateDays: this.state.toDateDays, fromDateDays: this.state.fromDateDays, todayDays: this.state.todayDays, todayDaysPlus9: this.state.todayDaysPlus9 })
       );
     }
   }]);
@@ -15922,7 +15951,7 @@ exports = module.exports = __webpack_require__(126)(undefined);
 
 
 // module
-exports.push([module.i, "@charset \"UTF-8\";\n/*variables*/\n/*flex-container mixin*/\n/*TODO: AWD - dodać media queries do hamburger menu*/\n/*reset css*/\n* {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  list-style-type: none;\n  font-size: 100%;\n  font-family: \"Times New Roman\", Times, serif; }\n/*fonts*/\n/*styles*/\nhtml {\n  font-size: 0.625em; }\n#site {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  min-width: 225px;\n  min-height: 100vh; }\n.container {\n  width: 90%;\n  min-width: 225px;\n  max-width: 1000px; }\nheader {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  position: fixed;\n  top: 0;\n  width: 100%;\n  min-width: 225px;\n  background-color: white;\n  border-bottom: 2px solid black; }\n.header-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  font-weight: bold;\n  padding: 0.5rem 0.5rem; }\n.header-container nav ul {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    wrap: nowrap; }\n.header-container nav ul li {\n      text-transform: uppercase;\n      padding: 0.4rem 0.5rem;\n      font-size: 1.4rem; }\n.header-container nav ul li .link {\n        color: black; }\n.header-container nav ul li .active {\n        color: #c29114; }\n.header-container nav ul li:first-child {\n        padding-left: 0; }\n.header-container nav ul li:last-child {\n        padding-right: 0; }\n.logo {\n  font-size: 1.8rem;\n  letter-spacing: 0.1rem;\n  padding: 0.4rem 0;\n  color: #c29114; }\n.link, a {\n  text-decoration: none;\n  color: #c29114; }\nmain {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  background-image: url(" + __webpack_require__(253) + ");\n  background-repeat: no-repeat;\n  background-size: cover;\n  background-attachment: fixed; }\n.content {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -ms-flex-line-pack: distribute;\n      align-content: space-around;\n  width: 100%;\n  max-width: 1000px;\n  min-height: 40vh;\n  background-color: white;\n  border: 2px solid black;\n  padding: 1rem 0;\n  margin: 20vh 0 8vh 0; }\n.text-content {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  padding: 0 1rem;\n  width: 100%;\n  text-align: center; }\n.text-content p {\n    font-size: 1.6rem;\n    line-height: 1.2em;\n    width: 80%;\n    margin: 1rem 0; }\n.text-content h1 {\n    font-size: 2rem;\n    font-weight: bold;\n    padding: 2rem 0;\n    letter-spacing: 0.1rem; }\n.text-content h2 {\n    font-size: 1.6rem;\n    font-weight: bold;\n    padding-top: 1.5rem; }\n.text-content button {\n    cursor: pointer;\n    color: #c29114;\n    font-size: 1.8rem;\n    font-weight: bold;\n    margin-top: 2rem;\n    margin-bottom: 1rem;\n    padding: 0.7rem 2rem;\n    background-color: white;\n    border: 2px solid #c29114;\n    border-radius: 1.5rem; }\n.text-content .note {\n    color: #c29114;\n    text-transform: uppercase; }\n#form {\n  width: 90%;\n  min-width: 210px; }\n#form h1 {\n    font-size: 4rem;\n    margin: 1rem 1rem 2rem 1rem; }\n#form h2 {\n    font-size: 2rem;\n    margin: 0 1rem 2rem 1rem; }\nform#search-form {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  font-size: 1.5rem; }\n.form-half {\n  min-width: 210px; }\n.form-half .form-item {\n    min-width: 210px;\n    padding: 1rem;\n    line-height: 25px !important;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between; }\n.form-half .form-item input {\n      height: 25px !important;\n      line-height: 25px !important; }\n.form-left {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n  -webkit-box-align: start;\n      -ms-flex-align: start;\n          align-items: flex-start;\n  -ms-flex-line-pack: start;\n      align-content: flex-start;\n  width: 50%; }\n.form-left .form-item {\n    width: 30%; }\n.form-left .form-item input {\n      width: 50px; }\n.form-right {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  width: 50%; }\n.form-right .form-item {\n    width: 40%; }\n.form-right .form-item input {\n      width: 135px; }\n.form-right p {\n    font-size: 1.3rem;\n    width: 100%;\n    padding: 1rem;\n    min-width: 210px; }\n.search-bar {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -ms-flex-wrap: nowrap;\n      flex-wrap: nowrap;\n  width: 100%;\n  min-width: 210px; }\n.search-bar .alert {\n    width: 90%;\n    margin: 0.5rem 1rem; }\n.search-bar .alert p {\n      font-size: 1.5rem;\n      color: red; }\n.search-bar .button-div {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: reverse;\n        -ms-flex-direction: row-reverse;\n            flex-direction: row-reverse;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    width: 10%;\n    min-width: 9rem;\n    -webkit-box-flex: 1;\n        -ms-flex-positive: 1;\n            flex-grow: 1;\n    -ms-flex-item-align: start;\n        align-self: flex-start; }\n.search-bar .button-div #search-button {\n      width: 100%;\n      font-size: 1.5rem;\n      font-weight: bold;\n      padding: 0.5em 1em 0.5em 1em;\n      margin: 1rem; }\n#results {\n  width: 90%;\n  min-width: 210px;\n  padding: 0 1rem 1rem 1rem; }\n#results p {\n    font-size: 1.6rem;\n    line-height: 2.5rem;\n    font-weight: bold;\n    color: black;\n    margin-bottom: 2rem; }\n#results p span {\n      color: #c29114; }\nli.country-li {\n  font-size: 1.6rem;\n  line-height: 2.5rem;\n  color: black;\n  font-weight: bold; }\nli.city-li {\n  display: inline-block;\n  text-indent: 20px;\n  color: #c29114; }\nli.city-li a.google-flights-link {\n    text-decoration: none;\n    color: #c29114;\n    font-weight: normal; }\nfooter {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  background-color: white;\n  border-top: 2px solid black; }\nfooter .footer-container {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    -ms-flex-wrap: nowrap;\n        flex-wrap: nowrap;\n    font-size: 1.4rem;\n    font-weight: bold; }\nfooter .footer-container div {\n      height: 100%;\n      padding: 0.5rem 1rem; }\nfooter .footer-container #disclaimer {\n      width: 60%; }\nfooter .footer-container #powered {\n      width: 40%;\n      text-align: right; }\nfooter .footer-container #powered a {\n        text-decoration: none;\n        color: #c29114; }\n", ""]);
+exports.push([module.i, "@charset \"UTF-8\";\n/*variables*/\n/*flex-container mixin*/\n/*TODO: AWD - dodać media queries do hamburger menu*/\n/*reset css*/\n* {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  list-style-type: none;\n  font-size: 100%;\n  font-family: \"Times New Roman\", Times, serif; }\n/*fonts*/\n/*styles*/\nhtml {\n  font-size: 0.625em; }\n#site {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  min-width: 225px;\n  min-height: 100vh; }\n.container {\n  width: 90%;\n  min-width: 225px;\n  max-width: 1000px; }\nheader {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  position: fixed;\n  top: 0;\n  width: 100%;\n  min-width: 225px;\n  background-color: white;\n  border-bottom: 2px solid black; }\n.header-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  font-weight: bold;\n  padding: 0.5rem 0.5rem; }\n.header-container nav ul {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    wrap: nowrap; }\n.header-container nav ul li {\n      text-transform: uppercase;\n      padding: 0.4rem 0.5rem;\n      font-size: 1.4rem; }\n.header-container nav ul li .link {\n        color: black; }\n.header-container nav ul li .active {\n        color: #c29114; }\n.header-container nav ul li:first-child {\n        padding-left: 0; }\n.header-container nav ul li:last-child {\n        padding-right: 0; }\n.logo {\n  font-size: 1.8rem;\n  letter-spacing: 0.1rem;\n  padding: 0.4rem 0;\n  color: #c29114; }\n.link, a {\n  text-decoration: none;\n  color: #c29114; }\nmain {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  background-image: url(" + __webpack_require__(253) + ");\n  background-repeat: no-repeat;\n  background-size: cover;\n  background-attachment: fixed; }\n.content {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -ms-flex-line-pack: distribute;\n      align-content: space-around;\n  width: 100%;\n  max-width: 1000px;\n  min-height: 40vh;\n  background-color: white;\n  border: 2px solid black;\n  padding: 1rem 0;\n  margin: 20vh 0 8vh 0; }\n.text-content {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  padding: 0 1rem;\n  width: 100%;\n  text-align: center; }\n.text-content p {\n    font-size: 1.6rem;\n    line-height: 1.2em;\n    width: 80%;\n    margin: 1rem 0; }\n.text-content h1 {\n    font-size: 2rem;\n    font-weight: bold;\n    padding: 2rem 0;\n    letter-spacing: 0.1rem; }\n.text-content h2 {\n    font-size: 1.6rem;\n    font-weight: bold;\n    padding-top: 1.5rem; }\n.text-content button {\n    cursor: pointer;\n    color: #c29114;\n    font-size: 1.8rem;\n    font-weight: bold;\n    margin-top: 2rem;\n    margin-bottom: 1rem;\n    padding: 0.7rem 2rem;\n    background-color: white;\n    border: 2px solid #c29114;\n    border-radius: 1.5rem; }\n.text-content .note {\n    color: #c29114;\n    text-transform: uppercase; }\n#form {\n  width: 90%;\n  min-width: 210px; }\n#form h1 {\n    font-size: 4rem;\n    margin: 1rem 1rem 2rem 1rem; }\n#form h2 {\n    font-size: 2rem;\n    margin: 0 1rem 2rem 1rem; }\nform#search-form {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  font-size: 1.5rem; }\n.form-half {\n  min-width: 210px; }\n.form-half .form-item {\n    min-width: 210px;\n    padding: 1rem;\n    line-height: 25px !important;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between; }\n.form-half .form-item input {\n      height: 25px !important;\n      line-height: 25px !important; }\n.form-left {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n  -webkit-box-align: start;\n      -ms-flex-align: start;\n          align-items: flex-start;\n  -ms-flex-line-pack: start;\n      align-content: flex-start;\n  width: 50%; }\n.form-left .form-item {\n    width: 30%; }\n.form-left .form-item input {\n      width: 50px; }\n.form-right {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  width: 50%; }\n.form-right .form-item {\n    width: 40%; }\n.form-right .form-item input {\n      width: 135px; }\n.form-right p {\n    font-size: 1.3rem;\n    width: 100%;\n    padding: 1rem;\n    min-width: 210px; }\n.search-bar {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -ms-flex-wrap: nowrap;\n      flex-wrap: nowrap;\n  width: 100%;\n  min-width: 210px; }\n.search-bar .alert {\n    width: 90%;\n    margin: 0.5rem 1rem; }\n.search-bar .alert p {\n      font-size: 1.5rem;\n      color: red; }\n.search-bar .button-div {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: reverse;\n        -ms-flex-direction: row-reverse;\n            flex-direction: row-reverse;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    width: 10%;\n    min-width: 9rem;\n    -webkit-box-flex: 1;\n        -ms-flex-positive: 1;\n            flex-grow: 1;\n    -ms-flex-item-align: start;\n        align-self: flex-start; }\n.search-bar .button-div #search-button {\n      width: 100%;\n      font-size: 1.5rem;\n      font-weight: bold;\n      padding: 0.5em 1em 0.5em 1em;\n      margin: 1rem; }\n#results {\n  width: 90%;\n  min-width: 210px;\n  padding: 0 1rem 1rem 1rem; }\n#results p {\n    font-size: 1.8rem;\n    line-height: 2.5rem;\n    font-weight: bold;\n    color: black;\n    margin-bottom: 2rem; }\n#results p span {\n      color: #c29114; }\nli.country-li {\n  font-size: 1.6rem;\n  line-height: 3rem;\n  color: black;\n  font-weight: bold; }\nli.city-li {\n  display: inline-block;\n  text-indent: 30px;\n  color: #c29114; }\nli.city-li a.google-flights-link {\n    text-decoration: none;\n    color: #c29114;\n    font-weight: normal; }\nfooter {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  background-color: white;\n  border-top: 2px solid black; }\nfooter .footer-container {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    -ms-flex-wrap: nowrap;\n        flex-wrap: nowrap;\n    font-size: 1.4rem;\n    font-weight: bold; }\nfooter .footer-container div {\n      height: 100%;\n      padding: 0.5rem 1rem; }\nfooter .footer-container #disclaimer {\n      width: 60%; }\nfooter .footer-container #powered {\n      width: 40%;\n      text-align: right; }\nfooter .footer-container #powered a {\n        text-decoration: none;\n        color: #c29114; }\n", ""]);
 
 // exports
 
@@ -30981,6 +31010,91 @@ module.exports = g;
 __webpack_require__(112);
 module.exports = __webpack_require__(111);
 
+
+/***/ }),
+/* 256 */,
+/* 257 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var names = {};
+names['Brussels'] = ['Brussels', 'BRU,CRL,ZYR'];
+names['Bourgas'] = ['Bourgas', 'BOJ'];
+names['Split'] = ['Split', 'SPU'];
+names['Larnaca'] = ['Larnaca', 'LCA'];
+names['Billund'] = ['Billund', 'BLL'];
+names['Paris'] = ['Paris', 'CDG,ORY,BVA,XHP,XPG'];
+names['Toulouse'] = ['Toulouse', 'TLS'];
+names['Kutaissi'] = ['Kutaisi', 'KUT'];
+names['Cologne'] = ['Cologne', 'CGN,QKL'];
+names['Baden-Baden'] = ['Baden-Baden', 'FKB'];
+names['Memmingen'] = ['Memmingen', 'FMM'];
+names['Kerkyra'] = ['Korfu', 'CFU'];
+names['Athens'] = ['Athens', 'ATH'];
+names['Chania'] = ['Chania (Crete)', 'CHQ'];
+names['Thessaloniki'] = ['Thessaloniki', 'SKG'];
+names['Budapest'] = ['Budapest', 'BUD'];
+names['Reykjavik'] = ['Reykjavik', 'KEF,RKV'];
+names['Dublin'] = ['Dublin', 'DUB'];
+names['Shannon'] = ['Shannon', 'SNN'];
+names['Eilat'] = ['Eilat', 'ETH'];
+names['Tel Aviv'] = ['Tel-Aviv', 'TLV'];
+names['Alghero'] = ['Alghero (Sardinia)', 'AHO'];
+names['Cagliari'] = ['Cagliari (Sardinia)', 'CAG'];
+names['Bari'] = ['Bari', 'BRI,BAU'];
+names['Catania'] = ['Catania (Sicily)', 'CTA,0NN'];
+names['Trapani'] = ['Trapani (Sicily)', 'TPS'];
+names['Lamezia'] = ['Lamezia Terme', 'SUF,LTZ'];
+names['Bergamo'] = ['Milan/Bergamo', 'MXP,LIN,BGY,IPR,XIK'];
+names['Naples'] = ['Naples', 'NAP,INP'];
+names['Rome'] = ['Rome', 'FCO,CIA,IRT,XRJ'];
+names['Turin'] = ['Turin', 'TRN,ITT,TPY'];
+names['Verona'] = ['Verona', 'VRN,XIX'];
+names['Bologna'] = ['Bologna', 'BLQ,IBT'];
+names['Pisa'] = ['Pisa', 'PSA,0QH'];
+names['Venice'] = ['Venice', 'VCE,XVQ'];
+names['Vilnius'] = ['Vilnius', 'VNO'];
+names['Valletta'] = ['Valletta', 'MLA'];
+names['Eindhoven'] = ['Eindhoven', 'EIN'];
+names['Bergen'] = ['Bergen', 'BGO'];
+names['Oslo'] = ['Oslo', 'OSL,TRF,RYG'];
+names['Lisbon'] = ['Lisbon', 'LIS'];
+names['Porto'] = ['Porto', 'OPO'];
+names['Faro'] = ['Faro', 'FAO'];
+names['Bucharest'] = ['Bucharest', 'OTP,BBU'];
+names['Bratislava'] = ['Bratislava', 'BTS,DX3'];
+names['Benalua'] = ['Alicante', 'ALC,YJE'];
+names['Barcelona'] = ['Barcelona', 'BCN,YJB'];
+names['Santander'] = ['Santander', 'SDR,YJL'];
+names['Puerto Del Rosario'] = ['Fuerteventura', 'FUE'];
+names['Telde'] = ['Gran Canaria', 'LPA'];
+names['Madrid'] = ['Madrid', 'MAD,XOC,XTI'];
+names['Malaga'] = ['Malaga', 'AGP,YJM'];
+names['Palma'] = ['Palma de Mallorca', 'PMI'];
+names['Sevilla'] = ['Sevilla', 'SVQ,XQA'];
+names['Tenerife'] = ['Tenerife', 'TFS,TFN'];
+names['Manises'] = ['Valencia', 'VLC,YJV,4GS'];
+names['Goteborg'] = ['Göteborg', 'GOT,GSE'];
+names['Malmo'] = ['Malmo', 'MMX'];
+names['Stockholm'] = ['Stockholm', 'ARN,BMA,NYO'];
+names['Basel'] = ['Basel', 'BSL,MLH,ZDH'];
+names['Aberdeen'] = ['Aberdeen', 'ABZ'];
+names['Birmingham'] = ['Birmingham', 'BHX'];
+names['Bristol'] = ['Bristol', 'BRS'];
+names['Sheffield'] = ['Sheffield', 'DSA,EMA'];
+names['Glasgow'] = ['Glasgow', 'GLA,PIK'];
+names['Liverpool'] = ['Liverpool', 'LPL'];
+names['London'] = ['London', 'LHR,LGW,STN,LTN,LCY,SEN,QQS'];
+names['Belfast'] = ['Belfast', 'BHD,BFS'];
+names['Edinburgh'] = ['Edinburgh', 'EDI'];
+names['Leeds'] = ['Leeds', 'LBA'];
+names['Manchester'] = ['Manchester', 'MAN'];
+names['Newcastle Upon Tyne'] = ['Newcastle', 'NCL'];
+names['Kiev'] = ['Kiev', 'KBP,IEV'];
+
+module.exports = names;
 
 /***/ })
 /******/ ]);

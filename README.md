@@ -6,10 +6,14 @@ Find the Sun is a web application that finds destinations matching user's criter
 
 Application was created as a final project for http://coderslab.pl/ "Become Front-End developer" bootcamp.
 
+I would really appreciate your feedback! If you have any suggestions, please contact me on GitHub (https://github.com/Manana101/) or LinkedIn (https://www.linkedin.com/in/mananajaworska/).
+
 Application is built on React 15.4.0 and uses various npm packages listed in https://github.com/Manana101/Find-the-Sun/blob/master/package.json
 
 Languages used: HTML5, CSS3, Sass, ECMAScript 5, ECMAScript 6, ECMAScript 7, JSX.
+
 Databases used: local (json), external API (https://www.apixu.com/).
+
 Servers used for demo: Apache, json-server.
 
 **Limitations**

@@ -54,9 +54,9 @@ export class Results extends React.Component{
 
     this.getActualForecast = (city) => {
       console.log('city.id z getActualForecast: ', city.id);
-      let currentDate = new Date().toISOString().substring(0, 10);
+      // let currentDate = new Date().toISOString().substring(0, 10);
       let checkedAt = city.checkedAt;
-      if (checkedAt !== currentDate){
+      if (checkedAt !== this.props.todayDays){
         console.log('prognoza dziś jeszcze nie była sprawdzona, jestem w if, zaraz zrobię fetch do API dla city.id: ', city.id);
         let url = "http://api.apixu.com/v1/forecast.json?key=0ffd45ac047f4cda8ae85915171303&q="+city.location.name+"&days=10"
         return fetch(url)
@@ -139,7 +139,7 @@ export class Results extends React.Component{
                     }
                   ]
                 },
-                "checkedAt": currentDate,
+                "checkedAt": this.props.todayDays,
                 "status": "new",
                 "id": city.id
               }
@@ -210,7 +210,7 @@ export class Results extends React.Component{
                   }
                 ]
               },
-              "checkedAt": city.checkedAt,
+              "checkedAt": this.props.todayDays,
               "status": "old",
               "id": city.id
             }
@@ -362,6 +362,14 @@ export class Results extends React.Component{
 
   render(){
     console.log('results render');
+    const names = require('./names.jsx');
+    let fromDate=this.props.fromDate;
+    let toDate=this.props.toDate;
+    console.log(fromDate);
+    console.log(toDate);
+    // console.log(names);
+    // console.log(names['Barcelona']);
+    // console.log(names['Barcelona'][0]);
     //zmienna results i warunek - co ma się wyświetlać w zależności od etapu załadowania danych i od tego czy znaleziono przynajmniej 1 miasto do wyświetlenia
     let results = '';
     if (this.props.formOk === false){
@@ -381,11 +389,13 @@ export class Results extends React.Component{
       // <p>Click on the country name, to see cities matching your search.<br/>
       // <span>Click on the city name to find flights.</span></p>
       results = <ul id='destinations-list'>
+      <p>
+      <span>Click on the city name to find flights.</span></p>
       {this.state.countries.map(country=>{
-          return <li className='country-li' key={this.state.destinations[country]}>{country}
+          return <li className='country-li' key={this.state.destinations[country]}>{country}:
             <ul className='city-ul'>{this.state.destinations[country].map(city=>{
                 return <li className='city-li' key={city}>
-                  {city}
+                  <a class='google-flights-link' href={'https://www.google.pl/flights/?gl=pl#search;f=WAW,WMI,RWA;t=' + names[city][1] + ';d='+this.props.fromDate.toString()+';r='+this.props.toDate.toString()+';a=A3,EI,SU,BT,CA,UX,AF,9U,JU,AB,AZ,OS,AD,B2,BA,SN,FB,CI,CZ,OU,OK,LY,EW,AY,HU,IB,KL,LO,LH,LG,IG,DY,D8,FR,SK,SQ,P7,QS,LX,TP,RO,TK,PS,VY,W6,MF;so=p'} target='blank'>{names[city][0]}</a>
                 </li>
               })
             }</ul>

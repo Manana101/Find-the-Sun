@@ -275,7 +275,7 @@ form#search-form {
   padding: 0 1rem 1rem 1rem;
   // border: 1px solid green;
   p {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     line-height: 2.5rem;
     font-weight: bold;
     color: $text-color1;
@@ -288,7 +288,7 @@ form#search-form {
 
 li.country-li{
   font-size: 1.6rem;
-  line-height: 2.5rem;
+  line-height: 3rem;
   color: $text-color1;
   font-weight: bold;
 }
@@ -297,7 +297,7 @@ li.country-li{
 // }
 li.city-li{
   display: inline-block;
-  text-indent: 20px;
+  text-indent: 30px;
   color: $text-color4;//usunąć potem jak dodam linki
   a.google-flights-link{
     text-decoration: none;

@@ -9,6 +9,7 @@ export class Form extends React.Component{
     let todayMs = Date.now();
     this.todayDays = Math.floor(todayMs/this.oneDayInMs); //in days instead of ms
     this.todayDaysPlus9 = this.todayDays + 9; //in days instead of ms
+    console.log(this.todayDays);
     this.state={
       minTemp: '',
       maxTemp: '',
@@ -42,6 +43,9 @@ export class Form extends React.Component{
   handleSearchClick = (event) => {
     event.preventDefault();
     //obliczam zakres dni, który ma być możliwy do wybrania w input type='date' (tutaj, bo chcę to przekazać w propsach do results)
+    console.log(this.state.toDate);
+    console.dir(this.state.toDate);
+    console.log(this.state.fromDate);
 
     let toDateMs = new Date(this.state.toDate).getTime();
     let toDateDays = Math.floor(toDateMs/this.oneDayInMs); //in days instead of ms
@@ -63,7 +67,7 @@ export class Form extends React.Component{
       });
       //oraz przekaż rodzicowi, że został wysłany niepoprawny formularz - jeśli otrzymałeś w propsie funkcję
       if ( typeof this.props.formInfoFn === 'function' ){
-        this.props.formInfoFn(false, this.state.minTemp, this.state.maxTemp, toDateDays, fromDateDays, this.todayDays, this.todayDaysPlus9);
+        this.props.formInfoFn(false, this.state.minTemp, this.state.maxTemp, this.state.fromDate, this.state.toDate, toDateDays, fromDateDays, this.todayDays, this.todayDaysPlus9);
       }
     //jeśli formularz jest wypełniony poprawnie, zmień formOk w state na true - jeśli alert był wcześniej wyświetlony, to zniknie
     } else if (isFormOk === true){
@@ -74,7 +78,7 @@ export class Form extends React.Component{
       //oraz przekaż rodzicowi wyniki formularza - jeśli otrzymałeś w propsie funkcję
       if ( typeof this.props.formInfoFn === 'function' ){
         console.log('jestem w Form w wywołaniu funkcji z propsów z parametrami');
-        this.props.formInfoFn(true, this.state.minTemp, this.state.maxTemp, toDateDays, fromDateDays, this.todayDays, this.todayDaysPlus9);
+        this.props.formInfoFn(true, this.state.minTemp, this.state.maxTemp, this.state.fromDate, this.state.toDate, toDateDays, fromDateDays, this.todayDays, this.todayDaysPlus9);
       }
     };
   } //koniec handleSearchClick

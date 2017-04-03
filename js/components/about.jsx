@@ -10,7 +10,7 @@ export class About extends React.Component {
         <h2 className='question'>How does it work?</h2>
         <p className='answer'>
           When you click on the search button, we search through a list of destinations, for each one of them checking if the weather forecast for the period you specified matches your criteria.<br/>
-        If you want to know the details, you can find them <a href='https://github.com/Manana101/coders_lab_final_project/blob/master/README.md' target='blank'>here</a>.
+        If you would like to know how the app exactly works, or you would like to see the code, please have a look <a href='https://github.com/Manana101/Find-the-Sun' target='blank'>here</a>.
         </p>
         <h2 className='question'>What destinations are searched through?</h2>
         <p className='answer'>
