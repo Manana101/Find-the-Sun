@@ -7,6 +7,7 @@ import {Template} from './components/template.jsx';
 import {Home} from './components/home.jsx';
 import {Search} from './components/search.jsx';
 import {About} from './components/about.jsx';
+import {Author} from './components/author.jsx';
 import {DestinationsList} from './components/destinations.jsx';
 import {NotFound} from './components/not_found.jsx';
 
@@ -20,6 +21,7 @@ class App extends React.Component {
               <Route path='/search' component={Search} />
               <Route path='/about' component={About} />
               <Route path='/about/destinations' component={DestinationsList} />
+              <Route path='/author' component={Author} />
               <Route path='*' component={NotFound} />
             </Route>
           </Router>

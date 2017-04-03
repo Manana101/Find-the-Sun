@@ -6,7 +6,7 @@ export class DestinationsList extends React.Component {
     //TODO: zaciągać to z jsona, sformatować.
     return <section className='content'>
         <div className='text-content'>
-          <h1>Full list of destinations</h1>
+          <h1>Destinations</h1>
           <p class='destinations-full-list'>
             Brussels,
             Bourgas,
@@ -56,7 +56,7 @@ export class DestinationsList extends React.Component {
             Alicante,
             Barcelona,
             Santander,
-            Fuertaventura,
+            Fuerteventura,
             Gran Canaria,
             Madrid,
             Malaga,

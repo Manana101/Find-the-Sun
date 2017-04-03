@@ -43,7 +43,7 @@ html {
   font-size: 0.625em; //=10px
 }
 #site {
-  @include flex-container(column, center);
+  @include flex-container(column, space-around);
   min-width: $min-width;
   min-height: 100vh;
 }
@@ -55,9 +55,9 @@ html {
 }
 header {
   @include flex-container(row, center);
-  position: fixed;
-  top: 0;
-  width: 100%; //to tu musi być - czy to przez position: fixed? bo normalnie div ma 100% z defaultu
+  // position: fixed;
+  // top: 0;
+  // width: 100%; //to tu musi być - czy to przez position: fixed? bo normalnie div ma 100% z defaultu
   min-width: $min-width;
   background-color: $color4;
   // border-top: 2px solid $color1;
@@ -83,7 +83,7 @@ header {
         }
         text-transform: uppercase;
         padding: 0.4rem 0.5rem;
-        font-size: 1.4rem;
+        font-size: 1.6rem;
         &:first-child{
           padding-left: 0;
         }
@@ -95,7 +95,7 @@ header {
   }
 }
 .logo {
-  font-size: 1.8rem;
+  font-size: 2.8rem;
   letter-spacing: 0.1rem;
   padding: 0.4rem 0;
   color: $text-color4;
@@ -107,7 +107,7 @@ header {
 main {
   @include flex-container(column, flex-start);
   align-items: center;
-  flex-grow: 1; //konieczne żeby footer był zawsze na dole, nawet jeśli treść nie zajmuje całej strony
+  flex-grow: 1; //konieczne żeby footer był zawsze na dole, a header na górze, nawet jeśli treść nie zajmuje całej strony
   background-image: url('./images/background-2.png');
   background-repeat: no-repeat;
   background-size: cover;
@@ -124,7 +124,7 @@ main {
   background-color: $color4;
   border: 2px solid $color1;
   padding: 1rem 0;
-  margin: 20vh 0 8vh 0;
+  margin: 8vh 0 8vh 0;
 }
 .text-content{
   @include flex-container(column, center);
@@ -144,6 +144,9 @@ main {
   //   text-align: justify;
   // }
   h1{
+    .logo {
+      font-size: 2rem;
+    }
     font-size: 2rem;
     font-weight: bold;
     // text-align: center;
@@ -177,12 +180,12 @@ main {
   width: $inner-width;
   min-width: $min-width-form;
   h1 {
-    font-size: 4rem;
-    margin: 1rem 1rem 2rem 1rem;
+    font-size: 3.4rem;
+    margin: 2rem 1rem 1rem 1rem;
   }
   h2 {
     font-size: 2rem;
-    margin: 0 1rem 2rem 1rem;
+    margin: 1rem 1rem 3rem 1rem;
   }
 }
 form#search-form {
@@ -302,7 +305,7 @@ li.city-li{
   a.google-flights-link{
     text-decoration: none;
     color: $text-color4;
-    font-weight: normal;
+    // font-weight: normal;
   }
 }
 

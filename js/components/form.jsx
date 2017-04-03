@@ -9,7 +9,7 @@ export class Form extends React.Component{
     let todayMs = Date.now();
     this.todayDays = Math.floor(todayMs/this.oneDayInMs); //in days instead of ms
     this.todayDaysPlus9 = this.todayDays + 9; //in days instead of ms
-    console.log(this.todayDays);
+    // console.log(this.todayDays);
     this.state={
       minTemp: '',
       maxTemp: '',
@@ -43,9 +43,9 @@ export class Form extends React.Component{
   handleSearchClick = (event) => {
     event.preventDefault();
     //obliczam zakres dni, który ma być możliwy do wybrania w input type='date' (tutaj, bo chcę to przekazać w propsach do results)
-    console.log(this.state.toDate);
-    console.dir(this.state.toDate);
-    console.log(this.state.fromDate);
+    // console.log(this.state.toDate);
+    // console.dir(this.state.toDate);
+    // console.log(this.state.fromDate);
 
     let toDateMs = new Date(this.state.toDate).getTime();
     let toDateDays = Math.floor(toDateMs/this.oneDayInMs); //in days instead of ms
@@ -61,7 +61,7 @@ export class Form extends React.Component{
     let isFormOk = this.checkFormOk(toDateDays, fromDateDays, this.todayDays, this.todayDaysPlus9); //wynik to true lub false
     //jeśli formularz jest wypełniony niepoprawnie, zmień formOk w state na false - co spowoduje wyświetlenie odpowiedniej informacji
     if (isFormOk === false){
-      console.log('formOk z if w handleSearchClick w komponencie Form', isFormOk);
+      // console.log('formOk z if w handleSearchClick w komponencie Form', isFormOk);
       this.setState({
         formOk: false
       });
@@ -71,13 +71,13 @@ export class Form extends React.Component{
       }
     //jeśli formularz jest wypełniony poprawnie, zmień formOk w state na true - jeśli alert był wcześniej wyświetlony, to zniknie
     } else if (isFormOk === true){
-      console.log('formOk z else w handleSearchClick w komponencie Form', isFormOk);
+      // console.log('formOk z else w handleSearchClick w komponencie Form', isFormOk);
       this.setState({
         formOk: true
       });
       //oraz przekaż rodzicowi wyniki formularza - jeśli otrzymałeś w propsie funkcję
       if ( typeof this.props.formInfoFn === 'function' ){
-        console.log('jestem w Form w wywołaniu funkcji z propsów z parametrami');
+        // console.log('jestem w Form w wywołaniu funkcji z propsów z parametrami');
         this.props.formInfoFn(true, this.state.minTemp, this.state.maxTemp, this.state.fromDate, this.state.toDate, toDateDays, fromDateDays, this.todayDays, this.todayDaysPlus9);
       }
     };
@@ -86,14 +86,14 @@ export class Form extends React.Component{
   //walidacja formularza
   //TODO poprawić walidację - niech każdy element formularza ma swoją
   checkFormOk = (toDate, fromDate, today, todayPlus9) => {
-    console.log('sprawdzanie formularza');
+    // console.log('sprawdzanie formularza');
     let maxTemp = parseInt(this.state.maxTemp);
     let minTemp = parseInt(this.state.minTemp);
     if (toDate<=todayPlus9&&fromDate>=today&&toDate>=fromDate&&maxTemp>=minTemp&&this.state.toDate!=''&&this.state.fromDate!=''&&this.state.minTemp!=''&&this.state.maxTemp!='') {
-      console.log('formOK');
+      // console.log('formOK');
       return true;
     } else {
-      console.log('formNotOK');
+      // console.log('formNotOK');
       return false;
     }
   }//koniec checkFormOk

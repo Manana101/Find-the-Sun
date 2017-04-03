@@ -13,16 +13,16 @@ export class Results extends React.Component{
   }
 
   componentWillReceiveProps(nextProps){
-    console.log('componentWillReceiveProps');
+    // console.log('componentWillReceiveProps');
     this.setState({
       dataReady: 'beforeSearch'
     });
   }
 
   componentDidUpdate(){
-    console.log('componentDidUpdate');
+    // console.log('componentDidUpdate');
     if (this.props.formOk === true && this.state.dataReady === 'beforeSearch'){
-      console.log('dataReady, formOk - ruszam z funkcją Search');
+      // console.log('dataReady, formOk - ruszam z funkcją Search');
       // console.log('poleciałby search ale jest wykomentowany');
       this.search();
     }
@@ -33,36 +33,39 @@ export class Results extends React.Component{
     this.setState({
       dataReady: 'loading'
     })
-    console.log('jestem w funkcji search w results, więc zaczynam iterować po miastach');
+    // console.log('jestem w funkcji search w results, więc zaczynam iterować po miastach');
     let ids = [];
     for (var i = 0; i < 73; i++) {
       ids.push(i+1);
     }
-    console.log(ids);
+    // console.log(ids);
     //czy te funkcje mogą być tu w środku funkcji search? czy powinny być poza nią?
     this.getCities = ids => ids.map(id => this.getCity(id));
 
     this.getCity = (id) => {
       return fetch("http://find-the-sun.com:3000/destinations/"+id)
-      .then(data => {console.log('wysłałem zapytanie GET do mojej bazy dla id: ', id);return data.json()})
+      .then(data => {
+        // console.log('wysłałem zapytanie GET do mojej bazy dla id: ', id);
+        return data.json()
+      })
       .catch(error => {
-        console.log('error z getCity przy id: ', id, error);
+        // console.log('error z getCity przy id: ', id, error);
       });
     }//koniec getCity
 
     this.getActualForecasts = citiesArray => citiesArray.map(city => this.getActualForecast(city));
 
     this.getActualForecast = (city) => {
-      console.log('city.id z getActualForecast: ', city.id);
+      // console.log('city.id z getActualForecast: ', city.id);
       // let currentDate = new Date().toISOString().substring(0, 10);
       let checkedAt = city.checkedAt;
       if (checkedAt !== this.props.todayDays){
-        console.log('prognoza dziś jeszcze nie była sprawdzona, jestem w if, zaraz zrobię fetch do API dla city.id: ', city.id);
+        // console.log('prognoza dziś jeszcze nie była sprawdzona, jestem w if, zaraz zrobię fetch do API dla city.id: ', city.id);
         let url = "http://api.apixu.com/v1/forecast.json?key=0ffd45ac047f4cda8ae85915171303&q="+city.location.name+"&days=10"
         return fetch(url)
         .then(data => data.json())
         .then(data=>{
-          console.log('jestem w fetchu do API, sprawdzam city.id: ', city.id);
+          // console.log('jestem w fetchu do API, sprawdzam city.id: ', city.id);
           //zapisuję średnie temperatury dla najbliższych 10 dni do zmiennych
           //zrobić tu pętlę:
           let temp_day0 = data.forecast.forecastday[0].day.avgtemp_c;
@@ -76,7 +79,7 @@ export class Results extends React.Component{
           let temp_day8 = data.forecast.forecastday[8].day.avgtemp_c;
           let temp_day9 = data.forecast.forecastday[9].day.avgtemp_c;
           //tworzę nowy obiekt dla miasta, w którym podmieniam temperatury oraz checkedAt, oraz ustawiam status na 'new'.
-          console.log('zapisałem do zmiennych temperatury dla city.id: ', city.id, 'zaraz tworzę cityUpdated');
+          // console.log('zapisałem do zmiennych temperatury dla city.id: ', city.id, 'zaraz tworzę cityUpdated');
           let cityUpdated =
           {
             "location": {
@@ -143,11 +146,14 @@ export class Results extends React.Component{
                 "status": "new",
                 "id": city.id
               }
-              console.log('stworzenie cityUpdated dla id: ', city.id, 'cityUpdated: ', cityUpdated);
+              // console.log('stworzenie cityUpdated dla id: ', city.id, 'cityUpdated: ', cityUpdated);
               return cityUpdated;
-          }).catch(error=>console.log('error w ifie, podczas fetcha do weather api', error));
+          }).catch(error=>{
+            // console.log('error w ifie, podczas fetcha do weather api', error);
+          }
+        );
       } else {
-        console.log('Prognoza dla miasta o id: ', city.id, 'już dziś była sprawdzona');
+        // console.log('Prognoza dla miasta o id: ', city.id, 'już dziś była sprawdzona');
         let cityNotUpdated =
         {
           "location": {
@@ -214,7 +220,7 @@ export class Results extends React.Component{
               "status": "old",
               "id": city.id
             }
-        console.log('cityNotUpdated: ', cityNotUpdated);
+        // console.log('cityNotUpdated: ', cityNotUpdated);
         return cityNotUpdated;
       } //koniec else
     }//koniec getActualForecast
@@ -234,29 +240,31 @@ export class Results extends React.Component{
                       'Content-Type': 'application/json'
                   }
               }).then(result => {
-                  console.log('dodałem do bazy zaktualizowane miasto o id ', actualForecastsArray[index].id);
-                  console.log('co zwraca PUT: ', result);
+                  // console.log('dodałem do bazy zaktualizowane miasto o id ', actualForecastsArray[index].id);
+                  // console.log('co zwraca PUT: ', result);
                   index ++;
                   if (index < actualForecastsArray.length){
-                    console.log('Włączam updejt dla id: ', actualForecastsArray[index].id)
+                    // console.log('Włączam updejt dla id: ', actualForecastsArray[index].id);
                     this.updateForecast(index);
                   } else {
-                    console.log('updejtowanie bazy zakończone, ostatnie zaktualizowane id to: ', index);
+                    // console.log('updejtowanie bazy zakończone, ostatnie zaktualizowane id to: ', index);
                   }
-              }).catch(error=>console.log('error podczas updejtowania miasta o id ', actualForecastsArray[index].id, ' w mojej bazie, error: ', error));
+              }).catch(error=>{
+                // console.log('error podczas updejtowania miasta o id ', actualForecastsArray[index].id, ' w mojej bazie, error: ', error)
+              });
         } else {
-          console.log("Nie updejtuję miasta o id ", actualForecastsArray[index].id , "w mojej bazie, bo ma status old");
+          // console.log("Nie updejtuję miasta o id ", actualForecastsArray[index].id , "w mojej bazie, bo ma status old");
           index ++;
           if (index < actualForecastsArray.length){
-            console.log('Włączam updejt dla id: ', actualForecastsArray[index].id)
+            // console.log('Włączam updejt dla id: ', actualForecastsArray[index].id);
             this.updateForecast(index);
           } else {
-            console.log('updejtowanie bazy zakończone, ostatnie id dla którego wykonano updateForecast to: ', index);
+            // console.log('updejtowanie bazy zakończone, ostatnie id dla którego wykonano updateForecast to: ', index);
           }
         }
       }
       //uruchomienie pierwszego updejtu:
-      console.log('Włączam updejt dla id: ', index+1);
+      // console.log('Włączam updejt dla id: ', index+1);
       this.updateForecast(index);
     }
 
@@ -282,7 +290,7 @@ export class Results extends React.Component{
         for (var i = startDay; i <= endDay; i++) {
           tempsToCheck.push(cityToFilter.forecast.forecastday[i].day.avgtemp_c);
         }
-        console.log(cityToFilter.location.name, 'tempsToCheck: ',tempsToCheck);
+        // console.log(cityToFilter.location.name, 'tempsToCheck: ',tempsToCheck);
 
         let tempsOk = [];
         //pętla, która sprawdza, czy dla każdego dnia, w zakresie dat podanym przez użytkownika, temperatura mieści się w podanym zakresie temperatur. Dla każdego dnia, do talbicy tempsOk wrzuca true lub false (jeśli napotka pierwsze false, przerywa pętlę).
@@ -294,21 +302,21 @@ export class Results extends React.Component{
             tempsOk.push(true);
           }
         }
-        console.log(cityToFilter.location.name, 'tempsOk: ', tempsOk);
+        // console.log(cityToFilter.location.name, 'tempsOk: ', tempsOk);
         //Teraz sprawdzam, czy tablica dla tego miasta zawiera false - jeśli nie ma ani jednego false, dorzucam państwo do countries oraz miasto do destinations(w tablicy tego państwa).
         if (tempsOk.indexOf(false)===-1){
           //if-else jest tu po to, żeby tylko raz dodać kraj do obiektu destinations i tablicy countries. Jeśli kraj już jest, dodajemy mu tylko miasto do jego tablicy
           if (destinations[cityToFilter.location.country]===undefined){
-            console.log(cityToFilter.location.country, 'Nie znalazłem kraju w obiekcie destinations');
+            // console.log(cityToFilter.location.country, 'Nie znalazłem kraju w obiekcie destinations');
             destinations[cityToFilter.location.country] = [cityToFilter.location.name];
             countries.push(cityToFilter.location.country);
-            console.log(destinations);
-            console.log(countries);
+            // console.log(destinations);
+            // console.log(countries);
           } else {
-            console.log(cityToFilter.location.country, 'Znalazłem kraj w obiekcie destinations');
+            // console.log(cityToFilter.location.country, 'Znalazłem kraj w obiekcie destinations');
             destinations[cityToFilter.location.country].push(cityToFilter.location.name);
-            console.log(destinations);
-            console.log(countries);
+            // console.log(destinations);
+            // console.log(countries);
           }
         }
 
@@ -340,51 +348,50 @@ export class Results extends React.Component{
       return Promise.all(this.getActualForecasts(citiesArray)); //getActualForecasts tworzy tablicę, w której wywołana jest funkcja getActualForecast dla każdego miasta z tablicy. Sprawdza, czy prognoza pogody dla tego miasta była sprawdzona dziś. Jeśli nie, wysyła zapytanie do API i zwraca zaktualizowane miasto ze statusem 'new'. Jeśli tak, zwraca miasto z niezmienionej postaci, dodając mu status 'old'. Efektem jest tablica, gdzie wszystkie miasta są już zaktualizowane, i mają status new albo old.
     })
     .then(actualForecastsArray => {
-      console.log('actualForecastsArray z PromiseChain w Fetch', actualForecastsArray);
-      //TODO: tu niepotrzebnie robię tablicę wywołań funkcji, zmienić to na jedną funkcję, która operuje od razu na tablicy miast
+      // console.log('actualForecastsArray z PromiseChain w Fetch', actualForecastsArray);
       let startAsynchronousUpdateForecasts = Promise.resolve(actualForecastsArray);
       startAsynchronousUpdateForecasts.then(actualForecastsArray => {
         return this.updateForecasts(actualForecastsArray)
       })//updateForecasts dla każdego miasta po kolei uruchamia funkcję updateForecast. Funkcja updateForecast sprawdza, czy miasto ma status new - jeśli tak, wrzuca miasto na odpowiednie miejsce do mojej bazy (aktualizuje bazę). Ważne - miasta są dodawane po kolei, bo wysłanie wielu PUT do mojej bazy jednocześnie nie jest możliwe. Dopiero, kiedy jeden fetch się zakończy, uruchamiany jest kolejny.
-      .catch(error => console.log('error z startAsynchronousUpdateForecasts', error));
-
+      .catch(error => {
+        // console.log('error z startAsynchronousUpdateForecasts', error);
+      });
       //Nie chcę czekać z wyświetleniem wyników, aż baza zostanie zaktualizowana (nie ma takiej potrzeby), więc lecę w tym samym then z funkcją filterCities(nie czekam na wykonanie się updejtowania bazy, które dzieje się asynchronicznie).
       this.filterCities(actualForecastsArray);//filterCities dla każdego miasta z tablicy sprawdza, czy spełnione są kryteria wyszukiwania - jeśli tak, miasto jest dodawane do odpowiednich zmiennych (countries i destinations). Na końcu aktualizowany jest state (countries, destinations, dataReady).
     })
     .catch(error => {
-      console.log('error z search', error);
+      // console.log('error z search', error);
       this.setState({
         dataReady: 'error'
       });
-      console.log(this.state);
+      // console.log(this.state);
     });
   }//koniec funkcji search
 
   render(){
-    console.log('results render');
+    // console.log('results render');
     const names = require('./names.jsx');
     let fromDate=this.props.fromDate;
     let toDate=this.props.toDate;
-    console.log(fromDate);
-    console.log(toDate);
-    // console.log(names);
-    // console.log(names['Barcelona']);
-    // console.log(names['Barcelona'][0]);
+    // console.log(fromDate);
+    // console.log(toDate);
+
     //zmienna results i warunek - co ma się wyświetlać w zależności od etapu załadowania danych i od tego czy znaleziono przynajmniej 1 miasto do wyświetlenia
     let results = '';
     if (this.props.formOk === false){
-      console.log('results zablokował swoje renderowanie');
+      // console.log('results zablokował swoje renderowanie');
       return null;
     } else if (this.state.dataReady ==='loading'){
-      console.log('results loading');
+      // console.log('results loading');
       results = <p>Loading...</p>;
     } else if (this.state.dataReady === 'error') {
       results = <p>Something went wrong. Please try again later.</p>
     } else if (this.state.dataReady === 'ready' && this.state.noResultsFound === true){
-      console.log('results empty');
+      // console.log('results empty');
       results = <p>Sorry, we didn't find any destinations matching your criteria.</p>;
     } else if (this.state.dataReady === 'ready' && this.state.noResultsFound === false) {
-      console.log('results should appear');
+      // console.log('results should appear');
+
       //dodać jak ustawię poniższe:
       // <p>Click on the country name, to see cities matching your search.<br/>
       // <span>Click on the city name to find flights.</span></p>
@@ -395,7 +402,7 @@ export class Results extends React.Component{
           return <li className='country-li' key={this.state.destinations[country]}>{country}:
             <ul className='city-ul'>{this.state.destinations[country].map(city=>{
                 return <li className='city-li' key={city}>
-                  <a class='google-flights-link' href={'https://www.google.pl/flights/?gl=pl#search;f=WAW,WMI,RWA;t=' + names[city][1] + ';d='+this.props.fromDate.toString()+';r='+this.props.toDate.toString()+';a=A3,EI,SU,BT,CA,UX,AF,9U,JU,AB,AZ,OS,AD,B2,BA,SN,FB,CI,CZ,OU,OK,LY,EW,AY,HU,IB,KL,LO,LH,LG,IG,DY,D8,FR,SK,SQ,P7,QS,LX,TP,RO,TK,PS,VY,W6,MF;so=p'} target='blank'>{names[city][0]}</a>
+                  <a className='google-flights-link' href={'https://www.google.pl/flights/?gl=pl#search;f=WAW,WMI,RWA;t=' + names[city][1] + ';d='+this.props.fromDate.toString()+';r='+this.props.toDate.toString()+';a=A3,EI,SU,BT,CA,UX,AF,9U,JU,AB,AZ,OS,AD,B2,BA,SN,FB,CI,CZ,OU,OK,LY,EW,AY,HU,IB,KL,LO,LH,LG,IG,DY,D8,FR,SK,SQ,P7,QS,LX,TP,RO,TK,PS,VY,W6,MF;so=p'} target='blank'>{names[city][0]}</a>
                 </li>
               })
             }</ul>
