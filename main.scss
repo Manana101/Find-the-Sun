@@ -245,11 +245,14 @@ form#search-form {
   align-items: center;
   flex-wrap: nowrap;
   width: 100%;
-  min-width: $min-width-form;
+  padding: 0.5rem 1rem;
+  // min-width: $min-width-form;
   .alert {
     // border: 1px solid pink;
-    width: 90%;
-    margin: 0.5rem 1rem;
+    // max-width: 50vw;
+    flex-shrink: 1;
+    width: 80%;
+    padding-right: 1rem;
     p {
       font-size: 1.5rem;
       color: $text-color3;
@@ -257,17 +260,17 @@ form#search-form {
   }
   .button-div {
     @include flex-container(row-reverse, space-between);
-    width: 10%;
+    width: 20%;
     min-width: 9rem;
     flex-grow: 1;
     align-self: flex-start;
     // border: 1px solid green;
     #search-button {
-      width: 100%;
+      width: 9rem;
       font-size: 1.5rem;
       font-weight: bold;
       padding: 0.5em 1em 0.5em 1em;
-      margin: 1rem;
+      // margin: 1rem;
     }
   }
 }
