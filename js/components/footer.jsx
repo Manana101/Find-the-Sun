@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-//TODO? tu może być disclaimer, który się otwiera, tak jak na RW
 export class Footer extends React.Component {
   render(){
     return <footer>

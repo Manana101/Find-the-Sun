@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 
 export class DestinationsList extends React.Component {
   render(){
-    //TODO: zaciągać to z jsona, sformatować.
     return <section className='content'>
         <div className='text-content'>
           <h1>Destinations</h1>

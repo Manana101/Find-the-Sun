@@ -1,24 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-//dostaje w propsach: <Form formInfoFn={this.formInfoFn}/>
 export class Form extends React.Component{
   constructor(props){
     super(props);
     this.oneDayInMs = 1000*60*60*24;
     let todayMs = Date.now();
-    this.todayDays = Math.floor(todayMs/this.oneDayInMs); //in days instead of ms
-    this.todayDaysPlus9 = this.todayDays + 9; //in days instead of ms
-    // console.log(this.todayDays);
+    this.todayDays = Math.floor(todayMs/this.oneDayInMs);
+    this.todayDaysPlus9 = this.todayDays + 9;
     this.state={
       minTemp: '',
       maxTemp: '',
       fromDate: '',
       toDate: '',
-      formOk: true
+      formOk: true,
+      datesOk: true
     }
   }
-  //funkcje obsługujące formularz:
   handleMinTempChange = (event) => {
     this.setState({
       minTemp: event.target.value
@@ -42,63 +40,55 @@ export class Form extends React.Component{
 
   handleSearchClick = (event) => {
     event.preventDefault();
-    //obliczam zakres dni, który ma być możliwy do wybrania w input type='date' (tutaj, bo chcę to przekazać w propsach do results)
-    // console.log(this.state.toDate);
-    // console.dir(this.state.toDate);
-    // console.log(this.state.fromDate);
-
     let toDateMs = new Date(this.state.toDate).getTime();
-    let toDateDays = Math.floor(toDateMs/this.oneDayInMs); //in days instead of ms
+    let toDateDays = Math.floor(toDateMs/this.oneDayInMs);
     let fromDateMs = new Date(this.state.fromDate).getTime();
-    let fromDateDays = Math.floor(fromDateMs/this.oneDayInMs); //in days instead of ms
-    //
-    // console.log('toDate: ', toDate);
-    // console.log('fromDate: ', fromDate);
-    // console.log('today: ', today);
-    // console.log('todayPlus9: ', todayPlus9);
-
-    //walidacja formularza - wywołuję osobną funkcję
-    let isFormOk = this.checkFormOk(toDateDays, fromDateDays, this.todayDays, this.todayDaysPlus9); //wynik to true lub false
-    //jeśli formularz jest wypełniony niepoprawnie, zmień formOk w state na false - co spowoduje wyświetlenie odpowiedniej informacji
+    let fromDateDays = Math.floor(fromDateMs/this.oneDayInMs);
+    let isFormOk = this.checkFormOk(toDateDays, fromDateDays, this.todayDays, this.todayDaysPlus9);
     if (isFormOk === false){
-      // console.log('formOk z if w handleSearchClick w komponencie Form', isFormOk);
       this.setState({
         formOk: false
       });
-      //oraz przekaż rodzicowi, że został wysłany niepoprawny formularz - jeśli otrzymałeś w propsie funkcję
       if ( typeof this.props.formInfoFn === 'function' ){
         this.props.formInfoFn(false, this.state.minTemp, this.state.maxTemp, this.state.fromDate, this.state.toDate, toDateDays, fromDateDays, this.todayDays, this.todayDaysPlus9);
       }
-    //jeśli formularz jest wypełniony poprawnie, zmień formOk w state na true - jeśli alert był wcześniej wyświetlony, to zniknie
     } else if (isFormOk === true){
-      // console.log('formOk z else w handleSearchClick w komponencie Form', isFormOk);
-      this.setState({
-        formOk: true
-      });
-      //oraz przekaż rodzicowi wyniki formularza - jeśli otrzymałeś w propsie funkcję
-      if ( typeof this.props.formInfoFn === 'function' ){
-        // console.log('jestem w Form w wywołaniu funkcji z propsów z parametrami');
-        this.props.formInfoFn(true, this.state.minTemp, this.state.maxTemp, this.state.fromDate, this.state.toDate, toDateDays, fromDateDays, this.todayDays, this.todayDaysPlus9);
+      let areDatesCorrect = this.checkDatesCorrect(toDateDays, fromDateDays);
+      if (areDatesCorrect === false) {
+        this.setState({
+          formOk: true,
+          datesOk: false
+        });
+      } else if (areDatesCorrect === true) {
+        this.setState({
+          formOk: true,
+          datesOk: true
+        });
+        if ( typeof this.props.formInfoFn === 'function' ){
+          this.props.formInfoFn(true, this.state.minTemp, this.state.maxTemp, this.state.fromDate, this.state.toDate, toDateDays, fromDateDays, this.todayDays, this.todayDaysPlus9);
+        }
       }
     };
-  } //koniec handleSearchClick
-
-  //walidacja formularza
-  //TODO poprawić walidację - niech każdy element formularza ma swoją
+  }
   checkFormOk = (toDate, fromDate, today, todayPlus9) => {
-    // console.log('sprawdzanie formularza');
     let maxTemp = parseInt(this.state.maxTemp);
     let minTemp = parseInt(this.state.minTemp);
     if (toDate<=todayPlus9&&fromDate>=today&&toDate>=fromDate&&maxTemp>=minTemp&&this.state.toDate!=''&&this.state.fromDate!=''&&this.state.minTemp!=''&&this.state.maxTemp!='') {
-      // console.log('formOK');
       return true;
     } else {
-      // console.log('formNotOK');
       return false;
     }
-  }//koniec checkFormOk
+  }
+  checkDatesCorrect = (toDateDays, fromDateDays) => {
+    let startDay = fromDateDays - this.todayDays;
+    let endDay = toDateDays - this.todayDays;
+    if (startDay === undefined || startDay < 0 || startDay > 9 || endDay === undefined || endDay < 0 || endDay > 9){
+      return false;
+    } else {
+      return true;
+    }
+  }
   render(){
-    //obliczam zakres dni, który ma być możliwy do wybrania w input type='date'
     let today = new Date(this.todayDays*this.oneDayInMs).toISOString().substring(0, 10);
     let todayPlus9 = new Date(this.todayDaysPlus9*this.oneDayInMs).toISOString().substring(0, 10);
     return <div id='form'>
@@ -139,6 +129,9 @@ export class Form extends React.Component{
                 <li key='dates-format'>- both dates are in the suggested format</li>
                 <li key='dates-between'>- both dates are between {today} and {todayPlus9}</li>
               </ul> : ''}
+            {this.state.datesOk === false? <p>
+              Ups, it seems that this app doesn't work correctly in your browser. Please try updating your browser or using another one.
+            </p> : ''}
           </div>
           <div className='button-div'>
             <button onClick={this.handleSearchClick} id='search-button'>Search</button>
@@ -146,5 +139,5 @@ export class Form extends React.Component{
         </div>
       </form>
     </div>;
-  }//koniec render
-}//koniec Form
+  }
+}

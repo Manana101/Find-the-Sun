@@ -12837,7 +12837,6 @@ var DestinationsList = exports.DestinationsList = function (_React$Component) {
   _createClass(DestinationsList, [{
     key: 'render',
     value: function render() {
-      //TODO: zaciągać to z jsona, sformatować.
       return _react2.default.createElement(
         'section',
         { className: 'content' },
@@ -12892,7 +12891,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-//TODO? tu może być disclaimer, który się otwiera, tak jak na RW
 var Footer = exports.Footer = function (_React$Component) {
   _inherits(Footer, _React$Component);
 
@@ -12964,7 +12962,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-//dostaje w propsach: <Form formInfoFn={this.formInfoFn}/>
 var Form = exports.Form = function (_React$Component) {
   _inherits(Form, _React$Component);
 
@@ -12999,86 +12996,75 @@ var Form = exports.Form = function (_React$Component) {
 
     _this.handleSearchClick = function (event) {
       event.preventDefault();
-      //obliczam zakres dni, który ma być możliwy do wybrania w input type='date' (tutaj, bo chcę to przekazać w propsach do results)
-      // console.log(this.state.toDate);
-      // console.dir(this.state.toDate);
-      // console.log(this.state.fromDate);
-
       var toDateMs = new Date(_this.state.toDate).getTime();
-      var toDateDays = Math.floor(toDateMs / _this.oneDayInMs); //in days instead of ms
+      var toDateDays = Math.floor(toDateMs / _this.oneDayInMs);
       var fromDateMs = new Date(_this.state.fromDate).getTime();
-      var fromDateDays = Math.floor(fromDateMs / _this.oneDayInMs); //in days instead of ms
-      //
-      // console.log('toDate: ', toDate);
-      // console.log('fromDate: ', fromDate);
-      // console.log('today: ', today);
-      // console.log('todayPlus9: ', todayPlus9);
-
-      //walidacja formularza - wywołuję osobną funkcję
-      var isFormOk = _this.checkFormOk(toDateDays, fromDateDays, _this.todayDays, _this.todayDaysPlus9); //wynik to true lub false
-      //jeśli formularz jest wypełniony niepoprawnie, zmień formOk w state na false - co spowoduje wyświetlenie odpowiedniej informacji
+      var fromDateDays = Math.floor(fromDateMs / _this.oneDayInMs);
+      var isFormOk = _this.checkFormOk(toDateDays, fromDateDays, _this.todayDays, _this.todayDaysPlus9);
       if (isFormOk === false) {
-        // console.log('formOk z if w handleSearchClick w komponencie Form', isFormOk);
         _this.setState({
           formOk: false
         });
-        //oraz przekaż rodzicowi, że został wysłany niepoprawny formularz - jeśli otrzymałeś w propsie funkcję
         if (typeof _this.props.formInfoFn === 'function') {
           _this.props.formInfoFn(false, _this.state.minTemp, _this.state.maxTemp, _this.state.fromDate, _this.state.toDate, toDateDays, fromDateDays, _this.todayDays, _this.todayDaysPlus9);
         }
-        //jeśli formularz jest wypełniony poprawnie, zmień formOk w state na true - jeśli alert był wcześniej wyświetlony, to zniknie
       } else if (isFormOk === true) {
-        // console.log('formOk z else w handleSearchClick w komponencie Form', isFormOk);
-        _this.setState({
-          formOk: true
-        });
-        //oraz przekaż rodzicowi wyniki formularza - jeśli otrzymałeś w propsie funkcję
-        if (typeof _this.props.formInfoFn === 'function') {
-          // console.log('jestem w Form w wywołaniu funkcji z propsów z parametrami');
-          _this.props.formInfoFn(true, _this.state.minTemp, _this.state.maxTemp, _this.state.fromDate, _this.state.toDate, toDateDays, fromDateDays, _this.todayDays, _this.todayDaysPlus9);
+        var areDatesCorrect = _this.checkDatesCorrect(toDateDays, fromDateDays);
+        if (areDatesCorrect === false) {
+          _this.setState({
+            formOk: true,
+            datesOk: false
+          });
+        } else if (areDatesCorrect === true) {
+          _this.setState({
+            formOk: true,
+            datesOk: true
+          });
+          if (typeof _this.props.formInfoFn === 'function') {
+            _this.props.formInfoFn(true, _this.state.minTemp, _this.state.maxTemp, _this.state.fromDate, _this.state.toDate, toDateDays, fromDateDays, _this.todayDays, _this.todayDaysPlus9);
+          }
         }
       };
     };
 
     _this.checkFormOk = function (toDate, fromDate, today, todayPlus9) {
-      // console.log('sprawdzanie formularza');
       var maxTemp = parseInt(_this.state.maxTemp);
       var minTemp = parseInt(_this.state.minTemp);
       if (toDate <= todayPlus9 && fromDate >= today && toDate >= fromDate && maxTemp >= minTemp && _this.state.toDate != '' && _this.state.fromDate != '' && _this.state.minTemp != '' && _this.state.maxTemp != '') {
-        // console.log('formOK');
         return true;
       } else {
-        // console.log('formNotOK');
         return false;
+      }
+    };
+
+    _this.checkDatesCorrect = function (toDateDays, fromDateDays) {
+      var startDay = fromDateDays - _this.todayDays;
+      var endDay = toDateDays - _this.todayDays;
+      if (startDay === undefined || startDay < 0 || startDay > 9 || endDay === undefined || endDay < 0 || endDay > 9) {
+        return false;
+      } else {
+        return true;
       }
     };
 
     _this.oneDayInMs = 1000 * 60 * 60 * 24;
     var todayMs = Date.now();
-    _this.todayDays = Math.floor(todayMs / _this.oneDayInMs); //in days instead of ms
-    _this.todayDaysPlus9 = _this.todayDays + 9; //in days instead of ms
-    // console.log(this.todayDays);
+    _this.todayDays = Math.floor(todayMs / _this.oneDayInMs);
+    _this.todayDaysPlus9 = _this.todayDays + 9;
     _this.state = {
       minTemp: '',
       maxTemp: '',
       fromDate: '',
       toDate: '',
-      formOk: true
+      formOk: true,
+      datesOk: true
     };
     return _this;
   }
-  //funkcje obsługujące formularz:
-  //koniec handleSearchClick
-
-  //walidacja formularza
-  //TODO poprawić walidację - niech każdy element formularza ma swoją
-
 
   _createClass(Form, [{
     key: 'render',
-    //koniec checkFormOk
     value: function render() {
-      //obliczam zakres dni, który ma być możliwy do wybrania w input type='date'
       var today = new Date(this.todayDays * this.oneDayInMs).toISOString().substring(0, 10);
       var todayPlus9 = new Date(this.todayDaysPlus9 * this.oneDayInMs).toISOString().substring(0, 10);
       return _react2.default.createElement(
@@ -13194,6 +13180,11 @@ var Form = exports.Form = function (_React$Component) {
                   ' and ',
                   todayPlus9
                 )
+              ) : '',
+              this.state.datesOk === false ? _react2.default.createElement(
+                'p',
+                null,
+                'Ups, it seems that this app doesn\'t work correctly in your browser. Please try updating your browser or using another one.'
               ) : ''
             ),
             _react2.default.createElement(
@@ -13208,12 +13199,11 @@ var Form = exports.Form = function (_React$Component) {
           )
         )
       );
-    } //koniec render
-
+    }
   }]);
 
   return Form;
-}(_react2.default.Component); //koniec Form
+}(_react2.default.Component);
 
 /***/ }),
 /* 118 */
@@ -13611,7 +13601,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-//dostaje w propsach: <Results minTemp={this.state.minTemp} maxTemp={this.state.maxTemp} fromDate={this.state.fromDate} toDate={this.state.toDate} formOk={this.state.formOk}/>
 var Results = exports.Results = function (_React$Component) {
   _inherits(Results, _React$Component);
 
@@ -13621,51 +13610,37 @@ var Results = exports.Results = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Results.__proto__ || Object.getPrototypeOf(Results)).call(this, props));
 
     _this.search = function () {
-      //wyświetl 'loading' i nie uruchamiaj znowu funkcji search, dopóki data nie będzie ready
       _this.setState({
         dataReady: 'loading'
       });
-      // console.log('jestem w funkcji search w results, więc zaczynam iterować po miastach');
       var ids = [];
       for (var i = 0; i < 73; i++) {
         ids.push(i + 1);
       }
-      // console.log(ids);
-      //czy te funkcje mogą być tu w środku funkcji search? czy powinny być poza nią?
       _this.getCities = function (ids) {
         return ids.map(function (id) {
           return _this.getCity(id);
         });
       };
-
       _this.getCity = function (id) {
         return fetch("http://find-the-sun.com:3000/destinations/" + id).then(function (data) {
-          // console.log('wysłałem zapytanie GET do mojej bazy dla id: ', id);
           return data.json();
         }).catch(function (error) {
           // console.log('error z getCity przy id: ', id, error);
         });
-      }; //koniec getCity
-
+      };
       _this.getActualForecasts = function (citiesArray) {
         return citiesArray.map(function (city) {
           return _this.getActualForecast(city);
         });
       };
-
       _this.getActualForecast = function (city) {
-        // console.log('city.id z getActualForecast: ', city.id);
-        // let currentDate = new Date().toISOString().substring(0, 10);
         var checkedAt = city.checkedAt;
         if (checkedAt !== _this.props.todayDays) {
-          // console.log('prognoza dziś jeszcze nie była sprawdzona, jestem w if, zaraz zrobię fetch do API dla city.id: ', city.id);
           var url = "http://api.apixu.com/v1/forecast.json?key=0ffd45ac047f4cda8ae85915171303&q=" + city.location.name + "&days=10";
           return fetch(url).then(function (data) {
             return data.json();
           }).then(function (data) {
-            // console.log('jestem w fetchu do API, sprawdzam city.id: ', city.id);
-            //zapisuję średnie temperatury dla najbliższych 10 dni do zmiennych
-            //zrobić tu pętlę:
             var temp_day0 = data.forecast.forecastday[0].day.avgtemp_c;
             var temp_day1 = data.forecast.forecastday[1].day.avgtemp_c;
             var temp_day2 = data.forecast.forecastday[2].day.avgtemp_c;
@@ -13676,8 +13651,7 @@ var Results = exports.Results = function (_React$Component) {
             var temp_day7 = data.forecast.forecastday[7].day.avgtemp_c;
             var temp_day8 = data.forecast.forecastday[8].day.avgtemp_c;
             var temp_day9 = data.forecast.forecastday[9].day.avgtemp_c;
-            //tworzę nowy obiekt dla miasta, w którym podmieniam temperatury oraz checkedAt, oraz ustawiam status na 'new'.
-            // console.log('zapisałem do zmiennych temperatury dla city.id: ', city.id, 'zaraz tworzę cityUpdated');
+
             var cityUpdated = {
               "location": {
                 "name": data.location.name,
@@ -13732,13 +13706,11 @@ var Results = exports.Results = function (_React$Component) {
               "status": "new",
               "id": city.id
             };
-            // console.log('stworzenie cityUpdated dla id: ', city.id, 'cityUpdated: ', cityUpdated);
             return cityUpdated;
           }).catch(function (error) {
-            // console.log('error w ifie, podczas fetcha do weather api', error);
+            // console.log('error podczas fetcha do weather api', error);
           });
         } else {
-          // console.log('Prognoza dla miasta o id: ', city.id, 'już dziś była sprawdzona');
           var cityNotUpdated = {
             "location": {
               "name": city.location.name,
@@ -13793,13 +13765,9 @@ var Results = exports.Results = function (_React$Component) {
             "status": "old",
             "id": city.id
           };
-          // console.log('cityNotUpdated: ', cityNotUpdated);
           return cityNotUpdated;
-        } //koniec else
-      }; //koniec getActualForecast
-
-
-      //updateForecasts - funkcja, która aktualizuje miasto po mieście (dopiero jak pierwsze się doda do bazy, zaczyna dodawać drugie itp - bo robiąc wszystkie PUT jednocześnie json server odmawia dostępu)
+        }
+      };
 
       _this.updateForecasts = function (actualForecastsArray) {
         var index = 0;
@@ -13813,60 +13781,36 @@ var Results = exports.Results = function (_React$Component) {
                 'Content-Type': 'application/json'
               }
             }).then(function (result) {
-              // console.log('dodałem do bazy zaktualizowane miasto o id ', actualForecastsArray[index].id);
-              // console.log('co zwraca PUT: ', result);
               index++;
               if (index < actualForecastsArray.length) {
-                // console.log('Włączam updejt dla id: ', actualForecastsArray[index].id);
                 _this.updateForecast(index);
-              } else {
-                // console.log('updejtowanie bazy zakończone, ostatnie zaktualizowane id to: ', index);
               }
             }).catch(function (error) {
               // console.log('error podczas updejtowania miasta o id ', actualForecastsArray[index].id, ' w mojej bazie, error: ', error)
             });
           } else {
-            // console.log("Nie updejtuję miasta o id ", actualForecastsArray[index].id , "w mojej bazie, bo ma status old");
             index++;
             if (index < actualForecastsArray.length) {
-              // console.log('Włączam updejt dla id: ', actualForecastsArray[index].id);
               _this.updateForecast(index);
-            } else {
-              // console.log('updejtowanie bazy zakończone, ostatnie id dla którego wykonano updateForecast to: ', index);
             }
           }
         };
-        //uruchomienie pierwszego updejtu:
-        // console.log('Włączam updejt dla id: ', index+1);
         _this.updateForecast(index);
       };
 
       _this.filterCities = function (actualForecastsArray) {
-        //zmienne, które podstawię potem do state:
         var destinations = {};
         var countries = [];
-        //TODO: na razie robię sobie osobną tablicę krajów, bo nie umiem iterować po obiekcie. Ale docelowo lepiej byłoby nie tworzyć dodatkowej zmiennej, tylko iterować po obiekcie destinations przy renderowaniu
 
-        //obliczenie startDay i endDay - które dni brać pod uwagę przy filtrowaniu
-
-        //obliczanie różnicy pomiędzy dzisiaj a dniem wylotu w dniach -> wynik oznacza, od którego dnia zacząć sprawdzać temperaturę (dzień 0 = dzisiaj);
         var startDay = _this.props.fromDateDays - _this.props.todayDays;
-        // console.log(startDay);
-
-        //obliczanie różnicy pomiędzy dzisiaj a dniem powrotu w dniach -> wynik oznacza, do którego dnia sprawdzać temperaturę (dzień 0 = dzisiaj);
         var endDay = _this.props.toDateDays - _this.props.todayDays;
-        // console.log(endDay);
 
         actualForecastsArray.forEach(function (cityToFilter) {
-          //sprawdzam temperaturę w danym mieście tylko dla wybranych dni
           var tempsToCheck = [];
           for (var i = startDay; i <= endDay; i++) {
             tempsToCheck.push(cityToFilter.forecast.forecastday[i].day.avgtemp_c);
           }
-          // console.log(cityToFilter.location.name, 'tempsToCheck: ',tempsToCheck);
-
           var tempsOk = [];
-          //pętla, która sprawdza, czy dla każdego dnia, w zakresie dat podanym przez użytkownika, temperatura mieści się w podanym zakresie temperatur. Dla każdego dnia, do talbicy tempsOk wrzuca true lub false (jeśli napotka pierwsze false, przerywa pętlę).
           for (var i = 0; i < tempsToCheck.length; i++) {
             if (tempsToCheck[i] < _this.props.minTemp || tempsToCheck[i] > _this.props.maxTemp) {
               tempsOk.push(false);
@@ -13875,25 +13819,15 @@ var Results = exports.Results = function (_React$Component) {
               tempsOk.push(true);
             }
           }
-          // console.log(cityToFilter.location.name, 'tempsOk: ', tempsOk);
-          //Teraz sprawdzam, czy tablica dla tego miasta zawiera false - jeśli nie ma ani jednego false, dorzucam państwo do countries oraz miasto do destinations(w tablicy tego państwa).
           if (tempsOk.indexOf(false) === -1) {
-            //if-else jest tu po to, żeby tylko raz dodać kraj do obiektu destinations i tablicy countries. Jeśli kraj już jest, dodajemy mu tylko miasto do jego tablicy
             if (destinations[cityToFilter.location.country] === undefined) {
-              // console.log(cityToFilter.location.country, 'Nie znalazłem kraju w obiekcie destinations');
               destinations[cityToFilter.location.country] = [cityToFilter.location.name];
               countries.push(cityToFilter.location.country);
-              // console.log(destinations);
-              // console.log(countries);
             } else {
-              // console.log(cityToFilter.location.country, 'Znalazłem kraj w obiekcie destinations');
               destinations[cityToFilter.location.country].push(cityToFilter.location.name);
-              // console.log(destinations);
-              // console.log(countries);
             }
           }
         });
-        //na koniec updejtuję state
         if (countries.length === 0) {
           _this.setState({
             destinations: destinations,
@@ -13925,14 +13859,12 @@ var Results = exports.Results = function (_React$Component) {
         .catch(function (error) {
           // console.log('error z startAsynchronousUpdateForecasts', error);
         });
-        //Nie chcę czekać z wyświetleniem wyników, aż baza zostanie zaktualizowana (nie ma takiej potrzeby), więc lecę w tym samym then z funkcją filterCities(nie czekam na wykonanie się updejtowania bazy, które dzieje się asynchronicznie).
+        //Żeby nie czekać z wyświetleniem wyników, aż baza zostanie zaktualizowana, od razu w tym samym then wywołuję filterCities.
         _this.filterCities(actualForecastsArray); //filterCities dla każdego miasta z tablicy sprawdza, czy spełnione są kryteria wyszukiwania - jeśli tak, miasto jest dodawane do odpowiednich zmiennych (countries i destinations). Na końcu aktualizowany jest state (countries, destinations, dataReady).
       }).catch(function (error) {
-        // console.log('error z search', error);
         _this.setState({
           dataReady: 'error'
         });
-        // console.log(this.state);
       });
     };
 
@@ -13947,7 +13879,6 @@ var Results = exports.Results = function (_React$Component) {
   _createClass(Results, [{
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
-      // console.log('componentWillReceiveProps');
       this.setState({
         dataReady: 'beforeSearch'
       });
@@ -13955,36 +13886,23 @@ var Results = exports.Results = function (_React$Component) {
   }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate() {
-      // console.log('componentDidUpdate');
       if (this.props.formOk === true && this.state.dataReady === 'beforeSearch') {
-        // console.log('dataReady, formOk - ruszam z funkcją Search');
-        // console.log('poleciałby search ale jest wykomentowany');
         this.search();
       }
     }
-    //TODO: obsługa błędów!!! dodać timeout?
-
   }, {
     key: 'render',
-    //koniec funkcji search
-
     value: function render() {
       var _this2 = this;
 
-      // console.log('results render');
       var names = __webpack_require__(120);
       var fromDate = this.props.fromDate;
       var toDate = this.props.toDate;
-      // console.log(fromDate);
-      // console.log(toDate);
 
-      //zmienna results i warunek - co ma się wyświetlać w zależności od etapu załadowania danych i od tego czy znaleziono przynajmniej 1 miasto do wyświetlenia
       var results = '';
       if (this.props.formOk === false) {
-        // console.log('results zablokował swoje renderowanie');
         return null;
       } else if (this.state.dataReady === 'loading') {
-        // console.log('results loading');
         results = _react2.default.createElement(
           'p',
           null,
@@ -13997,18 +13915,12 @@ var Results = exports.Results = function (_React$Component) {
           'Something went wrong. Please try again later.'
         );
       } else if (this.state.dataReady === 'ready' && this.state.noResultsFound === true) {
-        // console.log('results empty');
         results = _react2.default.createElement(
           'p',
           null,
           'Sorry, we didn\'t find any destinations matching your criteria.'
         );
       } else if (this.state.dataReady === 'ready' && this.state.noResultsFound === false) {
-        // console.log('results should appear');
-
-        //dodać jak ustawię poniższe:
-        // <p>Click on the country name, to see cities matching your search.<br/>
-        // <span>Click on the city name to find flights.</span></p>
         results = _react2.default.createElement(
           'ul',
           { id: 'destinations-list' },
@@ -14051,12 +13963,11 @@ var Results = exports.Results = function (_React$Component) {
         { id: 'results' },
         results
       );
-    } //koniec render
-
+    }
   }]);
 
   return Results;
-}(_react2.default.Component); //koniec Results
+}(_react2.default.Component);
 
 /***/ }),
 /* 123 */
@@ -14098,12 +14009,9 @@ var Search = exports.Search = function (_React$Component) {
   function Search(props) {
     _classCallCheck(this, Search);
 
-    //TODO: sprawdzić, czy działa przekazywanie informacji bez użycia state (czy results będzie się updejtował)
     var _this = _possibleConstructorReturn(this, (Search.__proto__ || Object.getPrototypeOf(Search)).call(this, props));
 
     _this.formInfoFn = function (formOkFromForm, minTempFromForm, maxTempFromForm, fromDateFromForm, toDateFromForm, toDateDays, fromDateDays, todayDays, todayDaysPlus9) {
-      // console.log('jestem w Search w odebraniu parametrów');
-      //czy to musi być robione przez zmianę state? może wystarczy to zapisać w zmiennych?
       _this.setState({
         minTemp: minTempFromForm,
         maxTemp: maxTempFromForm,
@@ -14128,14 +14036,10 @@ var Search = exports.Search = function (_React$Component) {
     };
     return _this;
   }
-  //funkcja do odbierania od Form informacji:
-
 
   _createClass(Search, [{
     key: 'render',
     value: function render() {
-      // console.log('jestem w Search', this.state.formOk);
-      // console.log('this.state.todayDays: ', this.state.todayDays);
       return _react2.default.createElement(
         'section',
         { className: 'content' },
@@ -16142,7 +16046,7 @@ exports = module.exports = __webpack_require__(128)(undefined);
 
 
 // module
-exports.push([module.i, "@charset \"UTF-8\";\n/*variables*/\n/*flex-container mixin*/\n/*TODO: AWD - dodać media queries do hamburger menu*/\n/*reset css*/\n* {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  list-style-type: none;\n  font-size: 100%;\n  font-family: \"Times New Roman\", Times, serif; }\n/*fonts*/\n/*styles*/\nhtml {\n  font-size: 0.625em; }\n#site {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 auto;\n          flex: 0 0 auto;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -ms-flex-pack: distribute;\n      justify-content: space-around;\n  -webkit-box-flex: 1 !important;\n      -ms-flex: 1 0 auto !important;\n          flex: 1 0 auto !important;\n  min-width: 250px;\n  min-height: 100vh; }\nheader {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 auto;\n          flex: 0 0 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  background-color: white;\n  border-bottom: 2px solid black; }\n.header-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 auto;\n          flex: 0 0 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -ms-flex: 0 0 90%;\n      flex: 0 0 90%;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -ms-flex-line-pack: center;\n      align-content: center;\n  font-weight: bold;\n  padding: 1rem 0; }\n.header-container nav {\n    padding: 0.4rem 0; }\n.header-container nav ul {\n      display: -webkit-box;\n      display: -ms-flexbox;\n      display: flex;\n      -ms-flex-wrap: wrap;\n          flex-wrap: wrap;\n      -webkit-box-flex: 0;\n          -ms-flex: 0 0 auto;\n              flex: 0 0 auto;\n      -webkit-box-orient: horizontal;\n      -webkit-box-direction: normal;\n          -ms-flex-direction: row;\n              flex-direction: row;\n      -webkit-box-pack: justify;\n          -ms-flex-pack: justify;\n              justify-content: space-between;\n      wrap: nowrap; }\n.header-container nav ul li {\n        text-transform: uppercase;\n        padding: 0 0.5rem;\n        font-size: 1.6rem; }\n.header-container nav ul li .link {\n          color: black; }\n.header-container nav ul li .active {\n          color: #c29114; }\n.header-container nav ul li:first-child {\n          padding-left: 0; }\n.header-container nav ul li:last-child {\n          padding-right: 0; }\n.logo {\n  font-size: 2.8rem;\n  letter-spacing: 0.1rem;\n  padding: 0.4rem 0;\n  color: #c29114; }\n.link, a {\n  text-decoration: none;\n  color: #c29114; }\nmain {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 auto;\n          flex: 0 0 auto;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-flex: 1 !important;\n      -ms-flex: 1 0 auto !important;\n          flex: 1 0 auto !important;\n  min-width: 250px;\n  background-image: url(" + __webpack_require__(255) + ");\n  background-repeat: no-repeat;\n  background-size: cover;\n  background-attachment: fixed; }\n.main-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 auto;\n          flex: 0 0 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  width: 100%; }\n.content {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 auto;\n          flex: 0 0 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -ms-flex-line-pack: distribute;\n      align-content: space-around;\n  -ms-flex: 0 0 100%;\n      flex: 0 0 100%;\n  max-width: 900px;\n  min-height: 40vh;\n  background-color: white;\n  border: 2px solid black;\n  padding: 1rem 0 1rem 0;\n  margin: 8vh 0 8vh 0; }\n.text-content {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 auto;\n          flex: 0 0 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -ms-flex: 0 0 90%;\n      flex: 0 0 90%;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  padding: 1rem 0;\n  text-align: center; }\n.text-content h1 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 1 100%;\n            flex: 0 1 100%;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n    -ms-flex: 0 0 auto;\n        flex: 0 0 auto;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    font-size: 2rem;\n    font-weight: bold;\n    padding: 2rem 0;\n    letter-spacing: 0.1rem; }\n.text-content h1 .logo {\n      font-size: 2rem;\n      padding: 0 0.5rem; }\n.text-content h2 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 100%;\n            flex: 0 0 100%;\n    font-size: 1.6rem;\n    font-weight: bold;\n    padding-top: 1.5rem; }\n.text-content p {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 100%;\n            flex: 0 0 100%;\n    font-size: 1.6rem;\n    line-height: 1.2em;\n    margin: 1rem 0; }\n.text-content button {\n    cursor: pointer;\n    color: #c29114;\n    font-size: 1.8rem;\n    font-weight: bold;\n    margin-top: 2rem;\n    margin-bottom: 1rem;\n    padding: 0.7rem 2rem;\n    background-color: white;\n    border: 2px solid #c29114;\n    border-radius: 1.5rem; }\n.text-content .note {\n    color: #c29114;\n    text-transform: uppercase; }\n#form {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 90%;\n          flex: 0 0 90%;\n  padding-bottom: 1rem; }\n#form h1 {\n    font-size: 3.4rem;\n    margin: 2rem 0 1rem 0; }\n#form h2 {\n    font-size: 2rem;\n    margin: 1rem 0 3rem 0; }\nform#search-form {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 auto;\n          flex: 0 0 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  font-size: 1.5rem; }\n.form-half .form-item {\n  padding: 1rem 0;\n  line-height: 25px !important;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 auto;\n          flex: 0 0 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between; }\n.form-half .form-item input {\n    height: 25px !important;\n    line-height: 25px !important; }\n.form-between {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 3%;\n          flex: 0 0 3%; }\n.form-left {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 auto;\n          flex: 0 0 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -webkit-box-align: start;\n      -ms-flex-align: start;\n          align-items: flex-start;\n  -ms-flex-line-pack: start;\n      align-content: flex-start;\n  -ms-flex: 0 0 225px;\n      flex: 0 0 225px; }\n.form-left .form-item {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 225px;\n            flex: 0 0 225px; }\n.form-left .form-item input {\n      width: 50px; }\n.form-right {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 auto;\n          flex: 0 0 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -ms-flex: 0 0 65%;\n      flex: 0 0 65%;\n  min-width: 225px; }\n.form-right .form-item {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 225px;\n            flex: 0 0 225px; }\n.form-right .form-item input {\n      width: 135px; }\n.form-right .form-p {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 1 auto;\n            flex: 0 1 auto; }\n.form-right .form-p p {\n      font-size: 1.3rem;\n      padding: 1rem 1rem 1rem 0; }\n.search-bar {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 auto;\n          flex: 0 0 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -ms-flex-wrap: nowrap;\n      flex-wrap: nowrap;\n  -ms-flex: 0 0 100%;\n      flex: 0 0 100%; }\n.search-bar .alert {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 1 80%;\n            flex: 0 1 80%;\n    padding-right: 1rem;\n    font-size: 1.5rem;\n    color: red; }\n.search-bar .button-div {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 auto;\n            flex: 0 0 auto;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: reverse;\n        -ms-flex-direction: row-reverse;\n            flex-direction: row-reverse;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    -ms-flex: 0 0 20%;\n        flex: 0 0 20%;\n    min-width: 9rem;\n    -ms-flex-item-align: start;\n        align-self: flex-start; }\n.search-bar .button-div #search-button {\n      width: 9rem;\n      font-size: 1.5rem;\n      font-weight: bold;\n      padding: 0.5em 1em 0.5em 1em;\n      margin-bottom: 1rem; }\n#results {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 90%;\n          flex: 0 0 90%; }\n#results p {\n    font-size: 1.8rem;\n    line-height: 2.5rem;\n    font-weight: bold;\n    color: black;\n    margin-bottom: 2rem; }\n#results p span {\n      color: #c29114; }\nli.country-li {\n  font-size: 1.6rem;\n  line-height: 3rem;\n  color: black;\n  font-weight: bold; }\nli.city-li {\n  display: inline-block;\n  text-indent: 30px;\n  color: #c29114; }\nli.city-li a.google-flights-link {\n    text-decoration: none;\n    color: #c29114; }\nfooter {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 auto;\n          flex: 0 0 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  background-color: white;\n  border-top: 2px solid black;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center; }\nfooter .footer-container {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 auto;\n            flex: 0 0 auto;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    padding: 1rem 0;\n    -ms-flex: 0 1 90%;\n        flex: 0 1 90%;\n    -ms-flex-wrap: nowrap;\n        flex-wrap: nowrap;\n    font-size: 1.4rem;\n    font-weight: bold; }\nfooter .footer-container div {\n      height: 100%; }\nfooter .footer-container #disclaimer {\n      padding-right: 2rem; }\nfooter .footer-container #powered {\n      text-align: right; }\nfooter .footer-container #powered a {\n        text-decoration: none;\n        color: #c29114; }\n", ""]);
+exports.push([module.i, "/*variables*/\n/*flex-container mixin*/\n/*reset css*/\n* {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  list-style-type: none;\n  font-size: 100%;\n  font-family: \"Times New Roman\", Times, serif; }\n/*styles*/\nhtml {\n  font-size: 0.625em; }\n#site {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 auto;\n          flex: 0 0 auto;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -ms-flex-pack: distribute;\n      justify-content: space-around;\n  -webkit-box-flex: 1 !important;\n      -ms-flex: 1 0 auto !important;\n          flex: 1 0 auto !important;\n  min-width: 250px;\n  min-height: 100vh; }\nheader {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 auto;\n          flex: 0 0 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  background-color: white;\n  border-bottom: 2px solid black; }\n.header-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 auto;\n          flex: 0 0 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -ms-flex: 0 0 90%;\n      flex: 0 0 90%;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -ms-flex-line-pack: center;\n      align-content: center;\n  font-weight: bold;\n  padding: 1rem 0; }\n.header-container nav {\n    padding: 0.4rem 0; }\n.header-container nav ul {\n      display: -webkit-box;\n      display: -ms-flexbox;\n      display: flex;\n      -ms-flex-wrap: wrap;\n          flex-wrap: wrap;\n      -webkit-box-flex: 0;\n          -ms-flex: 0 0 auto;\n              flex: 0 0 auto;\n      -webkit-box-orient: horizontal;\n      -webkit-box-direction: normal;\n          -ms-flex-direction: row;\n              flex-direction: row;\n      -webkit-box-pack: justify;\n          -ms-flex-pack: justify;\n              justify-content: space-between;\n      wrap: nowrap; }\n.header-container nav ul li {\n        text-transform: uppercase;\n        padding: 0 0.5rem;\n        font-size: 1.6rem; }\n.header-container nav ul li .link {\n          color: black; }\n.header-container nav ul li .active {\n          color: #c29114; }\n.header-container nav ul li:first-child {\n          padding-left: 0; }\n.header-container nav ul li:last-child {\n          padding-right: 0; }\n.logo {\n  font-size: 2.8rem;\n  letter-spacing: 0.1rem;\n  padding: 0.4rem 0;\n  color: #c29114; }\n.link, a {\n  text-decoration: none;\n  color: #c29114; }\nmain {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 auto;\n          flex: 0 0 auto;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-flex: 1 !important;\n      -ms-flex: 1 0 auto !important;\n          flex: 1 0 auto !important;\n  min-width: 250px;\n  background-image: url(" + __webpack_require__(255) + ");\n  background-repeat: no-repeat;\n  background-size: cover;\n  background-attachment: fixed; }\n.main-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 auto;\n          flex: 0 0 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  width: 100%; }\n.content {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 auto;\n          flex: 0 0 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -ms-flex-line-pack: distribute;\n      align-content: space-around;\n  -ms-flex: 0 0 100%;\n      flex: 0 0 100%;\n  max-width: 900px;\n  min-height: 40vh;\n  background-color: white;\n  border: 2px solid black;\n  padding: 1rem 0 1rem 0;\n  margin: 8vh 0 8vh 0; }\n.text-content {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 auto;\n          flex: 0 0 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -ms-flex: 0 0 90%;\n      flex: 0 0 90%;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  padding: 1rem 0;\n  text-align: center; }\n.text-content h1 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 1 100%;\n            flex: 0 1 100%;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n    -ms-flex: 0 0 auto;\n        flex: 0 0 auto;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    font-size: 2rem;\n    font-weight: bold;\n    padding: 2rem 0;\n    letter-spacing: 0.1rem; }\n.text-content h1 .logo {\n      font-size: 2rem;\n      padding: 0 0.5rem; }\n.text-content h2 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 100%;\n            flex: 0 0 100%;\n    font-size: 1.6rem;\n    font-weight: bold;\n    padding-top: 1.5rem; }\n.text-content p {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 100%;\n            flex: 0 0 100%;\n    font-size: 1.6rem;\n    line-height: 1.2em;\n    margin: 1rem 0; }\n.text-content button {\n    cursor: pointer;\n    color: #c29114;\n    font-size: 1.8rem;\n    font-weight: bold;\n    margin-top: 2rem;\n    margin-bottom: 1rem;\n    padding: 0.7rem 2rem;\n    background-color: white;\n    border: 2px solid #c29114;\n    border-radius: 1.5rem; }\n.text-content .note {\n    color: #c29114;\n    text-transform: uppercase; }\n#form {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 90%;\n          flex: 0 0 90%;\n  padding-bottom: 1rem; }\n#form h1 {\n    font-size: 3.4rem;\n    margin: 2rem 0 1rem 0; }\n#form h2 {\n    font-size: 2rem;\n    margin: 1rem 0 3rem 0; }\nform#search-form {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 auto;\n          flex: 0 0 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  font-size: 1.5rem; }\n.form-half .form-item {\n  padding: 1rem 0;\n  line-height: 25px !important;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 auto;\n          flex: 0 0 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between; }\n.form-half .form-item input {\n    height: 25px !important;\n    line-height: 25px !important; }\n.form-between {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 3%;\n          flex: 0 0 3%; }\n.form-left {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 auto;\n          flex: 0 0 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -webkit-box-align: start;\n      -ms-flex-align: start;\n          align-items: flex-start;\n  -ms-flex-line-pack: start;\n      align-content: flex-start;\n  -ms-flex: 0 0 225px;\n      flex: 0 0 225px; }\n.form-left .form-item {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 225px;\n            flex: 0 0 225px; }\n.form-left .form-item input {\n      width: 50px; }\n.form-right {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 auto;\n          flex: 0 0 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -ms-flex: 0 0 65%;\n      flex: 0 0 65%;\n  min-width: 225px; }\n.form-right .form-item {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 225px;\n            flex: 0 0 225px; }\n.form-right .form-item input {\n      width: 135px; }\n.form-right .form-p {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 1 auto;\n            flex: 0 1 auto; }\n.form-right .form-p p {\n      font-size: 1.3rem;\n      padding: 1rem 1rem 1rem 0; }\n.search-bar {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 auto;\n          flex: 0 0 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -ms-flex-wrap: nowrap;\n      flex-wrap: nowrap;\n  -ms-flex: 0 0 100%;\n      flex: 0 0 100%; }\n.search-bar .alert {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 1 80%;\n            flex: 0 1 80%;\n    padding-right: 1rem;\n    font-size: 1.5rem;\n    color: red; }\n.search-bar .button-div {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 auto;\n            flex: 0 0 auto;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: reverse;\n        -ms-flex-direction: row-reverse;\n            flex-direction: row-reverse;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    -ms-flex: 0 0 20%;\n        flex: 0 0 20%;\n    min-width: 9rem;\n    -ms-flex-item-align: start;\n        align-self: flex-start; }\n.search-bar .button-div #search-button {\n      width: 9rem;\n      font-size: 1.5rem;\n      font-weight: bold;\n      padding: 0.5em 1em 0.5em 1em;\n      margin-bottom: 1rem; }\n#results {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 90%;\n          flex: 0 0 90%; }\n#results p {\n    font-size: 1.8rem;\n    line-height: 2.5rem;\n    font-weight: bold;\n    color: black;\n    margin-bottom: 2rem; }\n#results p span {\n      color: #c29114; }\nli.country-li {\n  font-size: 1.6rem;\n  line-height: 3rem;\n  color: black;\n  font-weight: bold; }\nli.city-li {\n  display: inline-block;\n  text-indent: 30px; }\nli.city-li a.google-flights-link {\n    text-decoration: none;\n    color: #c29114; }\nfooter {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 auto;\n          flex: 0 0 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  background-color: white;\n  border-top: 2px solid black;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center; }\nfooter .footer-container {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 auto;\n            flex: 0 0 auto;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    padding: 1rem 0;\n    -ms-flex: 0 1 90%;\n        flex: 0 1 90%;\n    -ms-flex-wrap: nowrap;\n        flex-wrap: nowrap;\n    font-size: 1.4rem;\n    font-weight: bold; }\nfooter .footer-container div {\n      height: 100%; }\nfooter .footer-container #disclaimer {\n      padding-right: 2rem; }\nfooter .footer-container #powered {\n      text-align: right; }\nfooter .footer-container #powered a {\n        text-decoration: none;\n        color: #c29114; }\n", ""]);
 
 // exports
 

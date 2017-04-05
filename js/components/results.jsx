@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-//dostaje w propsach: <Results minTemp={this.state.minTemp} maxTemp={this.state.maxTemp} fromDate={this.state.fromDate} toDate={this.state.toDate} formOk={this.state.formOk}/>
 export class Results extends React.Component{
   constructor(props){
     super(props);
@@ -13,61 +12,42 @@ export class Results extends React.Component{
   }
 
   componentWillReceiveProps(nextProps){
-    // console.log('componentWillReceiveProps');
     this.setState({
       dataReady: 'beforeSearch'
     });
   }
-
   componentDidUpdate(){
-    // console.log('componentDidUpdate');
     if (this.props.formOk === true && this.state.dataReady === 'beforeSearch'){
-      // console.log('dataReady, formOk - ruszam z funkcją Search');
-      // console.log('poleciałby search ale jest wykomentowany');
       this.search();
     }
   }
-  //TODO: obsługa błędów!!! dodać timeout?
+
   search = () => {
-    //wyświetl 'loading' i nie uruchamiaj znowu funkcji search, dopóki data nie będzie ready
     this.setState({
       dataReady: 'loading'
     })
-    // console.log('jestem w funkcji search w results, więc zaczynam iterować po miastach');
     let ids = [];
     for (var i = 0; i < 73; i++) {
       ids.push(i+1);
     }
-    // console.log(ids);
-    //czy te funkcje mogą być tu w środku funkcji search? czy powinny być poza nią?
     this.getCities = ids => ids.map(id => this.getCity(id));
-
     this.getCity = (id) => {
       return fetch("http://find-the-sun.com:3000/destinations/"+id)
       .then(data => {
-        // console.log('wysłałem zapytanie GET do mojej bazy dla id: ', id);
         return data.json()
       })
       .catch(error => {
         // console.log('error z getCity przy id: ', id, error);
       });
-    }//koniec getCity
-
+    }
     this.getActualForecasts = citiesArray => citiesArray.map(city => this.getActualForecast(city));
-
     this.getActualForecast = (city) => {
-      // console.log('city.id z getActualForecast: ', city.id);
-      // let currentDate = new Date().toISOString().substring(0, 10);
       let checkedAt = city.checkedAt;
       if (checkedAt !== this.props.todayDays){
-        // console.log('prognoza dziś jeszcze nie była sprawdzona, jestem w if, zaraz zrobię fetch do API dla city.id: ', city.id);
         let url = "http://api.apixu.com/v1/forecast.json?key=0ffd45ac047f4cda8ae85915171303&q="+city.location.name+"&days=10"
         return fetch(url)
         .then(data => data.json())
         .then(data=>{
-          // console.log('jestem w fetchu do API, sprawdzam city.id: ', city.id);
-          //zapisuję średnie temperatury dla najbliższych 10 dni do zmiennych
-          //zrobić tu pętlę:
           let temp_day0 = data.forecast.forecastday[0].day.avgtemp_c;
           let temp_day1 = data.forecast.forecastday[1].day.avgtemp_c;
           let temp_day2 = data.forecast.forecastday[2].day.avgtemp_c;
@@ -78,8 +58,7 @@ export class Results extends React.Component{
           let temp_day7 = data.forecast.forecastday[7].day.avgtemp_c;
           let temp_day8 = data.forecast.forecastday[8].day.avgtemp_c;
           let temp_day9 = data.forecast.forecastday[9].day.avgtemp_c;
-          //tworzę nowy obiekt dla miasta, w którym podmieniam temperatury oraz checkedAt, oraz ustawiam status na 'new'.
-          // console.log('zapisałem do zmiennych temperatury dla city.id: ', city.id, 'zaraz tworzę cityUpdated');
+
           let cityUpdated =
           {
             "location": {
@@ -146,14 +125,12 @@ export class Results extends React.Component{
                 "status": "new",
                 "id": city.id
               }
-              // console.log('stworzenie cityUpdated dla id: ', city.id, 'cityUpdated: ', cityUpdated);
               return cityUpdated;
           }).catch(error=>{
-            // console.log('error w ifie, podczas fetcha do weather api', error);
+            // console.log('error podczas fetcha do weather api', error);
           }
         );
       } else {
-        // console.log('Prognoza dla miasta o id: ', city.id, 'już dziś była sprawdzona');
         let cityNotUpdated =
         {
           "location": {
@@ -220,13 +197,9 @@ export class Results extends React.Component{
               "status": "old",
               "id": city.id
             }
-        // console.log('cityNotUpdated: ', cityNotUpdated);
         return cityNotUpdated;
-      } //koniec else
-    }//koniec getActualForecast
-
-
-    //updateForecasts - funkcja, która aktualizuje miasto po mieście (dopiero jak pierwsze się doda do bazy, zaczyna dodawać drugie itp - bo robiąc wszystkie PUT jednocześnie json server odmawia dostępu)
+      }
+    }
 
     this.updateForecasts = actualForecastsArray => {
       let index = 0;
@@ -240,60 +213,36 @@ export class Results extends React.Component{
                       'Content-Type': 'application/json'
                   }
               }).then(result => {
-                  // console.log('dodałem do bazy zaktualizowane miasto o id ', actualForecastsArray[index].id);
-                  // console.log('co zwraca PUT: ', result);
                   index ++;
                   if (index < actualForecastsArray.length){
-                    // console.log('Włączam updejt dla id: ', actualForecastsArray[index].id);
                     this.updateForecast(index);
-                  } else {
-                    // console.log('updejtowanie bazy zakończone, ostatnie zaktualizowane id to: ', index);
                   }
               }).catch(error=>{
                 // console.log('error podczas updejtowania miasta o id ', actualForecastsArray[index].id, ' w mojej bazie, error: ', error)
               });
         } else {
-          // console.log("Nie updejtuję miasta o id ", actualForecastsArray[index].id , "w mojej bazie, bo ma status old");
           index ++;
           if (index < actualForecastsArray.length){
-            // console.log('Włączam updejt dla id: ', actualForecastsArray[index].id);
             this.updateForecast(index);
-          } else {
-            // console.log('updejtowanie bazy zakończone, ostatnie id dla którego wykonano updateForecast to: ', index);
           }
         }
       }
-      //uruchomienie pierwszego updejtu:
-      // console.log('Włączam updejt dla id: ', index+1);
       this.updateForecast(index);
     }
 
     this.filterCities = actualForecastsArray => {
-      //zmienne, które podstawię potem do state:
       let destinations = {};
       let countries = [];
-      //TODO: na razie robię sobie osobną tablicę krajów, bo nie umiem iterować po obiekcie. Ale docelowo lepiej byłoby nie tworzyć dodatkowej zmiennej, tylko iterować po obiekcie destinations przy renderowaniu
 
-      //obliczenie startDay i endDay - które dni brać pod uwagę przy filtrowaniu
-
-      //obliczanie różnicy pomiędzy dzisiaj a dniem wylotu w dniach -> wynik oznacza, od którego dnia zacząć sprawdzać temperaturę (dzień 0 = dzisiaj);
       let startDay = this.props.fromDateDays - this.props.todayDays;
-      // console.log(startDay);
-
-      //obliczanie różnicy pomiędzy dzisiaj a dniem powrotu w dniach -> wynik oznacza, do którego dnia sprawdzać temperaturę (dzień 0 = dzisiaj);
       let endDay = this.props.toDateDays - this.props.todayDays;
-      // console.log(endDay);
 
       actualForecastsArray.forEach(cityToFilter => {
-        //sprawdzam temperaturę w danym mieście tylko dla wybranych dni
         let tempsToCheck = [];
         for (var i = startDay; i <= endDay; i++) {
           tempsToCheck.push(cityToFilter.forecast.forecastday[i].day.avgtemp_c);
         }
-        // console.log(cityToFilter.location.name, 'tempsToCheck: ',tempsToCheck);
-
         let tempsOk = [];
-        //pętla, która sprawdza, czy dla każdego dnia, w zakresie dat podanym przez użytkownika, temperatura mieści się w podanym zakresie temperatur. Dla każdego dnia, do talbicy tempsOk wrzuca true lub false (jeśli napotka pierwsze false, przerywa pętlę).
         for (var i = 0; i < tempsToCheck.length; i++) {
           if (tempsToCheck[i] < this.props.minTemp || tempsToCheck[i] > this.props.maxTemp) {
             tempsOk.push(false);
@@ -302,26 +251,15 @@ export class Results extends React.Component{
             tempsOk.push(true);
           }
         }
-        // console.log(cityToFilter.location.name, 'tempsOk: ', tempsOk);
-        //Teraz sprawdzam, czy tablica dla tego miasta zawiera false - jeśli nie ma ani jednego false, dorzucam państwo do countries oraz miasto do destinations(w tablicy tego państwa).
         if (tempsOk.indexOf(false)===-1){
-          //if-else jest tu po to, żeby tylko raz dodać kraj do obiektu destinations i tablicy countries. Jeśli kraj już jest, dodajemy mu tylko miasto do jego tablicy
           if (destinations[cityToFilter.location.country]===undefined){
-            // console.log(cityToFilter.location.country, 'Nie znalazłem kraju w obiekcie destinations');
             destinations[cityToFilter.location.country] = [cityToFilter.location.name];
             countries.push(cityToFilter.location.country);
-            // console.log(destinations);
-            // console.log(countries);
           } else {
-            // console.log(cityToFilter.location.country, 'Znalazłem kraj w obiekcie destinations');
             destinations[cityToFilter.location.country].push(cityToFilter.location.name);
-            // console.log(destinations);
-            // console.log(countries);
           }
         }
-
-      })
-      //na koniec updejtuję state
+      });
       if (countries.length === 0){
         this.setState({
           destinations: destinations,
@@ -337,7 +275,6 @@ export class Results extends React.Component{
           noResultsFound: false
         });
       }
-
     }
 
     let startPromiseChain = Promise.resolve(ids);
@@ -356,45 +293,31 @@ export class Results extends React.Component{
       .catch(error => {
         // console.log('error z startAsynchronousUpdateForecasts', error);
       });
-      //Nie chcę czekać z wyświetleniem wyników, aż baza zostanie zaktualizowana (nie ma takiej potrzeby), więc lecę w tym samym then z funkcją filterCities(nie czekam na wykonanie się updejtowania bazy, które dzieje się asynchronicznie).
+      //Żeby nie czekać z wyświetleniem wyników, aż baza zostanie zaktualizowana, od razu w tym samym then wywołuję filterCities.
       this.filterCities(actualForecastsArray);//filterCities dla każdego miasta z tablicy sprawdza, czy spełnione są kryteria wyszukiwania - jeśli tak, miasto jest dodawane do odpowiednich zmiennych (countries i destinations). Na końcu aktualizowany jest state (countries, destinations, dataReady).
     })
     .catch(error => {
-      // console.log('error z search', error);
       this.setState({
         dataReady: 'error'
       });
-      // console.log(this.state);
     });
-  }//koniec funkcji search
+  }
 
   render(){
-    // console.log('results render');
     const names = require('./names.jsx');
     let fromDate=this.props.fromDate;
     let toDate=this.props.toDate;
-    // console.log(fromDate);
-    // console.log(toDate);
 
-    //zmienna results i warunek - co ma się wyświetlać w zależności od etapu załadowania danych i od tego czy znaleziono przynajmniej 1 miasto do wyświetlenia
     let results = '';
     if (this.props.formOk === false){
-      // console.log('results zablokował swoje renderowanie');
       return null;
     } else if (this.state.dataReady ==='loading'){
-      // console.log('results loading');
       results = <p>Loading...</p>;
     } else if (this.state.dataReady === 'error') {
       results = <p>Something went wrong. Please try again later.</p>
     } else if (this.state.dataReady === 'ready' && this.state.noResultsFound === true){
-      // console.log('results empty');
       results = <p>Sorry, we didn't find any destinations matching your criteria.</p>;
     } else if (this.state.dataReady === 'ready' && this.state.noResultsFound === false) {
-      // console.log('results should appear');
-
-      //dodać jak ustawię poniższe:
-      // <p>Click on the country name, to see cities matching your search.<br/>
-      // <span>Click on the city name to find flights.</span></p>
       results = <ul id='destinations-list'>
       <p>
       <span>Click on the city name to find flights.</span></p>
@@ -411,5 +334,5 @@ export class Results extends React.Component{
       }</ul>
     };
     return <div id='results'>{results}</div>
-  }//koniec render
-}//koniec Results
+  }
+}

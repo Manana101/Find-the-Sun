@@ -7,15 +7,12 @@ $color4: white;
 $text-color1: black;
 $text-color2: grey;
 $text-color3: red;
-$text-color4: #c29114; //logo
-//width
+$text-color4: #c29114;//logo
+//widths
 $min-width: 250px;
-// $container-min-width: 225px;
 $min-width-form: 225px;
 $inner-width: 90%;
 $max-width: 900px;
-// $main-width: 65%;
-
 /*flex-container mixin*/
 @mixin flex-container($direction, $justify-content) {
   display: flex;
@@ -24,9 +21,6 @@ $max-width: 900px;
   flex-direction: $direction;
   justify-content: $justify-content;
 }
-
-/*TODO: AWD - dodać media queries do hamburger menu*/
-
 /*reset css*/
 * {
   margin: 0;
@@ -36,16 +30,13 @@ $max-width: 900px;
   font-size: 100%;
   font-family: "Times New Roman", Times, serif;
 }
-/*fonts*/
-//TODO - fajniejsza czcionka
-
 /*styles*/
 html {
   font-size: 0.625em; //=10px
 }
 #site {
   @include flex-container(column, space-around);
-  flex: 1 0 auto !important;
+  flex: 1 0 auto !important;//to fix Safari flexbox bug
   min-width: $min-width;
   min-height: 100vh;
 }
@@ -59,7 +50,6 @@ header {
   flex: 0 0 $inner-width;
   align-items: center;
   align-content: center;
-  // border: 1px solid pink;
   font-weight: bold;
   padding: 1rem 0;
   nav {
@@ -100,10 +90,9 @@ header {
 main {
   @include flex-container(column, flex-start);
   align-items: center;
-  flex: 1 0 auto !important;
-  // width: 100%;
-  min-width: $min-width;
+  flex: 1 0 auto !important;//to fix Safari flexbox bug
   // flex-grow: 1; //konieczne żeby footer był zawsze na dole, a header na górze, nawet jeśli treść nie zajmuje całej strony - nie działa na IE11
+  min-width: $min-width;
   background-image: url('./images/background-2.png');
   background-repeat: no-repeat;
   background-size: cover;
@@ -113,16 +102,10 @@ main {
 .main-container {
   @include flex-container(row, center);
   width: 100%; //not good but no other way to set width inside flex-direction: column container
-  // min-width: $min-width;
-  // flex: 0 0 $inner-width;
-  // max-width: $max-width;
-  // width: $inner-width;
-  //border: 1px solid green;
 }
 .content { //czarna ramka, białe tło
   @include flex-container(row, center);
   align-content: space-around;
-  // width: 100%;
   flex: 0 0 100%;
   max-width: $max-width;
   min-height: 40vh;
@@ -136,9 +119,7 @@ main {
   flex: 0 0 $inner-width;
   align-items: center;
   padding: 1rem 0;
-  // width: 100%;
   text-align: center;
-  // text-align: justify;
   h1{
     flex: 0 1 100%;
     @include flex-container(row, center);
@@ -149,7 +130,6 @@ main {
     }
     font-size: 2rem;
     font-weight: bold;
-    // text-align: center;
     padding: 2rem 0;
     letter-spacing: 0.1rem;
   }
@@ -163,14 +143,8 @@ main {
     flex: 0 0 100%;
     font-size: 1.6rem;
     line-height: 1.2em;
-    // flex: 0 0 80%;
-    // width: 80%;
     margin: 1rem 0;
-    // display: none;
   }
-  // .destinations-full-list{
-  //   text-align: justify;
-  // }
   button{
     cursor: pointer;
     color: $text-color4;
@@ -189,10 +163,6 @@ main {
   }
 }
 #form {
-  // border: 1px solid blue;
-  // width: $inner-width;
-  // min-width: $min-width-form;
-  // flex-shrink: 0;
   flex: 0 0 $inner-width;
   padding-bottom: 1rem;
   h1 {
@@ -207,15 +177,9 @@ main {
 form#search-form {
   @include flex-container(row, space-between);
   font-size: 1.5rem;
-  // border: 1px solid red;
 }
 .form-half {
-  // border: 1px solid yellow;
-  // min-width: $min-width-form; !
-  // flex-shrink: 0;
-  // flex: 0 0 50%;
   .form-item {
-    // border: 1px solid black;
     padding: 1rem 0;
     line-height: 25px !important; //to override firefox defaults
     @include flex-container(row, space-between);
@@ -227,73 +191,43 @@ form#search-form {
 }
 .form-between{
   flex: 0 0 3%;
-  // border: 2px solid blue;
 }
 .form-left {
   @include flex-container(row, space-between);
   align-items: flex-start;
   align-content: flex-start;
-  // width: 50%;
-  // flex: 0 0 20%; !
   flex: 0 0 $min-width-form;
   .form-item {
-    // width: 30%;
-    // flex: 0 0 30%;
     flex: 0 0 $min-width-form;
     input {
       width: 50px;
     }
   }
-}//koniec .form-left
+}
 .form-right {
   @include flex-container(row, space-between);
   flex: 0 0 65%;
   min-width: $min-width-form;
-  // flex: 0 0 $min-width-form;
-  // flex-grow: 1;
-  // width: 50%;
-  // flex: 0 0 50%;
-  // border: 1px solid yellow;
     .form-item {
-      // flex: 0 1 40%; !
       flex: 0 0 $min-width-form;
-      // width: 40%;
-      // padding-left: 1rem;
       input {
         width: 135px;
       }
     }
     .form-p{
       flex: 0 1 auto;
-      // border: 1px solid green;
       p {
-        // border: 1px solid purple;
         font-size: 1.3rem;
-        // width: 100%;
-        // flex: 1 0 100%;
-        // text-align: right;
         padding: 1rem 1rem 1rem 0;
-        // min-width: $min-width-form;
-        // flex-shrink: 0;
       }
     }
-}//koniec .form-right
-
+}
 .search-bar {
   @include flex-container(row, space-between);
   align-items: center;
   flex-wrap: nowrap;
-  // width: 100%;
   flex: 0 0 100%;
-  // padding: 0.5rem 0;
-  // min-width: $min-width-form;
-  // border: 3px solid pink;
-  // padding-right: 1rem;
   .alert {
-    // border: 1px solid pink;
-    // max-width: 50vw;
-    // flex-shrink: 1;
-    // width: 80%;
     flex: 0 1 80%;
     padding-right: 1rem;
     font-size: 1.5rem;
@@ -301,12 +235,9 @@ form#search-form {
   }
   .button-div {
     @include flex-container(row-reverse, space-between);
-    // width: 20%;
     flex: 0 0 20%;
     min-width: 9rem;
-    // flex-grow: 1;
     align-self: flex-start;
-    // border: 1px solid green;
     #search-button {
       width: 9rem;
       font-size: 1.5rem;
@@ -316,12 +247,8 @@ form#search-form {
     }
   }
 }
-
 #results {
-  // width: $inner-width;
-  // min-width: $min-width-form;
   flex: 0 0 $inner-width;
-  // border: 1px solid green;
   p {
     font-size: 1.8rem;
     line-height: 2.5rem;
@@ -333,33 +260,25 @@ form#search-form {
     }
   }
 }
-
 li.country-li{
   font-size: 1.6rem;
   line-height: 3rem;
   color: $text-color1;
   font-weight: bold;
 }
-// ul.city-ul{
-//   display: inline-block;
-// }
 li.city-li{
   display: inline-block;
   text-indent: 30px;
-  color: $text-color4;//usunąć potem jak dodam linki
   a.google-flights-link{
     text-decoration: none;
     color: $text-color4;
-    // font-weight: normal;
   }
 }
 
 footer {
   @include flex-container(row, center);
-  // flex: 0 1 auto;
   background-color: $color4;
   border-top: 2px solid $color1;
-  // border-bottom: 2px solid $color1;
   align-items: center;
   .footer-container {
     @include flex-container(row, space-between);
@@ -370,18 +289,11 @@ footer {
     font-weight: bold;
     div {
       height: 100%;
-      // padding: 0.5rem 0;
     }
     #disclaimer{
-      // border: 1px solid yellow;
-      // width: 75%;
-      // flex: 0 0 60%;
       padding-right: 2rem;
     }
     #powered{
-      // border: 1px solid red;
-      // width: 40%;
-      // flex: 0 0 15%;
       text-align: right;
       a {
         text-decoration: none;
