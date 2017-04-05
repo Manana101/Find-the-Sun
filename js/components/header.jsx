@@ -6,7 +6,7 @@ import {IndexLink, Link} from 'react-router';
 export class Header extends React.Component {
   render(){
     return   <header>
-        <div className="container header-container">
+        <div className="header-container">
           <div className='logo'>
             <Link to="/" className='link'>Find the Sun</Link>
           </div>

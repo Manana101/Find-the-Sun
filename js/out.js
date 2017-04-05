@@ -331,7 +331,7 @@ module.exports = invariant;
 
 
 
-var emptyFunction = __webpack_require__(11);
+var emptyFunction = __webpack_require__(12);
 
 /**
  * Similar to invariant but only logs a warning if the condition is not met.
@@ -1184,6 +1184,16 @@ module.exports = ReactComponentTreeHook;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+
+
+module.exports = __webpack_require__(166);
+
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
 /* WEBPACK VAR INJECTION */(function(process) {/**
  * Copyright 2016-present, Facebook, Inc.
  * All rights reserved.
@@ -1210,7 +1220,7 @@ module.exports = { debugTool: debugTool };
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1252,16 +1262,6 @@ emptyFunction.thatReturnsArgument = function (arg) {
 };
 
 module.exports = emptyFunction;
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = __webpack_require__(166);
-
 
 /***/ }),
 /* 13 */
@@ -1577,7 +1577,7 @@ var _assign = __webpack_require__(5);
 
 var PooledClass = __webpack_require__(20);
 
-var emptyFunction = __webpack_require__(11);
+var emptyFunction = __webpack_require__(12);
 var warning = __webpack_require__(2);
 
 var didWarnForAddedNewProperty = false;
@@ -3058,7 +3058,7 @@ module.exports = DOMLazyTree;
 
 
 var ReactRef = __webpack_require__(195);
-var ReactInstrumentation = __webpack_require__(10);
+var ReactInstrumentation = __webpack_require__(11);
 
 var warning = __webpack_require__(2);
 
@@ -5924,7 +5924,7 @@ exports.default = runTransitionHook;
 var DOMLazyTree = __webpack_require__(24);
 var Danger = __webpack_require__(158);
 var ReactDOMComponentTree = __webpack_require__(6);
-var ReactInstrumentation = __webpack_require__(10);
+var ReactInstrumentation = __webpack_require__(11);
 
 var createMicrosoftUnsafeLocalFunction = __webpack_require__(57);
 var setInnerHTML = __webpack_require__(42);
@@ -6753,7 +6753,7 @@ var _prodInvariant = __webpack_require__(3);
 
 var ReactCurrentOwner = __webpack_require__(14);
 var ReactInstanceMap = __webpack_require__(32);
-var ReactInstrumentation = __webpack_require__(10);
+var ReactInstrumentation = __webpack_require__(11);
 var ReactUpdates = __webpack_require__(13);
 
 var invariant = __webpack_require__(1);
@@ -7275,7 +7275,7 @@ module.exports = shouldUpdateReactComponent;
 
 var _assign = __webpack_require__(5);
 
-var emptyFunction = __webpack_require__(11);
+var emptyFunction = __webpack_require__(12);
 var warning = __webpack_require__(2);
 
 var validateDOMNesting = emptyFunction;
@@ -8386,7 +8386,7 @@ module.exports = getIteratorFn;
  * @typechecks
  */
 
-var emptyFunction = __webpack_require__(11);
+var emptyFunction = __webpack_require__(12);
 
 /**
  * Upstream version of event listener. Does not take into account specific
@@ -9154,7 +9154,7 @@ module.exports = PooledClass.addPoolingTo(CallbackQueue);
 
 var DOMProperty = __webpack_require__(17);
 var ReactDOMComponentTree = __webpack_require__(6);
-var ReactInstrumentation = __webpack_require__(10);
+var ReactInstrumentation = __webpack_require__(11);
 
 var quoteAttributeValueForBrowser = __webpack_require__(222);
 var warning = __webpack_require__(2);
@@ -9901,7 +9901,7 @@ var ReactDOMContainerInfo = __webpack_require__(168);
 var ReactDOMFeatureFlags = __webpack_require__(170);
 var ReactFeatureFlags = __webpack_require__(85);
 var ReactInstanceMap = __webpack_require__(32);
-var ReactInstrumentation = __webpack_require__(10);
+var ReactInstrumentation = __webpack_require__(11);
 var ReactMarkupChecksum = __webpack_require__(190);
 var ReactReconciler = __webpack_require__(25);
 var ReactUpdateQueue = __webpack_require__(56);
@@ -12039,7 +12039,7 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(12);
+var _reactDom = __webpack_require__(10);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -12590,7 +12590,7 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(12);
+var _reactDom = __webpack_require__(10);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -12725,7 +12725,7 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(12);
+var _reactDom = __webpack_require__(10);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -12813,7 +12813,7 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(12);
+var _reactDom = __webpack_require__(10);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -12880,7 +12880,7 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(12);
+var _reactDom = __webpack_require__(10);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -12910,7 +12910,7 @@ var Footer = exports.Footer = function (_React$Component) {
         null,
         _react2.default.createElement(
           'div',
-          { className: 'container footer-container' },
+          { className: 'footer-container' },
           _react2.default.createElement(
             'div',
             { id: 'disclaimer' },
@@ -12952,7 +12952,7 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(12);
+var _reactDom = __webpack_require__(10);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -13121,6 +13121,7 @@ var Form = exports.Form = function (_React$Component) {
               _react2.default.createElement('input', { type: 'number', value: this.state.maxTemp, onChange: this.handleMaxTempChange, id: 'max-temp-input' })
             )
           ),
+          _react2.default.createElement('div', { className: 'form-between' }),
           _react2.default.createElement(
             'div',
             { className: 'form-half form-right' },
@@ -13134,6 +13135,7 @@ var Form = exports.Form = function (_React$Component) {
               ),
               _react2.default.createElement('input', { type: 'date', min: today, max: todayPlus9, value: this.state.fromDate, onChange: this.handleFromDateChange, id: 'from-date-input', placeholder: 'yyyy-mm-dd' })
             ),
+            _react2.default.createElement('div', { className: 'form-between' }),
             _react2.default.createElement(
               'div',
               { className: 'form-item' },
@@ -13145,9 +13147,13 @@ var Form = exports.Form = function (_React$Component) {
               _react2.default.createElement('input', { type: 'date', min: today, max: todayPlus9, value: this.state.toDate, onChange: this.handleToDateChange, id: 'to-date-input', placeholder: 'yyyy-mm-dd' })
             ),
             _react2.default.createElement(
-              'p',
-              null,
-              '*We can check the weather for max. 10 days from now'
+              'div',
+              { className: 'form-p' },
+              _react2.default.createElement(
+                'p',
+                null,
+                '*We can check the weather for max. 10 days from now'
+              )
             )
           ),
           _react2.default.createElement(
@@ -13157,40 +13163,36 @@ var Form = exports.Form = function (_React$Component) {
               'div',
               { className: 'alert' },
               this.state.formOk === false ? _react2.default.createElement(
-                'p',
+                'ul',
                 null,
+                ' Incorrect form! Please make sure that:',
                 _react2.default.createElement(
-                  'ul',
-                  null,
-                  ' Incorrect form! Please make sure that:',
-                  _react2.default.createElement(
-                    'li',
-                    { key: 'all-questions' },
-                    '- all the questions are answered'
-                  ),
-                  _react2.default.createElement(
-                    'li',
-                    { key: 'temps-logic' },
-                    '- \'Max. temp\' is higher or equal to \'Min. temp\''
-                  ),
-                  _react2.default.createElement(
-                    'li',
-                    { key: 'dates-logic' },
-                    '- \'To\' date is later or equal to \'From\' date'
-                  ),
-                  _react2.default.createElement(
-                    'li',
-                    { key: 'dates-format' },
-                    '- both dates are in the suggested format'
-                  ),
-                  _react2.default.createElement(
-                    'li',
-                    { key: 'dates-between' },
-                    '- both dates are between ',
-                    today,
-                    ' and ',
-                    todayPlus9
-                  )
+                  'li',
+                  { key: 'all-questions' },
+                  '- all the questions are answered'
+                ),
+                _react2.default.createElement(
+                  'li',
+                  { key: 'temps-logic' },
+                  '- \'Max. temp\' is higher or equal to \'Min. temp\''
+                ),
+                _react2.default.createElement(
+                  'li',
+                  { key: 'dates-logic' },
+                  '- \'To\' date is later or equal to \'From\' date'
+                ),
+                _react2.default.createElement(
+                  'li',
+                  { key: 'dates-format' },
+                  '- both dates are in the suggested format'
+                ),
+                _react2.default.createElement(
+                  'li',
+                  { key: 'dates-between' },
+                  '- both dates are between ',
+                  today,
+                  ' and ',
+                  todayPlus9
                 )
               ) : ''
             ),
@@ -13231,7 +13233,7 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(12);
+var _reactDom = __webpack_require__(10);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -13263,7 +13265,7 @@ var Header = exports.Header = function (_React$Component) {
         null,
         _react2.default.createElement(
           'div',
-          { className: 'container header-container' },
+          { className: 'header-container' },
           _react2.default.createElement(
             'div',
             { className: 'logo' },
@@ -13334,7 +13336,7 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(12);
+var _reactDom = __webpack_require__(10);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -13367,15 +13369,31 @@ var Home = exports.Home = function (_React$Component) {
           'div',
           { className: 'text-content' },
           _react2.default.createElement(
-            'h1',
+            'div',
             null,
-            'Welcome to ',
             _react2.default.createElement(
-              'span',
-              { className: 'logo' },
-              ' Find the Sun '
-            ),
-            ' app'
+              'h1',
+              null,
+              _react2.default.createElement(
+                'div',
+                null,
+                'Welcome to '
+              ),
+              _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                  'span',
+                  { className: 'logo' },
+                  ' Find the Sun '
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                null,
+                'app'
+              )
+            )
           ),
           _react2.default.createElement(
             'p',
@@ -13520,7 +13538,7 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(12);
+var _reactDom = __webpack_require__(10);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -13581,7 +13599,7 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(12);
+var _reactDom = __webpack_require__(10);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -14058,7 +14076,7 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(12);
+var _reactDom = __webpack_require__(10);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -14148,7 +14166,7 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(12);
+var _reactDom = __webpack_require__(10);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -14185,7 +14203,7 @@ var Template = exports.Template = function (_React$Component) {
           null,
           _react2.default.createElement(
             'div',
-            { className: 'container main-container' },
+            { className: 'main-container' },
             this.props.children
           )
         ),
@@ -16124,7 +16142,7 @@ exports = module.exports = __webpack_require__(128)(undefined);
 
 
 // module
-exports.push([module.i, "@charset \"UTF-8\";\n/*variables*/\n/*flex-container mixin*/\n/*TODO: AWD - dodać media queries do hamburger menu*/\n/*reset css*/\n* {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  list-style-type: none;\n  font-size: 100%;\n  font-family: \"Times New Roman\", Times, serif; }\n/*fonts*/\n/*styles*/\nhtml {\n  font-size: 0.625em; }\n#site {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -ms-flex-pack: distribute;\n      justify-content: space-around;\n  min-width: 225px;\n  min-height: 100vh; }\n.container {\n  width: 90%;\n  min-width: 225px;\n  max-width: 1000px; }\nheader {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  min-width: 225px;\n  background-color: white;\n  border-bottom: 2px solid black; }\n.header-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  font-weight: bold;\n  padding: 0.5rem 0.5rem; }\n.header-container nav ul {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    wrap: nowrap; }\n.header-container nav ul li {\n      text-transform: uppercase;\n      padding: 0.4rem 0.5rem;\n      font-size: 1.6rem; }\n.header-container nav ul li .link {\n        color: black; }\n.header-container nav ul li .active {\n        color: #c29114; }\n.header-container nav ul li:first-child {\n        padding-left: 0; }\n.header-container nav ul li:last-child {\n        padding-right: 0; }\n.logo {\n  font-size: 2.8rem;\n  letter-spacing: 0.1rem;\n  padding: 0.4rem 0;\n  color: #c29114; }\n.link, a {\n  text-decoration: none;\n  color: #c29114; }\nmain {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  background-image: url(" + __webpack_require__(255) + ");\n  background-repeat: no-repeat;\n  background-size: cover;\n  background-attachment: fixed; }\n.content {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -ms-flex-line-pack: distribute;\n      align-content: space-around;\n  width: 100%;\n  max-width: 1000px;\n  min-height: 40vh;\n  background-color: white;\n  border: 2px solid black;\n  padding: 1rem 0;\n  margin: 8vh 0 8vh 0; }\n.text-content {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  padding: 0 1rem;\n  width: 100%;\n  text-align: center; }\n.text-content p {\n    font-size: 1.6rem;\n    line-height: 1.2em;\n    width: 80%;\n    margin: 1rem 0; }\n.text-content h1 {\n    font-size: 2rem;\n    font-weight: bold;\n    padding: 2rem 0;\n    letter-spacing: 0.1rem; }\n.text-content h1 .logo {\n      font-size: 2rem; }\n.text-content h2 {\n    font-size: 1.6rem;\n    font-weight: bold;\n    padding-top: 1.5rem; }\n.text-content button {\n    cursor: pointer;\n    color: #c29114;\n    font-size: 1.8rem;\n    font-weight: bold;\n    margin-top: 2rem;\n    margin-bottom: 1rem;\n    padding: 0.7rem 2rem;\n    background-color: white;\n    border: 2px solid #c29114;\n    border-radius: 1.5rem; }\n.text-content .note {\n    color: #c29114;\n    text-transform: uppercase; }\n#form {\n  width: 90%;\n  min-width: 210px; }\n#form h1 {\n    font-size: 3.4rem;\n    margin: 2rem 1rem 1rem 1rem; }\n#form h2 {\n    font-size: 2rem;\n    margin: 1rem 1rem 3rem 1rem; }\nform#search-form {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  font-size: 1.5rem; }\n.form-half {\n  min-width: 210px; }\n.form-half .form-item {\n    min-width: 210px;\n    padding: 1rem;\n    line-height: 25px !important;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between; }\n.form-half .form-item input {\n      height: 25px !important;\n      line-height: 25px !important; }\n.form-left {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n  -webkit-box-align: start;\n      -ms-flex-align: start;\n          align-items: flex-start;\n  -ms-flex-line-pack: start;\n      align-content: flex-start;\n  width: 50%; }\n.form-left .form-item {\n    width: 30%; }\n.form-left .form-item input {\n      width: 50px; }\n.form-right {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  width: 50%; }\n.form-right .form-item {\n    width: 40%; }\n.form-right .form-item input {\n      width: 135px; }\n.form-right p {\n    font-size: 1.3rem;\n    width: 100%;\n    padding: 1rem;\n    min-width: 210px; }\n.search-bar {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -ms-flex-wrap: nowrap;\n      flex-wrap: nowrap;\n  width: 100%;\n  padding: 0.5rem 1rem; }\n.search-bar .alert {\n    -ms-flex-negative: 1;\n        flex-shrink: 1;\n    width: 80%;\n    padding-right: 1rem; }\n.search-bar .alert p {\n      font-size: 1.5rem;\n      color: red; }\n.search-bar .button-div {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: reverse;\n        -ms-flex-direction: row-reverse;\n            flex-direction: row-reverse;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    width: 20%;\n    min-width: 9rem;\n    -webkit-box-flex: 1;\n        -ms-flex-positive: 1;\n            flex-grow: 1;\n    -ms-flex-item-align: start;\n        align-self: flex-start; }\n.search-bar .button-div #search-button {\n      width: 9rem;\n      font-size: 1.5rem;\n      font-weight: bold;\n      padding: 0.5em 1em 0.5em 1em; }\n#results {\n  width: 90%;\n  min-width: 210px;\n  padding: 0 1rem 1rem 1rem; }\n#results p {\n    font-size: 1.8rem;\n    line-height: 2.5rem;\n    font-weight: bold;\n    color: black;\n    margin-bottom: 2rem; }\n#results p span {\n      color: #c29114; }\nli.country-li {\n  font-size: 1.6rem;\n  line-height: 3rem;\n  color: black;\n  font-weight: bold; }\nli.city-li {\n  display: inline-block;\n  text-indent: 30px;\n  color: #c29114; }\nli.city-li a.google-flights-link {\n    text-decoration: none;\n    color: #c29114; }\nfooter {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  background-color: white;\n  border-top: 2px solid black; }\nfooter .footer-container {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    -ms-flex-wrap: nowrap;\n        flex-wrap: nowrap;\n    font-size: 1.4rem;\n    font-weight: bold; }\nfooter .footer-container div {\n      height: 100%;\n      padding: 0.5rem 1rem; }\nfooter .footer-container #disclaimer {\n      width: 60%; }\nfooter .footer-container #powered {\n      width: 40%;\n      text-align: right; }\nfooter .footer-container #powered a {\n        text-decoration: none;\n        color: #c29114; }\n", ""]);
+exports.push([module.i, "@charset \"UTF-8\";\n/*variables*/\n/*flex-container mixin*/\n/*TODO: AWD - dodać media queries do hamburger menu*/\n/*reset css*/\n* {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  list-style-type: none;\n  font-size: 100%;\n  font-family: \"Times New Roman\", Times, serif; }\n/*fonts*/\n/*styles*/\nhtml {\n  font-size: 0.625em; }\n#site {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 auto;\n          flex: 0 0 auto;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -ms-flex-pack: distribute;\n      justify-content: space-around;\n  -webkit-box-flex: 1 !important;\n      -ms-flex: 1 0 auto !important;\n          flex: 1 0 auto !important;\n  min-width: 250px;\n  min-height: 100vh; }\nheader {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 auto;\n          flex: 0 0 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  background-color: white;\n  border-bottom: 2px solid black; }\n.header-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 auto;\n          flex: 0 0 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -ms-flex: 0 0 90%;\n      flex: 0 0 90%;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -ms-flex-line-pack: center;\n      align-content: center;\n  font-weight: bold;\n  padding: 1rem 0; }\n.header-container nav {\n    padding: 0.4rem 0; }\n.header-container nav ul {\n      display: -webkit-box;\n      display: -ms-flexbox;\n      display: flex;\n      -ms-flex-wrap: wrap;\n          flex-wrap: wrap;\n      -webkit-box-flex: 0;\n          -ms-flex: 0 0 auto;\n              flex: 0 0 auto;\n      -webkit-box-orient: horizontal;\n      -webkit-box-direction: normal;\n          -ms-flex-direction: row;\n              flex-direction: row;\n      -webkit-box-pack: justify;\n          -ms-flex-pack: justify;\n              justify-content: space-between;\n      wrap: nowrap; }\n.header-container nav ul li {\n        text-transform: uppercase;\n        padding: 0 0.5rem;\n        font-size: 1.6rem; }\n.header-container nav ul li .link {\n          color: black; }\n.header-container nav ul li .active {\n          color: #c29114; }\n.header-container nav ul li:first-child {\n          padding-left: 0; }\n.header-container nav ul li:last-child {\n          padding-right: 0; }\n.logo {\n  font-size: 2.8rem;\n  letter-spacing: 0.1rem;\n  padding: 0.4rem 0;\n  color: #c29114; }\n.link, a {\n  text-decoration: none;\n  color: #c29114; }\nmain {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 auto;\n          flex: 0 0 auto;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-flex: 1 !important;\n      -ms-flex: 1 0 auto !important;\n          flex: 1 0 auto !important;\n  min-width: 250px;\n  background-image: url(" + __webpack_require__(255) + ");\n  background-repeat: no-repeat;\n  background-size: cover;\n  background-attachment: fixed; }\n.main-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 auto;\n          flex: 0 0 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  width: 100%; }\n.content {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 auto;\n          flex: 0 0 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -ms-flex-line-pack: distribute;\n      align-content: space-around;\n  -ms-flex: 0 0 100%;\n      flex: 0 0 100%;\n  max-width: 900px;\n  min-height: 40vh;\n  background-color: white;\n  border: 2px solid black;\n  padding: 1rem 0 1rem 0;\n  margin: 8vh 0 8vh 0; }\n.text-content {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 auto;\n          flex: 0 0 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -ms-flex: 0 0 90%;\n      flex: 0 0 90%;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  padding: 1rem 0;\n  text-align: center; }\n.text-content h1 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 1 100%;\n            flex: 0 1 100%;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n    -ms-flex: 0 0 auto;\n        flex: 0 0 auto;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    font-size: 2rem;\n    font-weight: bold;\n    padding: 2rem 0;\n    letter-spacing: 0.1rem; }\n.text-content h1 .logo {\n      font-size: 2rem;\n      padding: 0 0.5rem; }\n.text-content h2 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 100%;\n            flex: 0 0 100%;\n    font-size: 1.6rem;\n    font-weight: bold;\n    padding-top: 1.5rem; }\n.text-content p {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 100%;\n            flex: 0 0 100%;\n    font-size: 1.6rem;\n    line-height: 1.2em;\n    margin: 1rem 0; }\n.text-content button {\n    cursor: pointer;\n    color: #c29114;\n    font-size: 1.8rem;\n    font-weight: bold;\n    margin-top: 2rem;\n    margin-bottom: 1rem;\n    padding: 0.7rem 2rem;\n    background-color: white;\n    border: 2px solid #c29114;\n    border-radius: 1.5rem; }\n.text-content .note {\n    color: #c29114;\n    text-transform: uppercase; }\n#form {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 90%;\n          flex: 0 0 90%;\n  padding-bottom: 1rem; }\n#form h1 {\n    font-size: 3.4rem;\n    margin: 2rem 0 1rem 0; }\n#form h2 {\n    font-size: 2rem;\n    margin: 1rem 0 3rem 0; }\nform#search-form {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 auto;\n          flex: 0 0 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  font-size: 1.5rem; }\n.form-half .form-item {\n  padding: 1rem 0;\n  line-height: 25px !important;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 auto;\n          flex: 0 0 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between; }\n.form-half .form-item input {\n    height: 25px !important;\n    line-height: 25px !important; }\n.form-between {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 3%;\n          flex: 0 0 3%; }\n.form-left {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 auto;\n          flex: 0 0 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -webkit-box-align: start;\n      -ms-flex-align: start;\n          align-items: flex-start;\n  -ms-flex-line-pack: start;\n      align-content: flex-start;\n  -ms-flex: 0 0 225px;\n      flex: 0 0 225px; }\n.form-left .form-item {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 225px;\n            flex: 0 0 225px; }\n.form-left .form-item input {\n      width: 50px; }\n.form-right {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 auto;\n          flex: 0 0 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -ms-flex: 0 0 65%;\n      flex: 0 0 65%;\n  min-width: 225px; }\n.form-right .form-item {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 225px;\n            flex: 0 0 225px; }\n.form-right .form-item input {\n      width: 135px; }\n.form-right .form-p {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 1 auto;\n            flex: 0 1 auto; }\n.form-right .form-p p {\n      font-size: 1.3rem;\n      padding: 1rem 1rem 1rem 0; }\n.search-bar {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 auto;\n          flex: 0 0 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -ms-flex-wrap: nowrap;\n      flex-wrap: nowrap;\n  -ms-flex: 0 0 100%;\n      flex: 0 0 100%; }\n.search-bar .alert {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 1 80%;\n            flex: 0 1 80%;\n    padding-right: 1rem;\n    font-size: 1.5rem;\n    color: red; }\n.search-bar .button-div {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 auto;\n            flex: 0 0 auto;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: reverse;\n        -ms-flex-direction: row-reverse;\n            flex-direction: row-reverse;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    -ms-flex: 0 0 20%;\n        flex: 0 0 20%;\n    min-width: 9rem;\n    -ms-flex-item-align: start;\n        align-self: flex-start; }\n.search-bar .button-div #search-button {\n      width: 9rem;\n      font-size: 1.5rem;\n      font-weight: bold;\n      padding: 0.5em 1em 0.5em 1em;\n      margin-bottom: 1rem; }\n#results {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 90%;\n          flex: 0 0 90%; }\n#results p {\n    font-size: 1.8rem;\n    line-height: 2.5rem;\n    font-weight: bold;\n    color: black;\n    margin-bottom: 2rem; }\n#results p span {\n      color: #c29114; }\nli.country-li {\n  font-size: 1.6rem;\n  line-height: 3rem;\n  color: black;\n  font-weight: bold; }\nli.city-li {\n  display: inline-block;\n  text-indent: 30px;\n  color: #c29114; }\nli.city-li a.google-flights-link {\n    text-decoration: none;\n    color: #c29114; }\nfooter {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 auto;\n          flex: 0 0 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  background-color: white;\n  border-top: 2px solid black;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center; }\nfooter .footer-container {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 auto;\n            flex: 0 0 auto;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    padding: 1rem 0;\n    -ms-flex: 0 1 90%;\n        flex: 0 1 90%;\n    -ms-flex-wrap: nowrap;\n        flex-wrap: nowrap;\n    font-size: 1.4rem;\n    font-weight: bold; }\nfooter .footer-container div {\n      height: 100%; }\nfooter .footer-container #disclaimer {\n      padding-right: 2rem; }\nfooter .footer-container #powered {\n      text-align: right; }\nfooter .footer-container #powered a {\n        text-decoration: none;\n        color: #c29114; }\n", ""]);
 
 // exports
 
@@ -18482,7 +18500,7 @@ module.exports = BeforeInputEventPlugin;
 
 var CSSProperty = __webpack_require__(79);
 var ExecutionEnvironment = __webpack_require__(7);
-var ReactInstrumentation = __webpack_require__(10);
+var ReactInstrumentation = __webpack_require__(11);
 
 var camelizeStyleName = __webpack_require__(130);
 var dangerousStyleValue = __webpack_require__(214);
@@ -19027,7 +19045,7 @@ var DOMLazyTree = __webpack_require__(24);
 var ExecutionEnvironment = __webpack_require__(7);
 
 var createNodesFromMarkup = __webpack_require__(133);
-var emptyFunction = __webpack_require__(11);
+var emptyFunction = __webpack_require__(12);
 var invariant = __webpack_require__(1);
 
 var Danger = {
@@ -19731,7 +19749,7 @@ var ReactComponentEnvironment = __webpack_require__(54);
 var ReactCurrentOwner = __webpack_require__(14);
 var ReactErrorUtils = __webpack_require__(55);
 var ReactInstanceMap = __webpack_require__(32);
-var ReactInstrumentation = __webpack_require__(10);
+var ReactInstrumentation = __webpack_require__(11);
 var ReactNodeTypes = __webpack_require__(89);
 var ReactReconciler = __webpack_require__(25);
 
@@ -20718,7 +20736,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 if (process.env.NODE_ENV !== 'production') {
-  var ReactInstrumentation = __webpack_require__(10);
+  var ReactInstrumentation = __webpack_require__(11);
   var ReactDOMUnknownPropertyHook = __webpack_require__(180);
   var ReactDOMNullInputValuePropHook = __webpack_require__(174);
   var ReactDOMInvalidARIAHook = __webpack_require__(173);
@@ -20768,11 +20786,11 @@ var ReactDOMInput = __webpack_require__(172);
 var ReactDOMOption = __webpack_require__(175);
 var ReactDOMSelect = __webpack_require__(83);
 var ReactDOMTextarea = __webpack_require__(178);
-var ReactInstrumentation = __webpack_require__(10);
+var ReactInstrumentation = __webpack_require__(11);
 var ReactMultiChild = __webpack_require__(191);
 var ReactServerRenderingTransaction = __webpack_require__(196);
 
-var emptyFunction = __webpack_require__(11);
+var emptyFunction = __webpack_require__(12);
 var escapeTextContentForBrowser = __webpack_require__(41);
 var invariant = __webpack_require__(1);
 var isEventSupported = __webpack_require__(61);
@@ -23668,7 +23686,7 @@ var _assign = __webpack_require__(5);
 var ReactUpdates = __webpack_require__(13);
 var Transaction = __webpack_require__(40);
 
-var emptyFunction = __webpack_require__(11);
+var emptyFunction = __webpack_require__(12);
 
 var RESET_BATCHED_UPDATES = {
   initialize: emptyFunction,
@@ -24230,13 +24248,13 @@ var _prodInvariant = __webpack_require__(3);
 
 var ReactComponentEnvironment = __webpack_require__(54);
 var ReactInstanceMap = __webpack_require__(32);
-var ReactInstrumentation = __webpack_require__(10);
+var ReactInstrumentation = __webpack_require__(11);
 
 var ReactCurrentOwner = __webpack_require__(14);
 var ReactReconciler = __webpack_require__(25);
 var ReactChildReconciler = __webpack_require__(163);
 
-var emptyFunction = __webpack_require__(11);
+var emptyFunction = __webpack_require__(12);
 var flattenChildren = __webpack_require__(216);
 var invariant = __webpack_require__(1);
 
@@ -24819,7 +24837,7 @@ var CallbackQueue = __webpack_require__(80);
 var PooledClass = __webpack_require__(20);
 var ReactBrowserEventEmitter = __webpack_require__(38);
 var ReactInputSelection = __webpack_require__(87);
-var ReactInstrumentation = __webpack_require__(10);
+var ReactInstrumentation = __webpack_require__(11);
 var Transaction = __webpack_require__(40);
 var ReactUpdateQueue = __webpack_require__(56);
 
@@ -25095,7 +25113,7 @@ var _assign = __webpack_require__(5);
 
 var PooledClass = __webpack_require__(20);
 var Transaction = __webpack_require__(40);
-var ReactInstrumentation = __webpack_require__(10);
+var ReactInstrumentation = __webpack_require__(11);
 var ReactServerUpdateQueue = __webpack_require__(197);
 
 /**
@@ -25872,7 +25890,7 @@ var SyntheticTransitionEvent = __webpack_require__(210);
 var SyntheticUIEvent = __webpack_require__(33);
 var SyntheticWheelEvent = __webpack_require__(211);
 
-var emptyFunction = __webpack_require__(11);
+var emptyFunction = __webpack_require__(12);
 var getEventCharCode = __webpack_require__(58);
 var invariant = __webpack_require__(1);
 
@@ -28858,7 +28876,7 @@ module.exports = PooledClass;
 var PooledClass = __webpack_require__(241);
 var ReactElement = __webpack_require__(21);
 
-var emptyFunction = __webpack_require__(11);
+var emptyFunction = __webpack_require__(12);
 var traverseAllChildren = __webpack_require__(250);
 
 var twoArgumentPooler = PooledClass.twoArgumentPooler;
@@ -29954,7 +29972,7 @@ var ReactElement = __webpack_require__(21);
 var ReactPropTypeLocationNames = __webpack_require__(70);
 var ReactPropTypesSecret = __webpack_require__(110);
 
-var emptyFunction = __webpack_require__(11);
+var emptyFunction = __webpack_require__(12);
 var getIteratorFn = __webpack_require__(72);
 var warning = __webpack_require__(2);
 

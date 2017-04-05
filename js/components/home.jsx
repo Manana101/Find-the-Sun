@@ -6,7 +6,7 @@ export class Home extends React.Component {
   render(){
     return <section className='content'>
         <div className='text-content'>
-          <h1>Welcome to <span className='logo'> Find the Sun </span> app</h1>
+          <div><h1><div>Welcome to </div><div><span className='logo'> Find the Sun </span></div><div>app</div></h1></div>
           <p>
           With this app, you can find out where to go to enjoy your preferred weather.<br/>
           <br/>

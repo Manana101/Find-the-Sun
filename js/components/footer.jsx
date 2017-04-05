@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 export class Footer extends React.Component {
   render(){
     return <footer>
-            <div className='container footer-container'>
+            <div className='footer-container'>
                 <div id='disclaimer'>
                   Disclaimer: Results are based on a weather forecast. Weather forecasts do not always come true. Please don't blame us for ruining your holiday :)
                 </div>

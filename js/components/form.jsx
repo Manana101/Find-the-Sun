@@ -115,28 +115,30 @@ export class Form extends React.Component{
             <input type='number' value={this.state.maxTemp} onChange={this.handleMaxTempChange} id='max-temp-input'/>
           </div>
         </div>
+        <div className='form-between'>
+        </div>
         <div className='form-half form-right'>
           <div className='form-item'>
             <label htmlFor="from-date-input">From:</label>
             <input type='date' min={today} max={todayPlus9} value={this.state.fromDate} onChange={this.handleFromDateChange} id='from-date-input' placeholder='yyyy-mm-dd'/>
           </div>
+          <div className='form-between'>
+          </div>
           <div className='form-item'>
             <label htmlFor="to-date-input">To*:</label>
             <input type='date' min={today} max={todayPlus9} value={this.state.toDate} onChange={this.handleToDateChange} id='to-date-input' placeholder='yyyy-mm-dd'/>
           </div>
-          <p>*We can check the weather for max. 10 days from now</p>
+          <div className='form-p'><p>*We can check the weather for max. 10 days from now</p></div>
         </div>
         <div className='search-bar'>
           <div className='alert'>
-            {this.state.formOk === false? <p>
-              <ul> Incorrect form! Please make sure that:
+            {this.state.formOk === false? <ul> Incorrect form! Please make sure that:
                 <li key='all-questions'>- all the questions are answered</li>
                 <li key='temps-logic'>- 'Max. temp' is higher or equal to 'Min. temp'</li>
                 <li key='dates-logic'>- 'To' date is later or equal to 'From' date</li>
                 <li key='dates-format'>- both dates are in the suggested format</li>
                 <li key='dates-between'>- both dates are between {today} and {todayPlus9}</li>
-              </ul>
-            </p> : ''}
+              </ul> : ''}
           </div>
           <div className='button-div'>
             <button onClick={this.handleSearchClick} id='search-button'>Search</button>

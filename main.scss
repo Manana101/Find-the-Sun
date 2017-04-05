@@ -9,17 +9,18 @@ $text-color2: grey;
 $text-color3: red;
 $text-color4: #c29114; //logo
 //width
-$min-width: 225px;
-$container-min-width: 225px;
-$min-width-form: 210px;
+$min-width: 250px;
+// $container-min-width: 225px;
+$min-width-form: 225px;
 $inner-width: 90%;
-$max-width: 1000px;
-$main-width: 65%;
+$max-width: 900px;
+// $main-width: 65%;
 
 /*flex-container mixin*/
 @mixin flex-container($direction, $justify-content) {
   display: flex;
   flex-wrap: wrap;
+  flex: 0 0 auto;
   flex-direction: $direction;
   justify-content: $justify-content;
 }
@@ -44,33 +45,25 @@ html {
 }
 #site {
   @include flex-container(column, space-around);
+  flex: 1 0 auto !important;
   min-width: $min-width;
   min-height: 100vh;
 }
-.container {
-  width: 90%;
-  min-width: $container-min-width;
-  max-width: $max-width;
-  // border: 1px solid green;
-}
 header {
   @include flex-container(row, center);
-  // position: fixed;
-  // top: 0;
-  // width: 100%; //to tu musi być - czy to przez position: fixed? bo normalnie div ma 100% z defaultu
-  min-width: $min-width;
   background-color: $color4;
-  // border-top: 2px solid $color1;
   border-bottom: 2px solid $color1;
 }
-//TODO: muszę zrobić tu @media i hamburgera, bo inaczej przy mniejszym ekranie nav będzie zajmował za dużo ekranu
 .header-container {
   @include flex-container(row, space-between);
+  flex: 0 0 $inner-width;
   align-items: center;
+  align-content: center;
   // border: 1px solid pink;
   font-weight: bold;
-  padding: 0.5rem 0.5rem;
+  padding: 1rem 0;
   nav {
+    padding: 0.4rem 0;
     ul {
       @include flex-container(row, space-between);
       wrap: nowrap;
@@ -82,7 +75,7 @@ header {
           color: $text-color4;;
         }
         text-transform: uppercase;
-        padding: 0.4rem 0.5rem;
+        padding: 0 0.5rem;
         font-size: 1.6rem;
         &:first-child{
           padding-left: 0;
@@ -107,45 +100,52 @@ header {
 main {
   @include flex-container(column, flex-start);
   align-items: center;
-  flex-grow: 1; //konieczne żeby footer był zawsze na dole, a header na górze, nawet jeśli treść nie zajmuje całej strony
+  flex: 1 0 auto !important;
+  // width: 100%;
+  min-width: $min-width;
+  // flex-grow: 1; //konieczne żeby footer był zawsze na dole, a header na górze, nawet jeśli treść nie zajmuje całej strony - nie działa na IE11
   background-image: url('./images/background-2.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
-  // background-color: $color2;
   // border: 1px solid brown;
+}
+.main-container {
+  @include flex-container(row, center);
+  width: 100%; //not good but no other way to set width inside flex-direction: column container
+  // min-width: $min-width;
+  // flex: 0 0 $inner-width;
+  // max-width: $max-width;
+  // width: $inner-width;
+  //border: 1px solid green;
 }
 .content { //czarna ramka, białe tło
   @include flex-container(row, center);
   align-content: space-around;
-  width: 100%;
+  // width: 100%;
+  flex: 0 0 100%;
   max-width: $max-width;
   min-height: 40vh;
   background-color: $color4;
   border: 2px solid $color1;
-  padding: 1rem 0;
+  padding: 1rem 0 1rem 0;
   margin: 8vh 0 8vh 0;
 }
 .text-content{
-  @include flex-container(column, center);
+  @include flex-container(row, center);
+  flex: 0 0 $inner-width;
   align-items: center;
-  padding: 0 1rem;
-  width: 100%;
+  padding: 1rem 0;
+  // width: 100%;
   text-align: center;
   // text-align: justify;
-  p {
-    font-size: 1.6rem;
-    line-height: 1.2em;
-    width: 80%;
-    margin: 1rem 0;
-    // display: none;
-  }
-  // .destinations-full-list{
-  //   text-align: justify;
-  // }
   h1{
+    flex: 0 1 100%;
+    @include flex-container(row, center);
+    align-items: center;
     .logo {
       font-size: 2rem;
+      padding: 0 0.5rem;
     }
     font-size: 2rem;
     font-weight: bold;
@@ -154,10 +154,23 @@ main {
     letter-spacing: 0.1rem;
   }
   h2{
+    flex: 0 0 100%;
     font-size: 1.6rem;
     font-weight: bold;
     padding-top: 1.5rem;
   }
+  p {
+    flex: 0 0 100%;
+    font-size: 1.6rem;
+    line-height: 1.2em;
+    // flex: 0 0 80%;
+    // width: 80%;
+    margin: 1rem 0;
+    // display: none;
+  }
+  // .destinations-full-list{
+  //   text-align: justify;
+  // }
   button{
     cursor: pointer;
     color: $text-color4;
@@ -177,15 +190,18 @@ main {
 }
 #form {
   // border: 1px solid blue;
-  width: $inner-width;
-  min-width: $min-width-form;
+  // width: $inner-width;
+  // min-width: $min-width-form;
+  // flex-shrink: 0;
+  flex: 0 0 $inner-width;
+  padding-bottom: 1rem;
   h1 {
     font-size: 3.4rem;
-    margin: 2rem 1rem 1rem 1rem;
+    margin: 2rem 0 1rem 0;
   }
   h2 {
     font-size: 2rem;
-    margin: 1rem 1rem 3rem 1rem;
+    margin: 1rem 0 3rem 0;
   }
 }
 form#search-form {
@@ -195,11 +211,12 @@ form#search-form {
 }
 .form-half {
   // border: 1px solid yellow;
-  min-width: $min-width-form;
+  // min-width: $min-width-form; !
+  // flex-shrink: 0;
+  // flex: 0 0 50%;
   .form-item {
-    min-width: $min-width-form;
     // border: 1px solid black;
-    padding: 1rem;
+    padding: 1rem 0;
     line-height: 25px !important; //to override firefox defaults
     @include flex-container(row, space-between);
     input {
@@ -208,35 +225,57 @@ form#search-form {
     }
   }
 }
+.form-between{
+  flex: 0 0 3%;
+  // border: 2px solid blue;
+}
 .form-left {
-  @include flex-container(row, flex-start);
+  @include flex-container(row, space-between);
   align-items: flex-start;
   align-content: flex-start;
-  width: 50%;
+  // width: 50%;
+  // flex: 0 0 20%; !
+  flex: 0 0 $min-width-form;
   .form-item {
-    width: 30%;
+    // width: 30%;
+    // flex: 0 0 30%;
+    flex: 0 0 $min-width-form;
     input {
       width: 50px;
     }
   }
 }//koniec .form-left
-.form-right { //TODO: jak zrobić, żeby prawa część form najpierw się na maksa zmniejszała, a potem dopiero przeskakiwała na dół? napis (p) to rozpycha? poza tym głupio wygląda, że jest tak z prawej przy zmniejszaniu
+.form-right {
   @include flex-container(row, space-between);
+  flex: 0 0 65%;
+  min-width: $min-width-form;
+  // flex: 0 0 $min-width-form;
   // flex-grow: 1;
-  width: 50%;
+  // width: 50%;
+  // flex: 0 0 50%;
+  // border: 1px solid yellow;
     .form-item {
-      width: 40%;
+      // flex: 0 1 40%; !
+      flex: 0 0 $min-width-form;
+      // width: 40%;
+      // padding-left: 1rem;
       input {
         width: 135px;
       }
     }
-    p {
-      // border: 1px solid purple;
-      font-size: 1.3rem;
-      width: 100%;
-      // text-align: right;
-      padding: 1rem;
-      min-width: $min-width-form;
+    .form-p{
+      flex: 0 1 auto;
+      // border: 1px solid green;
+      p {
+        // border: 1px solid purple;
+        font-size: 1.3rem;
+        // width: 100%;
+        // flex: 1 0 100%;
+        // text-align: right;
+        padding: 1rem 1rem 1rem 0;
+        // min-width: $min-width-form;
+        // flex-shrink: 0;
+      }
     }
 }//koniec .form-right
 
@@ -244,25 +283,28 @@ form#search-form {
   @include flex-container(row, space-between);
   align-items: center;
   flex-wrap: nowrap;
-  width: 100%;
-  padding: 0.5rem 1rem;
+  // width: 100%;
+  flex: 0 0 100%;
+  // padding: 0.5rem 0;
   // min-width: $min-width-form;
+  // border: 3px solid pink;
+  // padding-right: 1rem;
   .alert {
     // border: 1px solid pink;
     // max-width: 50vw;
-    flex-shrink: 1;
-    width: 80%;
+    // flex-shrink: 1;
+    // width: 80%;
+    flex: 0 1 80%;
     padding-right: 1rem;
-    p {
-      font-size: 1.5rem;
-      color: $text-color3;
-    }
+    font-size: 1.5rem;
+    color: $text-color3;
   }
   .button-div {
     @include flex-container(row-reverse, space-between);
-    width: 20%;
+    // width: 20%;
+    flex: 0 0 20%;
     min-width: 9rem;
-    flex-grow: 1;
+    // flex-grow: 1;
     align-self: flex-start;
     // border: 1px solid green;
     #search-button {
@@ -270,15 +312,15 @@ form#search-form {
       font-size: 1.5rem;
       font-weight: bold;
       padding: 0.5em 1em 0.5em 1em;
-      // margin: 1rem;
+      margin-bottom: 1rem;
     }
   }
 }
 
 #results {
-  width: $inner-width;
-  min-width: $min-width-form;
-  padding: 0 1rem 1rem 1rem;
+  // width: $inner-width;
+  // min-width: $min-width-form;
+  flex: 0 0 $inner-width;
   // border: 1px solid green;
   p {
     font-size: 1.8rem;
@@ -314,25 +356,32 @@ li.city-li{
 
 footer {
   @include flex-container(row, center);
+  // flex: 0 1 auto;
   background-color: $color4;
   border-top: 2px solid $color1;
   // border-bottom: 2px solid $color1;
+  align-items: center;
   .footer-container {
     @include flex-container(row, space-between);
+    padding: 1rem 0;
+    flex: 0 1 $inner-width;
     flex-wrap: nowrap;
     font-size: 1.4rem;
     font-weight: bold;
     div {
       height: 100%;
-      padding: 0.5rem 1rem;
+      // padding: 0.5rem 0;
     }
     #disclaimer{
       // border: 1px solid yellow;
-      width: 60%;
+      // width: 75%;
+      // flex: 0 0 60%;
+      padding-right: 2rem;
     }
     #powered{
       // border: 1px solid red;
-      width: 40%;
+      // width: 40%;
+      // flex: 0 0 15%;
       text-align: right;
       a {
         text-decoration: none;

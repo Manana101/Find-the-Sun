@@ -24,6 +24,8 @@ Weather forecasts are updated max. once per day, when the first user on a given 
 
 Weather can be checked for 10 days only, starting from the current date.
 
+As application's layout is based on flexbox, and HTML5 input date is used, it might not work properly on some browsers (especially IE and older versions of Safari). User experience is best on Chrome and Opera (in Firefox, dates have to be entered as text). To be fixed soon.
+
 **Search logic**
 
 Application uses weather forecasts from Apixu.com. Because of API's free account limit (5000 calls per month), following search logic is implemented:

@@ -8,7 +8,7 @@ export class Template extends React.Component {
     return <div id='site'>
       <Header/>
       <main>
-        <div className="container main-container">
+        <div className="main-container">
           {this.props.children}
         </div>
       </main>
