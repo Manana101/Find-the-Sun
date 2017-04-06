@@ -12045,6 +12045,8 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactRouter = __webpack_require__(43);
 
+__webpack_require__(112);
+
 __webpack_require__(254);
 
 var _template = __webpack_require__(124);
@@ -13623,10 +13625,18 @@ var Results = exports.Results = function (_React$Component) {
         });
       };
       _this.getCity = function (id) {
-        return fetch("http://find-the-sun.com:3000/destinations/" + id).then(function (data) {
+        return fetch("http://find-the-sun.com:3000/destinations/" + id).then(function (response) {
+          if (response.status >= 200 && response.status < 300) {
+            return response;
+          } else {
+            var error = new Error(response.statusText);
+            error.response = response;
+            throw error;
+          }
+        }).then(function (data) {
           return data.json();
         }).catch(function (error) {
-          // console.log('error z getCity przy id: ', id, error);
+          console.log(error);
         });
       };
       _this.getActualForecasts = function (citiesArray) {
@@ -13638,7 +13648,15 @@ var Results = exports.Results = function (_React$Component) {
         var checkedAt = city.checkedAt;
         if (checkedAt !== _this.props.todayDays) {
           var url = "http://api.apixu.com/v1/forecast.json?key=0ffd45ac047f4cda8ae85915171303&q=" + city.location.name + "&days=10";
-          return fetch(url).then(function (data) {
+          return fetch(url).then(function (response) {
+            if (response.status >= 200 && response.status < 300) {
+              return response;
+            } else {
+              var error = new Error(response.statusText);
+              error.response = response;
+              throw error;
+            }
+          }).then(function (data) {
             return data.json();
           }).then(function (data) {
             var temp_day0 = data.forecast.forecastday[0].day.avgtemp_c;
@@ -13708,7 +13726,7 @@ var Results = exports.Results = function (_React$Component) {
             };
             return cityUpdated;
           }).catch(function (error) {
-            // console.log('error podczas fetcha do weather api', error);
+            console.log(error);
           });
         } else {
           var cityNotUpdated = {
@@ -13780,13 +13798,21 @@ var Results = exports.Results = function (_React$Component) {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
               }
+            }).then(function (response) {
+              if (response.status >= 200 && response.status < 300) {
+                return response;
+              } else {
+                var error = new Error(response.statusText);
+                error.response = response;
+                throw error;
+              }
             }).then(function (result) {
               index++;
               if (index < actualForecastsArray.length) {
                 _this.updateForecast(index);
               }
             }).catch(function (error) {
-              // console.log('error podczas updejtowania miasta o id ', actualForecastsArray[index].id, ' w mojej bazie, error: ', error)
+              console.log(error);
             });
           } else {
             index++;
@@ -13857,7 +13883,7 @@ var Results = exports.Results = function (_React$Component) {
           return _this.updateForecasts(actualForecastsArray);
         }) //updateForecasts dla każdego miasta po kolei uruchamia funkcję updateForecast. Funkcja updateForecast sprawdza, czy miasto ma status new - jeśli tak, wrzuca miasto na odpowiednie miejsce do mojej bazy (aktualizuje bazę). Ważne - miasta są dodawane po kolei, bo wysłanie wielu PUT do mojej bazy jednocześnie nie jest możliwe. Dopiero, kiedy jeden fetch się zakończy, uruchamiany jest kolejny.
         .catch(function (error) {
-          // console.log('error z startAsynchronousUpdateForecasts', error);
+          console.log(error);
         });
         //Żeby nie czekać z wyświetleniem wyników, aż baza zostanie zaktualizowana, od razu w tym samym then wywołuję filterCities.
         _this.filterCities(actualForecastsArray); //filterCities dla każdego miasta z tablicy sprawdza, czy spełnione są kryteria wyszukiwania - jeśli tak, miasto jest dodawane do odpowiednich zmiennych (countries i destinations). Na końcu aktualizowany jest state (countries, destinations, dataReady).
@@ -13865,6 +13891,7 @@ var Results = exports.Results = function (_React$Component) {
         _this.setState({
           dataReady: 'error'
         });
+        console.log(error);
       });
     };
 

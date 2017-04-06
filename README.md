@@ -24,7 +24,7 @@ Weather forecasts are updated max. once per day, when the first user on a given 
 
 Weather can be checked for 10 days only, starting from the current date.
 
-As application's layout is based on flexbox, and HTML5 input date is used, it might not work properly on some browsers (especially IE and older versions of Safari). User experience is best on Chrome and Opera (in Firefox, dates have to be entered as text). To be fixed soon.
+As application's layout is based on flexbox, and HTML5 input date is used, it might not work properly on some browsers (especially IE and browsers that are not up to date). User experience is best on Chrome and Opera (in Firefox, dates have to be entered as text). To be fixed soon.
 
 **Search logic**
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {IndexLink, Router, Route, Link, IndexRoute, hashHistory} from 'react-router';
+import 'whatwg-fetch';
 import '../main.scss';
 
 import {Template} from './components/template.jsx';

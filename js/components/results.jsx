@@ -33,11 +33,20 @@ export class Results extends React.Component{
     this.getCities = ids => ids.map(id => this.getCity(id));
     this.getCity = (id) => {
       return fetch("http://find-the-sun.com:3000/destinations/"+id)
+      .then(response => {
+        if (response.status >= 200 && response.status < 300) {
+          return response
+        } else {
+          var error = new Error(response.statusText)
+          error.response = response
+          throw error
+        }
+      })
       .then(data => {
         return data.json()
       })
       .catch(error => {
-        // console.log('error z getCity przy id: ', id, error);
+        console.log(error);
       });
     }
     this.getActualForecasts = citiesArray => citiesArray.map(city => this.getActualForecast(city));
@@ -46,6 +55,15 @@ export class Results extends React.Component{
       if (checkedAt !== this.props.todayDays){
         let url = "http://api.apixu.com/v1/forecast.json?key=0ffd45ac047f4cda8ae85915171303&q="+city.location.name+"&days=10"
         return fetch(url)
+        .then(response => {
+          if (response.status >= 200 && response.status < 300) {
+            return response
+          } else {
+            var error = new Error(response.statusText)
+            error.response = response
+            throw error
+          }
+        })
         .then(data => data.json())
         .then(data=>{
           let temp_day0 = data.forecast.forecastday[0].day.avgtemp_c;
@@ -127,7 +145,7 @@ export class Results extends React.Component{
               }
               return cityUpdated;
           }).catch(error=>{
-            // console.log('error podczas fetcha do weather api', error);
+            console.log(error);
           }
         );
       } else {
@@ -212,14 +230,25 @@ export class Results extends React.Component{
                       'Accept': 'application/json',
                       'Content-Type': 'application/json'
                   }
-              }).then(result => {
+          })
+          .then(response => {
+            if (response.status >= 200 && response.status < 300) {
+              return response
+            } else {
+              var error = new Error(response.statusText)
+              error.response = response
+              throw error
+            }
+          })
+          .then(result => {
                   index ++;
                   if (index < actualForecastsArray.length){
                     this.updateForecast(index);
                   }
-              }).catch(error=>{
-                // console.log('error podczas updejtowania miasta o id ', actualForecastsArray[index].id, ' w mojej bazie, error: ', error)
-              });
+          })
+          .catch(error=>{
+            console.log(error);
+          });
         } else {
           index ++;
           if (index < actualForecastsArray.length){
@@ -291,7 +320,7 @@ export class Results extends React.Component{
         return this.updateForecasts(actualForecastsArray)
       })//updateForecasts dla każdego miasta po kolei uruchamia funkcję updateForecast. Funkcja updateForecast sprawdza, czy miasto ma status new - jeśli tak, wrzuca miasto na odpowiednie miejsce do mojej bazy (aktualizuje bazę). Ważne - miasta są dodawane po kolei, bo wysłanie wielu PUT do mojej bazy jednocześnie nie jest możliwe. Dopiero, kiedy jeden fetch się zakończy, uruchamiany jest kolejny.
       .catch(error => {
-        // console.log('error z startAsynchronousUpdateForecasts', error);
+        console.log(error);
       });
       //Żeby nie czekać z wyświetleniem wyników, aż baza zostanie zaktualizowana, od razu w tym samym then wywołuję filterCities.
       this.filterCities(actualForecastsArray);//filterCities dla każdego miasta z tablicy sprawdza, czy spełnione są kryteria wyszukiwania - jeśli tak, miasto jest dodawane do odpowiednich zmiennych (countries i destinations). Na końcu aktualizowany jest state (countries, destinations, dataReady).
@@ -300,6 +329,7 @@ export class Results extends React.Component{
       this.setState({
         dataReady: 'error'
       });
+      console.log(error);
     });
   }
 
