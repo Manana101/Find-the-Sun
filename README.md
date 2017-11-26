@@ -1,7 +1,5 @@
 # Find the Sun
 
-DEMO: http://find-the-sun.com/
-
 Find the Sun is a web application that finds destinations matching user's criteria: min. & max. average daily forecast temperature in the specified period.
 
 Application was created as a final project for http://coderslab.pl/ "Become Front-End developer" bootcamp.
